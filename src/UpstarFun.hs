@@ -40,3 +40,18 @@ newtype To a                = To a
 
 instance Functor OpFunc where
     fmap f (OpFunc x)        = OpFunc (f x)
+
+---------------------------------------------------------------------------------
+
+-- So now lets invent some functions that can take advantage of our types
+
+-- Lets invent a contravariant function that provides our dimap input type a
+preUpstar :: s   -> From a
+preUpstar  = undefined
+
+-- We also need a covariant function that takes our profunctor output (b) and potentially manipulates it further 
+postUpstar :: To a -> s'
+postUpstar = undefined
+
+-- Now we invent a function that represents how our upstar profunctor works primarily
+--upStarter :: 
