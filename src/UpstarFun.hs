@@ -69,7 +69,7 @@ opticalUpstarP :: OpticalUpstar OpFunc k (To b)
 opticalUpstarP = dimap preUpstar postUpstar (OpticalUpstar unstarter)
 
 
--- So now you can use our Profunctor transformer like this: 
--- Since we are going from : s -> s' , and not from some a', then lets just supply it
+-- So now you can use our Profunctor transformer (or any similar one), like this: 
+-- Since we are going from : s -> s' , and not from some a', then lets just supply the s (which we are not calling type k)
 useUpstart :: OpticalUpstar OpFunc k (To b) -> k -> OpFunc (To b)
 useUpstart (OpticalUpstar t) = t
