@@ -4,6 +4,9 @@ import Control.Lens.Combinators (Profunctor, dimap)
 
 {--
 
+To understand this better, read from top to bottom, in the style 
+that the code was slowly built up
+
 class Profunctor p where
     dimap :: (a' -> a) -> (b -> b')-> p a b -> p a' b'
 
@@ -28,10 +31,10 @@ instance Functor f' => Profunctor (OpticalUpstar f') where
 -- this will help be our functor
 newtype OpFunc a            = OpFunc a 
 
--- we will be going from this type to a (To) type
+-- we will be going from this type...
 newtype From a              = From a
 
--- we are going to this type 
+-- and eventually end up with this type.... 
 newtype To a                = To a 
 
 ---------------------------------------------------------------------------------
