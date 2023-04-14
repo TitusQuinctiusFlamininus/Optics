@@ -46,7 +46,7 @@ instance Functor OpFunc where
 -- So now lets invent some functions that can take advantage of our types
 
 -- Lets invent a contravariant function that provides our dimap input type a
-preUpstar :: String   -> From a
+preUpstar :: k   -> From a
 preUpstar  = undefined
 
 -- We also need a covariant function that takes our profunctor output (b) and potentially manipulates it further 
@@ -65,11 +65,11 @@ unstarter  = undefined
 -- The new transformation, after it became a profunctor, goes from     : s -> s'
 -- Actually, s' has the type (OpFunc s')
 -- fmap :: (To a -> s') -> OpFunc (To b)  -> (OpFunc s')
-opticalUpstarP :: OpticalUpstar OpFunc String (To b)
+opticalUpstarP :: OpticalUpstar OpFunc k (To b)
 opticalUpstarP = dimap preUpstar postUpstar (OpticalUpstar unstarter)
 
 
 -- So now you can use our Profunctor transformer like this: 
 -- Since we are going from : s -> s' , and not from some a', then lets just supply it
-useUpstart :: OpticalUpstar OpFunc String (To b) -> String -> OpFunc (To b)
-useUpstart (OpticalUpstar t) z = t z
+useUpstart :: OpticalUpstar OpFunc k (To b) -> k -> OpFunc (To b)
+useUpstart (OpticalUpstar t) = t
