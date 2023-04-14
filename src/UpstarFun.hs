@@ -54,4 +54,16 @@ postUpstar :: To a -> s'
 postUpstar = undefined
 
 -- Now we invent a function that represents how our upstar profunctor works primarily
---upStarter :: 
+unstarter :: From a -> OpFunc (To b)
+unstarter  = undefined
+
+
+---------------------------------------------------------------------------------
+
+-- Time to define our transformation
+-- The old transformation, before it was a profunctor, used to go from : a' -> f b'
+-- The new transformation, after it became a profunctor, goes from     : s -> s'
+-- Actually, s' has the type (OpFunc s')
+-- fmap :: (To a -> s') -> OpFunc (To b)  -> (OpFunc s')
+opticalUpstarP :: OpticalUpstar OpFunc (From a) (To a)
+opticalUpstarP = dimap preUpstar postUpstar (OpticalUpstar unstarter)
