@@ -2,18 +2,18 @@
 
 ## Profunctors
 - :large_orange_diamond: Upstar
-- [x] Downstar
-- [] Tagged
-- [] Affine
-- [] Cartesian   (or Strong)
-- [] CoCartesian (or Choice)
-- [] Lens
-- [] Prism
-- [] Traversal
+- :large_orange_diamond: Downstar
+- :white_circle: Tagged
+- :white_circle: Affine
+- :white_circle: Cartesian   (or Strong)
+- :white_circle: CoCartesian (or Choice)
+- :white_circle: Lens
+- :white_circle: Prism
+- :white_circle: Traversal
 
 ## Profunctor-Optics
-- [] Cartesian   (or Strong)
-- [] CoCartesian (or Choice)
-- [] Lens
-- [] Prism
-- [] Traversal
+- :white_circle: Cartesian   (or Strong)
+- :white_circle: CoCartesian (or Choice)
+- :white_circle: Lens
+- :white_circle: Prism
+- :white_circle: Traversal
