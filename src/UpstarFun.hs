@@ -8,7 +8,9 @@ To understand this better, read from top to bottom, in the style
 that the code was slowly built up
 
 class Profunctor p where
-    dimap :: (a' -> a) -> (b -> b')-> p a b -> p a' b'
+  lmap  :: (c -> a) -> p a b -> p c b
+  rmap  :: (b -> d) -> p a b -> p a d
+  dimap :: (c -> a) -> (b -> d) -> p a b -> p c d
 
 class Functor f where
     fmap :: (a -> b) -> f a -> f b
