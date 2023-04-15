@@ -9,11 +9,11 @@
 - [] CoCartesian (or Choice)
 - [] Lens
 - [] Prism
-- [] Traversal (or Strong)
+- [] Traversal
 
 ## Profunctor-Optics
 - [] Cartesian   (or Strong)
 - [] CoCartesian (or Choice)
 - [] Lens
 - [] Prism
-- [] Traversal (or Strong)
+- [] Traversal
