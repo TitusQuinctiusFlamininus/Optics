@@ -12,6 +12,7 @@ class Profunctor p where
   rmap  :: (b -> d) -> p a b -> p a d
   dimap :: (c -> a) -> (b -> d) -> p a b -> p c d
 
+--This may come in useful, given the nature of a Downstar
 class Functor w => Comonad w where
     extract :: w a -> a
 
@@ -46,3 +47,17 @@ instance Functor OpFunc where
     fmap f (OpFunc x)        = OpFunc (f x)
 
 ---------------------------------------------------------------------------------
+
+-- Let us come up with some functions we can use for our dimap instance
+
+-- Lets invent a contravariant function that provides the dimap something of type (f a)
+preDownstar :: k   -> OpFunc (From a) 
+preDownstar  = undefined
+
+-- We also need a covariant function that takes our profunctor output (b) and potentially manipulates it further 
+postDownstar :: To a -> s'
+postDownstar = undefined
+
+-- Now we invent a function that represents how our upstar works primarily
+unstarter :: OpFunc (From a)  -> To b
+unstarter  = undefined
