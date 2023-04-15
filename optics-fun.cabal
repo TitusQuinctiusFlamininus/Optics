@@ -25,6 +25,7 @@ source-repository head
 
 library
   exposed-modules:
+      DownstarFun
       UpstarFun
   other-modules:
       Paths_optics_fun

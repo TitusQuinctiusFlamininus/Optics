@@ -18,7 +18,7 @@ class Functor f where
 --}
 
 -- Ok, Let us invent our own Upstar
-data OpticalUpstar f' a' b' = OpticalUpstar {unstar :: a' -> f' b'}
+newtype OpticalUpstar f' a' b' = OpticalUpstar {unstar :: a' -> f' b'}
 
 
 --Make it a Profunctor
