@@ -1,7 +1,7 @@
 module DownstarFun where
 
-import Control.Comonad           (Comonad, extract)
 import Control.Lens.Combinators  (Profunctor, dimap)
+import Control.Comonad           (Comonad, extract, extend, duplicate)
 
 {--
 
@@ -45,12 +45,14 @@ newtype To a                = To a
 
 -- Since the input of our downer is a functor of something, then let's make the type we've chosen to represent that functor, into one
 instance Functor OpFunc where
-    fmap f (OpFunc x)        = OpFunc (f x)
+    fmap f (OpFunc x)           = OpFunc (f x)
 
 
--- Just to give an example of the implementation of the Upstar internals, we'l go ahead and make our OpFunc type a comonad as well
+-- Just to give an example of the implementation of the Upstar internals, we'll go ahead and make our OpFunc type a comonad as well
 instance Comonad OpFunc where
-    extract (OpFunc x)       = x
+    extract    (OpFunc x)       =  x
+    duplicate  (OpFunc x)       =  (OpFunc ((OpFunc x)))
+    extend  f                   =  fmap f . duplicate
 
 ---------------------------------------------------------------------------------
 
@@ -59,6 +61,7 @@ instance Comonad OpFunc where
 -- Lets invent a contravariant function that provides the dimap something of type (f a), from the functional expression: (f a -> b)
 preDownstar :: k   -> OpFunc (From a) 
 preDownstar  = undefined
+
 
 -- We also need a covariant function that takes our profunctor output (To a) and 
 -- potentially manipulates it further (here (To a) represented abstractly as b, from the functional expression: (f a -> b)
