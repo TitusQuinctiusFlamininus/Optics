@@ -69,8 +69,8 @@ unstarter  = undefined
 -- The new transformation, after it became a profunctor, goes from     : s -> s'
 -- Actually, s' has the type (OpFunc s') so that we can infer: 
 -- fmap :: (To a -> s') -> OpFunc (To b)  -> (OpFunc s')
-opticalUpstarP :: OpticalUpstar OpFunc k (To b)
-opticalUpstarP = dimap preUpstar postUpstar (OpticalUpstar unstarter)
+proUpstarP :: OpticalUpstar OpFunc k (To b)
+proUpstarP = dimap preUpstar postUpstar (OpticalUpstar unstarter)
 
 
 -- So now you can use our Profunctor transformer (or any similar one), like this: 

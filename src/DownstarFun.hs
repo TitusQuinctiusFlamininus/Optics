@@ -13,11 +13,12 @@ class Profunctor p where
   rmap  :: (b -> d) -> p a b -> p a d
   dimap :: (c -> a) -> (b -> d) -> p a b -> p c d
 
+
 --This may come in useful, given the nature of a Downstar
 class Functor w => Comonad w where
-    extract :: w a -> a                       <--- we need only this, technically
-    duplicate :: w a -> w (w a)
-    extend :: (w a -> b) -> w a -> w b
+    extract     ::  w a -> a                       <--- we need only this, technically
+    duplicate   ::  w a -> w (w a)
+    extend      :: (w a -> b) -> w a -> w b
 
 
 --}
@@ -34,7 +35,7 @@ instance Functor f => Profunctor (OpticalDownstar f) where
 
 -- Ok, lets us come up with some examples of types to use for our downstar transformation
 
--- this will help be our Downstar functor
+-- this will help be our Downstar Input Computational type 
 newtype OpFunc a            = OpFunc a 
 
 -- we will be going from this type...
@@ -62,7 +63,7 @@ instance Comonad OpFunc where
 -- Let us come up with a few functions we can use for our dimap instance and build up one example of how to use the Downstar
 
 -- Lets invent a contravariant function that provides the dimap something of type (f a), from the functional expression: (f a -> b)
-preDownstar :: k   -> OpFunc (From a) 
+preDownstar :: m   -> From a
 preDownstar  = undefined
 
 
@@ -73,9 +74,20 @@ postDownstar = undefined
 
 
 -- Now we invent a function that represents how our Downstar works primarily
--- As mentioned before, since OpFunc is a comonad, let's convert what's extracted into our Downstar output type
+-- As mentioned before, since OpFunc is a comonad, and example of an implementation here is to convert what's extracted into our Downstar output type
 downer' :: OpFunc (From a)  -> To a
 downer' p          = To x
   where ( From x ) = extract p
 
 ---------------------------------------------------------------------------------
+
+--Time to tranform the Downstar instance into a Profunctor using functions we invented
+proDownstar :: OpticalDownstar OpFunc m (To a)
+proDownstar = dimap preDownstar postDownstar (OpDownstar downer')
+
+
+-- Now its time to use the Downstar. All we need to do is provide something of type (OpFunc m)
+-- since we are 'fmapping' h, we need to give the profunctor a functor computational type
+-- we see that: fmap (m -> From a) -> OpFunc m -> OpFunc (From a)        <<----and this looks like what our Downstar (downer') takes
+useProDownstar :: OpticalDownstar OpFunc m (To a) -> OpFunc m -> To a
+useProDownstar (OpDownstar d)    = d
