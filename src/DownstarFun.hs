@@ -22,5 +22,21 @@ class Functor w => Comonad w where
 newtype OpticalDownstar f a b = OpDownstar { downer :: f a -> b }
 
 -- Ok, lets go ahead and make it a Profunctor
+-- Whatever d produces, it needs to be a functor of something, so we have to fmap h
 instance Functor f => Profunctor (OpticalDownstar f) where
   dimap h g ( OpDownstar d ) = OpDownstar (  g . d . fmap h )
+
+  ---------------------------------------------------------------------------------
+
+-- Ok, lets us come up with some examples of types to use for our downstar transformation
+
+-- this will help be our Downstar functor
+newtype OpFunc a            = OpFunc a 
+
+-- we will be going from this type...
+newtype From a              = From a
+
+-- and eventually end up with this type.... 
+newtype To a                = To a 
+
+---------------------------------------------------------------------------------
