@@ -1,7 +1,7 @@
 # Fun With All Things Optics
 
 ## Profunctors
-- [x] Upstar
+- :heavy_check_mark: Upstar
 - [x] Downstar
 - [] Tagged
 - [] Affine
