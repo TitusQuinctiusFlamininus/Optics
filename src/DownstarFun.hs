@@ -52,8 +52,8 @@ instance Functor OpFunc where
 -- For the comonad instance, if you implement extract, that's enough; but lets do them all (we're having fun after all :))
 instance Comonad OpFunc where
     extract    (OpFunc x)       =  x
-    duplicate  (OpFunc x)       =  (OpFunc ((OpFunc x)))
-    extend  f                   =  fmap f . duplicate
+    duplicate  x                =  OpFunc x
+    extend     f                =  fmap f . duplicate
 
 ---------------------------------------------------------------------------------
 
