@@ -1,7 +1,7 @@
 # Fun With All Things Optics
 
 ## Profunctors
-- :ballot_box_with_check: Upstar
+- :large_orange_diamond: Upstar
 - [x] Downstar
 - [] Tagged
 - [] Affine
