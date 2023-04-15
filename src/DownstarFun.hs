@@ -40,3 +40,9 @@ newtype From a              = From a
 newtype To a                = To a 
 
 ---------------------------------------------------------------------------------
+
+-- Since the input of our downer is a functor of something, then let's make the type we've chosen to represent that functor, into one
+instance Functor OpFunc where
+    fmap f (OpFunc x)        = OpFunc (f x)
+
+---------------------------------------------------------------------------------
