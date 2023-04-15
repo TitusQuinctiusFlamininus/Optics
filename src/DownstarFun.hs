@@ -49,6 +49,7 @@ instance Functor OpFunc where
 
 
 -- Just to give an example of the implementation of the Upstar internals, we'll go ahead and make our OpFunc type a comonad as well
+-- For the comonad instance, if you implement extract, that's enough; but lets do them all (we're having fun after all :))
 instance Comonad OpFunc where
     extract    (OpFunc x)       =  x
     duplicate  (OpFunc x)       =  (OpFunc ((OpFunc x)))
