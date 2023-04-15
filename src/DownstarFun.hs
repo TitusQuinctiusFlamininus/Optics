@@ -50,14 +50,15 @@ instance Functor OpFunc where
 
 -- Let us come up with some functions we can use for our dimap instance
 
--- Lets invent a contravariant function that provides the dimap something of type (f a)
+-- Lets invent a contravariant function that provides the dimap something of type (f a), from the functional expression: (f a -> b)
 preDownstar :: k   -> OpFunc (From a) 
 preDownstar  = undefined
 
--- We also need a covariant function that takes our profunctor output (b) and potentially manipulates it further 
+-- We also need a covariant function that takes our profunctor output (To a) and 
+-- potentially manipulates it further (here (To a) represented abstractly as b, from the functional expression: (f a -> b)
 postDownstar :: To a -> s'
 postDownstar = undefined
 
--- Now we invent a function that represents how our upstar works primarily
-unstarter :: OpFunc (From a)  -> To b
-unstarter  = undefined
+-- Now we invent a function that represents how our Downstar works primarily
+downer' :: OpFunc (From a)  -> To b
+downer'  = undefined
