@@ -15,7 +15,9 @@ class Profunctor p where
 
 --This may come in useful, given the nature of a Downstar
 class Functor w => Comonad w where
-    extract :: w a -> a
+    extract :: w a -> a                       <--- we need only this, technically
+    duplicate :: w a -> w (w a)
+    extend :: (w a -> b) -> w a -> w b
 
 
 --}
