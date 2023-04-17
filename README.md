@@ -3,8 +3,6 @@
 ## Profunctors
 - :large_orange_diamond: Upstar
 - :large_orange_diamond: Downstar
-- :white_circle: Peak (Upstar-Downstar)
-- :white_circle: Valley (Downstar-Upstar)
 - :white_circle: Adapter
 - :white_circle: Tagged
 - :white_circle: Affine
@@ -22,3 +20,7 @@
 - :white_circle: Prism
 - :white_circle: Affine
 - :white_circle: Traversal
+
+## Experimental
+- :white_circle: Peak (Upstar-Downstar)
+- :white_circle: Valley (Downstar-Upstar)
