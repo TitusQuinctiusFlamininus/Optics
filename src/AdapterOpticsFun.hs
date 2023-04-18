@@ -85,7 +85,7 @@ adapterP = dimap preAdapt postAdapt (FAdapter adapt unAdapt)
 --adapterP' :: FunAdapter a b s t          <<------- (which was going from an s to t) 
 
 -- In order words, we need a function that will have this type: 
--- myUnknownFunction :: p a  b ->  p s t
+-- myUnknownOptic :: p a  b ->  p s t
 -- Or more accurately:  p s' t' -> p s t
 
 -- Remember waaaaaaaay at the top of the page, remember we wrote this wierd thing:         ---->>>>     Optic p a b s t = p a b -> p s t
