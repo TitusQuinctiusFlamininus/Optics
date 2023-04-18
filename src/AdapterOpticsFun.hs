@@ -110,10 +110,10 @@ useOptical :: FunAdapter Old New (Raw Old) (Ripe New)
 useOptical = adapterOptical adapterP
 
       
--- Creating some adapter utility function for To    
+-- Creating some adapter utility optic for To, that can give a's from s's
 useOpticalTo :: Raw Old -> Old
 useOpticalTo = to useOptical
 
--- Creating some adapter utility function for Fro    
+-- Creating some adapter utility function for Fro, that will compose t's from b's   
 useOpticalFro :: New  -> Ripe New
 useOpticalFro = fro useOptical
