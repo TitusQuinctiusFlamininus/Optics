@@ -54,20 +54,20 @@ data New                   = New
 -- So now lets invent some functions that can take advantage of our types
 
 -- Lets invent a contravariant function that provides the dimap something of type s
-preAdapt :: s' -> Raw Old
-preAdapt  = undefined
+preAdapt     :: s' -> Raw Old
+preAdapt     = undefined
 
 -- We also need a covariant function that takes our profunctor output (t) and potentially manipulates it further 
-postAdapt :: Ripe New -> t'
-postAdapt = undefined
+postAdapt    :: Ripe New -> t'
+postAdapt    = undefined
 
 -- Now we invent a function that represents how our adapter works primarily
-adapt :: Raw Old -> Old
-adapt  = undefined
+adapt        :: Raw Old -> Old
+adapt        = undefined
 
 -- Now we invent a function that represents how our adapter works primarily
-unAdapt :: New -> Ripe New
-unAdapt  = undefined
+unAdapt      :: New -> Ripe New
+unAdapt      = undefined
 
 
 ---------------------------------------------------------------------------------
@@ -106,14 +106,14 @@ adapterOptical (FAdapter i o) = dimap i o (FAdapter id id)
 
 --But how can we actually take advantage of the adapterP profunction we made earlier? Just hand it over to our Optical
 -- Now we have a Profunctor that can map between whole structures, instead of just the types found within those structures 
-useOptical :: FunAdapter Old New (Raw Old) (Ripe New)
-useOptical = adapterOptical adapterP
+useOptical     :: FunAdapter Old New (Raw Old) (Ripe New)
+useOptical     = adapterOptical adapterP
 
       
 -- Creating some adapter utility optic for To, that can give a's from s's
-useOpticalTo :: Raw Old -> Old
-useOpticalTo = to useOptical
+useOpticalTo   :: Raw Old -> Old
+useOpticalTo   = to useOptical
 
 -- Creating some adapter utility function for Fro, that will compose t's from b's   
-useOpticalFro :: New  -> Ripe New
-useOpticalFro = fro useOptical
+useOpticalFro  :: New  -> Ripe New
+useOpticalFro  = fro useOptical
