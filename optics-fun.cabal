@@ -25,6 +25,7 @@ source-repository head
 
 library
   exposed-modules:
+      AdapterOpticsFun
       DownstarFun
       UpstarFun
   other-modules:
