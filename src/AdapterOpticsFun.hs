@@ -79,10 +79,10 @@ adapterP :: FunAdapter Old New (Raw Old) (Ripe New)
 adapterP = dimap preAdapt postAdapt (FAdapter adapt unAdapt)
 
 -- We can write what we have above kinda like this:
---adapterP  :: FunAdapter a b s' t'        <<------- (which can be represented like this: p a b)
+--adapterP  :: FunAdapter a b s' t'        <<------- (which was going from an s' to a t')
 
 -- That's fine, but what if we wanted this:
---adapterP' :: FunAdapter s t s t         <<------- (which can be represented like this: p s t) 
+--adapterP' :: FunAdapter a b s t          <<------- (which was going from an s to a t) 
 
 -- In order words, we need a function that will have this type: 
 -- myUnknownFunction :: p a b -> p s t
@@ -98,14 +98,16 @@ adapterP = dimap preAdapt postAdapt (FAdapter adapt unAdapt)
  --adapterOptical :: FunAdapter Old New s' t' -> FunAdapter (Raw Old) (Ripe New) (Raw Old) (Ripe New)
  -- Now since s' can be supposed to be (Raw Old) and t' can be supposed to be (Ripe New) for all intents and purposes, we can simply the signature
 
- -- So lets invent it now: 
+ -- So lets invent it now: It becomes:
+ -- Optic p Old New (Raw Old) (Ripe New) =  (p Old New   -> p (Raw Old) (Ripe New))
 adapterOptical :: FunAdapter Old New (Raw Old) (Ripe New) -> FunAdapter Old New (Raw Old) (Ripe New)
 adapterOptical (FAdapter inside outside) = dimap inside outside (FAdapter id id)
 
--- Explanation : outside function is producing type a, and our "to" adapter function  needs to produce the same type as well: so why not use the identity function
--- Also        : whatever the "fro" adapter function produces is of type t, but know that we'll just need to hand that off to "outside" so who not use the identity function to take a "t" and produce a "t", handing it off, so our "b" might as well be a "t" in the fro-definition
+-- Explanation : dimap's inside  function has a signature  (s -> a), and our "to"  adapter function needs to produce the same type as well (to  :: s -> a) : so why not use the identity function to simply carry the "a" along unmodified, instead of creating an s and then grinding it back to to an "a" again
+-- Also        : dimap's outside function has a signature  (b -> t), and our "fro" adapter function needs to produce the same type as well (fro :: b -> t) : so why not use the identity function to simply carry the "t" along unmodified, essentially assuming our "b"s to be "t"s
 
 --But how can we actually take advantage of the adapterP profunction we made earlier? Just hand it over to our Optical
+-- Now we have a Profunctor that can map between whole structures, instead of just the types found within those structures 
 useOptical :: FunAdapter Old New (Raw Old) (Ripe New)
 useOptical = adapterOptical adapterP
 
