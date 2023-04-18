@@ -88,7 +88,7 @@ adapterP = dimap preAdapt postAdapt (FAdapter adapt unAdapt)
 -- myUnknownOptic :: p a  b ->  p s t
 -- Or more accurately:  p s' t' -> p s t
 
--- Remember waaaaaaaay at the top of the page, remember we wrote this wierd thing:         ---->>>>     Optic p a b s t = p a b -> p s t
+-- Remember waaaaaaaay at the top of the page, we wrote this wierd thing:         ---->>>>     Optic p a b s t = p a b -> p s t
 -- Looks kinda like what we want to achieve in the "myUnknownFunction", right? 
 
 
