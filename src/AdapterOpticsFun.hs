@@ -79,10 +79,10 @@ adapterP :: FunAdapter Old New (Raw Old) (Ripe New)
 adapterP = dimap preAdapt postAdapt (FAdapter adapt unAdapt)
 
 -- We can write what we have above kinda like this:
---adapterP  :: FunAdapter a b s' t'        <<------- (which was going from an s' to a t')
+--adapterP  :: FunAdapter a b s' t'        <<------- (which was going from an s' to t')
 
 -- That's fine, but what if we wanted this:
---adapterP' :: FunAdapter a b s t          <<------- (which was going from an s to a t) 
+--adapterP' :: FunAdapter a b s t          <<------- (which was going from an s to t) 
 
 -- In order words, we need a function that will have this type: 
 -- myUnknownFunction :: p a b -> p s t
