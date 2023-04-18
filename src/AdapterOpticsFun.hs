@@ -85,17 +85,15 @@ adapterP = dimap preAdapt postAdapt (FAdapter adapt unAdapt)
 --adapterP' :: FunAdapter a b s t          <<------- (which was going from an s to t) 
 
 -- In order words, we need a function that will have this type: 
--- myUnknownFunction :: p a b -> p s t
+-- myUnknownFunction :: p a  b ->  p s t
+-- Or more accurately:  p s' t' -> p s t
 
 -- Remember waaaaaaaay at the top of the page, remember we wrote this wierd thing:         ---->>>>     Optic p a b s t = p a b -> p s t
 -- Looks kinda like what we want to achieve in the "myUnknownFunction", right? 
 
--- Let's give that function a name, something Adapter-rish:
---adapterOptical :: Profunctor p => p a b -> p s t 
-
 
 -- What would our final Signature looks like, if we filled in the abstract types (a, b, s, t) with types we already invented?
- --adapterOptical :: FunAdapter Old New s' t' -> FunAdapter (Raw Old) (Ripe New) (Raw Old) (Ripe New)
+ --adapterOptical :: FunAdapter Old New s' t' -> FunAdapter Old New (Raw Old) (Ripe New)
  -- Now since s' can be supposed to be (Raw Old) and t' can be supposed to be (Ripe New) for all intents and purposes, we can simply the signature
 
  -- So lets invent it now: It becomes:
