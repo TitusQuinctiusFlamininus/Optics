@@ -99,10 +99,10 @@ adapterP = dimap preAdapt postAdapt (FAdapter adapt unAdapt)
  -- So lets invent it now: It becomes:
  -- Optic p Old New (Raw Old) (Ripe New) =  (p Old New   -> p (Raw Old) (Ripe New))
 adapterOptical :: FunAdapter Old New (Raw Old) (Ripe New) -> FunAdapter Old New (Raw Old) (Ripe New)
-adapterOptical (FAdapter inside outside) = dimap inside outside (FAdapter id id)
+adapterOptical (FAdapter i o) = dimap i o (FAdapter id id)
 
--- Explanation : dimap's inside  function has a signature  (s -> a), and our "to"  adapter function needs to produce the same type as well (to  :: s -> a) : so why not use the identity function to simply carry the "a" along unmodified, instead of creating an s and then grinding it back to to an "a" again
--- Also        : dimap's outside function has a signature  (b -> t), and our "fro" adapter function needs to produce the same type as well (fro :: b -> t) : so why not use the identity function to simply carry the "t" along unmodified, essentially assuming our "b"s to be "t"s
+-- Explanation : dimap's inside i  function has a signature  (s -> a), and our "to"  adapter function needs to produce the same type as well (to  :: s -> a) : so why not use the identity function to simply carry the "a" along unmodified, instead of creating an s and then grinding it back to to an "a" again
+-- Also        : dimap's outside o function has a signature  (b -> t), and our "fro" adapter function needs to produce the same type as well (fro :: b -> t) : so why not use the identity function to simply carry the "t" along unmodified, essentially assuming our "b"s to be "t"s
 
 --But how can we actually take advantage of the adapterP profunction we made earlier? Just hand it over to our Optical
 -- Now we have a Profunctor that can map between whole structures, instead of just the types found within those structures 
