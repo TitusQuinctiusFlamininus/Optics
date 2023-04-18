@@ -89,7 +89,7 @@ adapterP = dimap preAdapt postAdapt (FAdapter adapt unAdapt)
 -- Or more accurately:  p s' t' -> p s t
 
 -- Remember waaaaaaaay at the top of the page, we wrote this wierd thing:         ---->>>>     Optic p a b s t = p a b -> p s t
--- Looks kinda like what we want to achieve in the "myUnknownFunction", right? 
+-- Looks kinda like what we want to achieve in the "myUnknownOptic", right? 
 
 
 -- What would our final Signature looks like, if we filled in the abstract types (a, b, s, t) with types we already invented?
