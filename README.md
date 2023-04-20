@@ -22,5 +22,5 @@
 - :white_circle: Traversal
 
 ## Experimental
-- :white_circle: Peak (Upstar-Downstar)
-- :white_circle: Valley (Downstar-Upstar)
+- :white_circle: Spike (Upstar-Downstar)
+- :white_circle: Sink (Downstar-Upstar)
