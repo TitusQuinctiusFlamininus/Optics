@@ -47,6 +47,15 @@ data Molecule               = Molecule
 newtype NewComposite b      = NewComposite b
 
 
+-- Now to invent some functions 
 
+-- This contravariant function will supply our original structure
+preTreat :: m   ->  Composite a 
+preTreat = undefined
+
+
+-- This covariant function will absorb our resultant type structures and possibly modify them further
+postTreat :: NewComposite b   ->  n
+postTreat = undefined
 
 
