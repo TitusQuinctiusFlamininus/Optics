@@ -27,6 +27,7 @@ library
   exposed-modules:
       AdapterOpticsFun
       DownstarFun
+      LensOpticsFun
       UpstarFun
   other-modules:
       Paths_optics_fun
