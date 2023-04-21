@@ -99,6 +99,10 @@ telescope :: OpticalLens Atom Molecule (Composite Atom) (NewComposite Molecule)
 telescope = OptLens (peep . preTreat) (\(a',c')  -> postTreat . comp $ (a', preTreat c'))
 
 
--- Let's create the Optic
-teleOptic  :: OpticalLens a Molecule (Composite Atom) (NewComposite Molecule) -> OpticalLens (Composite Atom) (NewComposite Molecule) s' t'
-teleOptic (OptLens _ macro) = dimap preTreat postTreat (OptLens id (\(a',c')  -> postTreat . macro $ (extract a', preTreat c')))
+-- Let's create the Optic: We are moving 
+-- Now we see the use of extract in the Optic's general definition: We needed to step-down from a Functor/Comonad of some type to that type
+-- Also notice that it does not matter what we used to do on the left hand side of our profunctor (almost like the Adapter case), but because the input type of the right-hand side it not trivial, the identity function is not enough 
+-- Left-Hand side: We had (s -> a) : and we had (p a b)      ------->>> Means if we have: (p s t) we have to replace a's with s , but if we do that in (s -> a), we will end up with (s -> s), and that is the identity function!
+-- Right-Hand side: More complicated, but just take the long function we had above, and replace the types, except we need to extract something first    
+teleOptic  :: OpticalLens a Molecule (Composite Atom) (NewComposite Molecule) -> OpticalLens (Composite Atom) (NewComposite Molecule) (Composite Atom) (NewComposite Molecule)
+teleOptic (OptLens _ macro) = dimap preTreat postTreat (OptLens id (\(v,w)  -> postTreat . macro $ (extract v, preTreat w)))
