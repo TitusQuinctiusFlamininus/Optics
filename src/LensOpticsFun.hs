@@ -30,3 +30,23 @@ instance Profunctor (OpticalLens a b) where
         
 
 
+---------------------------------------------------------------------------------
+
+-- As is now also routine, we'll invent types and functions to use for a practical example
+
+-- Let's define some type from which we can compose things of type s
+data Atom                   =   Atom
+
+-- Another definition that can represent original whole structured types
+newtype Composite a         = Composite a
+
+-- Some type we can use to build up new structured types
+data Molecule               = Molecule
+
+--Finally some new structure we can build up
+newtype NewComposite b      = NewComposite b
+
+
+
+
+
