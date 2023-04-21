@@ -2,6 +2,7 @@ module LensOpticsFun where
 
 
 import Control.Lens.Combinators (Profunctor, dimap)
+import Control.Comonad          (Comonad, extract)
 
 {--
 
@@ -15,6 +16,12 @@ class Profunctor p where
 
 where p is a Profunctor : 
 type Optic p a b s t = p a b -> p s t
+
+class Functor f where
+    fmap :: (a -> b) -> f a -> f b
+
+class Functor w => Comonad w where
+    extract     ::  w a -> a                       
 
 --}
 
@@ -45,19 +52,24 @@ instance Profunctor (OpticalLens a b) where
 -- As is now also routine, we'll invent types and functions to use for a practical example
 
 -- Let's define some type from which we can compose things of type s
-data Atom                   =   Atom
+data Atom                     =   Atom
 
 -- Another definition that can represent original whole structured types
-newtype Composite a         = Composite a
+newtype Composite a           = Composite a
 
 -- Some type we can use to build up new structured types
-data Molecule               = Molecule
+data Molecule                 = Molecule
 
 --Finally some new structure we can build up
-newtype NewComposite b      = NewComposite b
+newtype NewComposite b        = NewComposite b
 
 
+--Let's make the latter a Functor, in the hope of making it a Comonad, will explain lower down
+instance Functor NewComposite where
+    fmap f (NewComposite b)   =  NewComposite (f b)
 
+instance Comonad NewComposite where
+    extract (NewComposite b)  =  b
 ---------------------------------------------------------------------------------
 
 -- Now to invent some functions 
@@ -85,3 +97,8 @@ comp      = undefined
 -- Formulating a concrete profunctor type based our custom types
 telescope :: OpticalLens Atom Molecule (Composite Atom) (NewComposite Molecule)
 telescope = OptLens (peep . preTreat) (\(a',c')  -> postTreat . comp $ (a', preTreat c'))
+
+
+-- Let's create the Optic
+teleOptic  :: OpticalLens a Molecule (Composite Atom) (NewComposite Molecule) -> OpticalLens (Composite Atom) (NewComposite Molecule) s' t'
+teleOptic (OptLens _ macro) = dimap preTreat postTreat (OptLens id (\(a',c')  -> postTreat . macro $ (extract a', preTreat c')))
