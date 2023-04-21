@@ -20,11 +20,13 @@ type Optic p a b s t = p a b -> p s t
 
 -- This time we are dealing with the powerful concept of a lens
 -- Let's roll our own 
-data OpticalLens a b s t = OptLens { look :: s      -> a, 
-                                     edit :: (b, s) -> t 
+data OpticalLens a b s t = OptLens { look :: s         ->  a, 
+                                     edit :: (b, s)    ->  t 
                                    }
 
 -- Turning our custom type into a Profunctor
 instance Profunctor (OpticalLens a b) where
     dimap h g (OptLens l e )     = OptLens (l . h) (\(x,y)  -> g . e $ (x, h y))
         
+
+
