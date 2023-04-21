@@ -82,6 +82,6 @@ comp      = undefined
 
 ---------------------------------------------------------------------------------
 
--- Formulating a concrete type based our custom types
+-- Formulating a concrete profunctor type based our custom types
 telescope :: OpticalLens Atom Molecule (Composite Atom) (NewComposite Molecule)
 telescope = OptLens (peep . preTreat) (\(a',c')  -> postTreat . comp $ (a', preTreat c'))
