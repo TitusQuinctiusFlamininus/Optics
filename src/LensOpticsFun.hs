@@ -79,3 +79,9 @@ peep      = undefined
 -- Let's define a function that can assemble new types and create new ones from parts
 comp         ::   (Molecule, Composite Atom)  ->   NewComposite Molecule
 comp      = undefined
+
+---------------------------------------------------------------------------------
+
+-- Formulating a concrete type based our custom types
+telescope :: OpticalLens Atom Molecule (Composite Atom) (NewComposite Molecule)
+telescope = undefined
