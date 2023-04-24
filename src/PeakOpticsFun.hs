@@ -8,7 +8,7 @@ that the code was slowly built up
 
 
 -- Combination of an Upstar and Downstar
-newtype Multistar   f a b   = Multistar    {  up   :: a     -> f b,
+data Multistar   f a b   = Multistar    {  up   :: a     -> f b,
                                              down :: f a   -> b
                                            }
 
