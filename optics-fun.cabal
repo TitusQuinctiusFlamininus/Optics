@@ -28,7 +28,7 @@ library
       AdapterOpticsFun
       DownstarFun
       LensOpticsFun
-      PeakOpticsFun
+      MultistarOpticsFun
       UpstarFun
   other-modules:
       Paths_optics_fun
