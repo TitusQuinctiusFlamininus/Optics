@@ -1,35 +1,52 @@
 module LensOpticsFun where
 
 
-import Control.Lens.Combinators (Profunctor, dimap)
-import Control.Comonad          (Comonad, extract)
+import Control.Lens.Combinators (Profunctor, dimap   )
+import Control.Comonad          (Comonad   , duplicate, extract, extend )
 
 {--
 
 To understand this better, read from top to bottom, in the style 
 that the code was slowly built up
 
+
+data Lens a b s t = Lens { view   ::  s      ->  a, 
+                           update :: (b, s)  ->  t
+                         }
+
+
 class Profunctor p where
   lmap  :: (c -> a) -> p a b -> p c b
   rmap  :: (b -> d) -> p a b -> p a d
   dimap :: (c -> a) -> (b -> d) -> p a b -> p c d
 
+
 where p is a Profunctor : 
 type Optic p a b s t = p a b -> p s t
+
 
 class Functor f where
     fmap :: (a -> b) -> f a -> f b
 
+
 class Functor w => Comonad w where
-    extract     ::  w a -> a                       
+    extract     ::  w a -> a      
+    duplicate   ::  w a -> w (w a)
+    extend      :: (w a -> b) -> w a -> w b                 
 
 --}
+
+
+
+---------------------------------------------------------------------------------
+
 
 -- This time we are dealing with the powerful concept of a lens
 -- Let's roll our own 
 data OpticalLens a b s t = OptLens { look :: s         ->  a, 
                                      edit :: (b, s)    ->  t 
                                    }
+
 
 -- Turning our custom type into a Profunctor
 instance Profunctor (OpticalLens a b) where
@@ -64,13 +81,21 @@ data Molecule                 = Molecule
 newtype NewComposite b        = NewComposite b
 
 
+---------------------------------------------------------------------------------
+-- Defining the instances 
+
 --Let's make the latter a Functor, in the hope of making it a Comonad, will explain lower down
 instance Functor NewComposite where
     fmap f (NewComposite b)   =  NewComposite (f b)
 
 instance Comonad NewComposite where
     extract (NewComposite b)  =  b
+    duplicate  x              =  NewComposite x
+    extend     f              =  fmap f . duplicate
+
+
 ---------------------------------------------------------------------------------
+
 
 -- Now to invent some functions 
 
@@ -92,7 +117,9 @@ peep      = undefined
 comp         ::   (Molecule, Composite Atom)  ->   NewComposite Molecule
 comp      = undefined
 
+
 ---------------------------------------------------------------------------------
+
 
 -- Formulating a concrete profunctor type based our custom types
 telescope :: OpticalLens Atom Molecule (Composite Atom) (NewComposite Molecule)
@@ -106,3 +133,19 @@ telescope = OptLens (peep . preTreat) (\(a',c')  -> postTreat . comp $ (a', preT
 -- Right-Hand side: More complicated, but just take the long function we had above, and replace the types, except we need to extract something first    
 teleOptic  :: OpticalLens a Molecule (Composite Atom) (NewComposite Molecule) -> OpticalLens (Composite Atom) (NewComposite Molecule) (Composite Atom) (NewComposite Molecule)
 teleOptic (OptLens _ macro) = dimap preTreat postTreat (OptLens id (\(v,w)  -> postTreat . macro $ (extract v, preTreat w)))
+
+
+
+---------------------------------------------------------------------------------
+
+
+-- How can we use the new Profunctor we to peer into some composite type
+microscope :: Composite Atom -> Composite Atom
+microscope     = look (teleOptic telescope)
+
+-- How can we use the new Profunctor we to build up some new composite type from smaller alternative parts
+structer :: NewComposite Molecule  -> Composite Atom -> NewComposite Molecule
+structer m o   = edit (teleOptic telescope) (m, o)
+
+
+---------------------------------------------------------------------------------
