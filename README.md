@@ -8,7 +8,7 @@
 - :white_circle: Affine
 - :white_circle: Cartesian   (or Strong)
 - :white_circle: CoCartesian (or Choice)
-- :white_circle: Lens
+- :large_orange_diamond: Lens
 - :white_circle: Prism
 - :white_circle: Traversal
 
@@ -16,7 +16,7 @@
 - :white_circle: Cartesian   (or Strong)
 - :white_circle: CoCartesian (or Choice)
 - :large_orange_diamond: Adapter
-- :white_circle: Lens
+- :large_orange_diamond: Lens
 - :white_circle: Prism
 - :white_circle: Affine
 - :white_circle: Traversal
