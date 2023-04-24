@@ -9,8 +9,8 @@ that the code was slowly built up
 
 -- Combination of an Upstar and Downstar
 data Multistar   f a b   = Multistar    {  up   :: a     -> f b,
-                                             down :: f a   -> b
-                                           }
+                                           down :: f a   -> b
+                                        }
 
 
 class Profunctor p where
