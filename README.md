@@ -4,6 +4,7 @@
 - :large_orange_diamond: Upstar
 - :large_orange_diamond: Downstar
 - :large_orange_diamond: Adapter
+- :white_circle: Forget
 - :white_circle: Tagged
 - :white_circle: Affine
 - :white_circle: Cartesian   (or Strong)
