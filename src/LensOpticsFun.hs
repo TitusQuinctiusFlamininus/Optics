@@ -139,11 +139,11 @@ teleOptic (OptLens _ macro) = dimap preTreat postTreat (OptLens id (\(v,w)  -> p
 ---------------------------------------------------------------------------------
 
 
--- How can we use the new Profunctor we to peer into some composite type
+-- How can we use the new Profunctor to peer into some composite type
 microscope :: Composite Atom -> Composite Atom
 microscope     = look (teleOptic telescope)
 
--- How can we use the new Profunctor we to build up some new composite type from smaller alternative parts
+-- How can we use the new Profunctor to build up some new composite type from smaller alternative parts
 structer :: NewComposite Molecule  -> Composite Atom -> NewComposite Molecule
 structer m o   = edit (teleOptic telescope) (m, o)
 
