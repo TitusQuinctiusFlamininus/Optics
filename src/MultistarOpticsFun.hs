@@ -1,6 +1,7 @@
 module MultistarOpticsFun where
 
 import Control.Lens.Combinators (Profunctor, dimap   )
+import Control.Comonad          (Comonad, extract, extend, duplicate)
 
  {--
 
@@ -33,3 +34,8 @@ class Functor w => Comonad w where
 data Multistar   f a b   = Multistar    {  up   :: a     -> f b,
                                            down :: f a   -> b
                                         }
+
+
+-- Now we construct a Profunctor, like we always do
+instance Functor f => Profunctor (Multistar f) where
+    dimap h g (Multistar u d)     = Multistar (fmap g . u . h) (g . d . fmap h)
