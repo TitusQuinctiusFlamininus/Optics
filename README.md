@@ -12,6 +12,7 @@
 - :green_circle: Lens
 - :white_circle: Prism
 - :white_circle: Traversal
+- :white_circle: Closed
 
 ## Profunctor-Optics
 - :white_circle: Cartesian   (or Strong)
@@ -23,4 +24,5 @@
 - :white_circle: Traversal
 
 ## Experimental
-- :white_circle: Multistar / Peak-Valley (Upstar-Downstar)
+- :white_circle: Multistar / Spike (Upstar-Downstar)
+- :white_circle: Multistar / Ditch (Downstar-Upstar)
