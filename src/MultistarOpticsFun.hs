@@ -1,6 +1,7 @@
 module MultistarOpticsFun where
 
 import Control.Lens.Combinators (Profunctor, dimap)
+import Control.Comonad          (Comonad   , duplicate, extract, extend )
 
 ---------------------------------------------------------------------------------
 
@@ -27,6 +28,11 @@ type Optic p a b s t = p a b -> p s t
 
 class Functor f where
     fmap :: (a -> b) -> f a -> f b
+
+class Functor w => Comonad w where
+    extract     ::  w a -> a      
+    duplicate   ::  w a -> w (w a)
+    extend      :: (w a -> b) -> w a -> w b  
 
 --}   
 
@@ -63,19 +69,19 @@ instance Functor f => Profunctor (Multistar f a b) where
 newtype  SuperStar s        = Star s
 
 
--- Here's some arbitrary ingredient type
+-- Here's some arbitrary type that mimicks intersteller dirt
 data     Dust               = Dust 
 
 
--- Here's another arbitrary result type
+-- Here's another type that can be used as some intersteller dirt
 data     StarDust           = StarDust
 
 
--- Here's a type that looks like it might contain other types
+-- Some kind of composite type that could hold a form of space dirt
 newtype  Cloud c            = Cloud c
 
 
--- This type can be formed by interchanging internal types for others
+-- Another intersteller composite type that holds a different type of space dirt 
 newtype  Cluster v          = Cluster v
 
 
@@ -87,19 +93,22 @@ newtype  Cluster v          = Cluster v
 instance Functor SuperStar where
   fmap f  (Star n)          = Star (f n)
 
-
+instance Comonad SuperStar where
+    extract (Star x)        =  x
+    duplicate  x            =  Star x
+    extend     f            =  fmap f . duplicate
 ---------------------------------------------------------------------------------
 
 -- Time to form a concrete set of functions that we can utilize 
 -- Analogy of star-formation in galaxies used, just as an example
 
 -- We need a contravariant function for providing our intersteller material during Star formation
-epoch      ::  a'           ->   Dust
+epoch      ::  a'           ->   s
 epoch       = undefined
 
 
 -- We also need a covariant function that will eventually produce the space phenomenon we seek
-evolve     :: StarDust       ->  d
+evolve     :: t       ->  d
 evolve      = undefined
 
 
@@ -108,18 +117,18 @@ outflow    :: a             -> SuperStar b
 outflow     = undefined
 
 -- Finally, inventing a function within which Stars are formed 
-supernova  :: SuperStar Dust   ->  StarDust
+supernova  :: SuperStar s   ->  t
 supernova   = undefined
 
 
 ---------------------------------------------------------------------------------
 
 -- Formulating a praktisk profunctor
-multiFunctor :: Multistar SuperStar a b Dust StarDust
+multiFunctor :: Multistar SuperStar a b s t
 multiFunctor                    = dimap epoch evolve (Multistar outflow supernova)
 
 
 -- Coming up with our Optical, so that we can transform between simple Dust to Intersteller Dust
 multiOptic  :: Multistar SuperStar a b Dust StarDust  -> Multistar SuperStar a b (Cloud Dust) (Cluster StarDust) 
-multiOptic (Multistar l r)      = Multistar l (_)
+multiOptic (Multistar l _)      = Multistar l (extract . fmap epoch)
 
