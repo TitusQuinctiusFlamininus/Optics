@@ -34,6 +34,11 @@ class Functor w => Comonad w where
     duplicate   ::  w a -> w (w a)
     extend      :: (w a -> b) -> w a -> w b  
 
+class Functor r => Applicative r where
+    pure        :: x           -> r x
+    <*>         :: f (a -> b)  -> f a   ->  f b
+
+
 --}   
 
 ---------------------------------------------------------------------------------
@@ -89,14 +94,21 @@ newtype  Cluster v          = Cluster v
 
 -- We need one of our types to behave like a functor; so let's make it do that now
 
-
+-- Making our custom type a functor
 instance Functor SuperStar where
   fmap f  (Star n)          = Star (f n)
 
+-- This instance will come in useful when we need a type associated with a functor, rather than the composition of the two
 instance Comonad SuperStar where
     extract (Star x)        =  x
     duplicate  x            =  Star x
     extend     f            =  fmap f . duplicate
+
+-- This instance will come in useful when we have to deal with input as a type, rather than a functor of some type
+instance Applicative SuperStar where
+  pure x                    =  Star x
+  Star y   <*>  Star z      =  Star (y z)
+
 ---------------------------------------------------------------------------------
 
 -- Time to form a concrete set of functions that we can utilize 
@@ -108,13 +120,14 @@ epoch       = undefined
 
 
 -- We also need a covariant function that will eventually produce the space phenomenon we seek
-evolve     :: t       ->  d
+evolve     :: t             ->  d
 evolve      = undefined
 
 
 -- Let's invent a function that mimicks some process not really associated with star-formation (L.H.S Multistar)
 outflow    :: a             -> SuperStar b 
 outflow     = undefined
+
 
 -- Finally, inventing a function within which Stars are formed 
 supernova  :: SuperStar s   ->  t
@@ -123,12 +136,25 @@ supernova   = undefined
 
 ---------------------------------------------------------------------------------
 
+
 -- Formulating a praktisk profunctor
 multiFunctor :: Multistar SuperStar a b s t
 multiFunctor                    = dimap epoch evolve (Multistar outflow supernova)
 
 
 -- Coming up with our Optical, so that we can transform between simple Dust to Intersteller Dust
-multiOptic  :: Multistar SuperStar a b Dust StarDust  -> Multistar SuperStar a b (Cloud Dust) (Cluster StarDust) 
+multiOptic   :: Multistar SuperStar a b Dust StarDust  -> Multistar SuperStar a b (Cloud Dust) (Cluster StarDust) 
 multiOptic (Multistar l _)      = Multistar l (extract . fmap epoch)
 
+
+-- Lifting Intersteller dust into our intersteller functor
+upper        :: c' -> SuperStar d'
+upper                           = up   (multiOptic multiFunctor)
+
+-- Lowering an Intersteller Composite to into another Composite result type
+downer        :: Cloud Dust -> Cluster StarDust
+downer                          = down (multiOptic multiFunctor) . pure
+
+
+
+---------------------------------------------------------------------------------
