@@ -14,7 +14,7 @@
 - :white_circle: Traversal
 
 ## Profunctor-Optics
-- :white_circle: Cartesian   (or Strong)
+- :red_circle: Cartesian   (or Strong)
 - :white_circle: CoCartesian (or Choice)
 - :large_orange_diamond: Adapter
 - :large_orange_diamond: Lens
