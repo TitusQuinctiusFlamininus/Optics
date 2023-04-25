@@ -9,7 +9,7 @@
 - :white_circle: Affine
 - :white_circle: Cartesian   (or Strong)
 - :white_circle: CoCartesian (or Choice)
-- :large_orange_diamond: Lens
+- :green_circle: Lens
 - :white_circle: Prism
 - :white_circle: Traversal
 
