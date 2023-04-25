@@ -24,5 +24,5 @@
 - :white_circle: Traversal
 
 ## Experimental
-- :white_circle: Multistar / Spike (Upstar-Downstar)
+- :green_circle: Multistar / Spike (Upstar-Downstar)
 - :white_circle: Multistar / Ditch (Downstar-Upstar)
