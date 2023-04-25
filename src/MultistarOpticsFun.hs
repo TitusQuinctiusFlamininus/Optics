@@ -129,7 +129,7 @@ outflow    :: a             -> SuperStar b
 outflow     = undefined
 
 
--- Finally, inventing a function within which Stars are formed 
+-- Finally, inventing a function within which Stars die 
 supernova  :: SuperStar s   ->  t
 supernova   = undefined
 
