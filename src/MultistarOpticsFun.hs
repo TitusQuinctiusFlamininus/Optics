@@ -43,7 +43,7 @@ class Functor r => Applicative r where
 ---------------------------------------------------------------------------------
 
 
--- Combination of an Upstar and Downstar
+-- Combination of an Upstar and Downstar (It is an experimental type, purely for fun)
 data Multistar   f a b s t        = Multistar    {  up   :: a     -> f b,
                                                     down :: f s   -> t
                                                  }
