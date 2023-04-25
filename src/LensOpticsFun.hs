@@ -26,7 +26,7 @@ type Optic p a b s t = p a b -> p s t
 
 
 class Functor f where
-    fmap :: (a -> b) -> f a -> f b
+    <$> :: (a -> b) -> f a -> f b
 
 
 class Functor w => Comonad w where
