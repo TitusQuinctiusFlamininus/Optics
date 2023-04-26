@@ -163,6 +163,7 @@ upper                           = up   (multiOptic multiFunctor)
 
 -- Transposing between Intersteller Composite types, using our Optic
 -- What we really want it to be able to transform from one composite type to another composite (intersteller) type
+-- We need pure to lift a type into a functor
 downer        :: Cloud Dust -> Cluster StarDust
 downer                          = down (multiOptic multiFunctor) . pure
 
