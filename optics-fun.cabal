@@ -29,6 +29,7 @@ library
       DownstarFun
       LensOpticsFun
       MultistarOpticsFun
+      PrismOpticsFun
       UpstarFun
   other-modules:
       Paths_optics_fun
