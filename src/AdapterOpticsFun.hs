@@ -100,8 +100,10 @@ adapterP     = dimap preAdapt postAdapt (FAdapter adapt unAdapt)
 adapterOptical :: FunAdapter Old New Old New -> FunAdapter Old New (Raw Old) (Ripe New)
 adapterOptical (FAdapter i o) = dimap (i . adapt) (unAdapt . o) (FAdapter id id)
 
--- Explanation : dimap's inside i  function has a signature  (s -> a), and our "to"  adapter function needs to produce the same type as well (to  :: s -> a) : so why not use the identity function to simply carry the "a" along unmodified, instead of creating an s and then grinding it back to to an "a" again
--- Also        : dimap's outside o function has a signature  (b -> t), and our "fro" adapter function needs to produce the same type as well (fro :: b -> t) : so why not use the identity function to simply carry the "t" along unmodified, essentially assuming our "b"s to be "t"s
+-- Explanation : dimap's inside i  function has a signature  (s -> a), and our "to"  adapter function needs to produce the same type as well (to  :: s -> a) : 
+--                                 so why not use the identity function to simply carry the "a" along unmodified, instead of creating an s and then grinding it back to to an "a" again; adapt is needed to convert original composite types before the indentity application
+-- Also        : dimap's outside o function has a signature  (b -> t), and our "fro" adapter function needs to produce the same type as well (fro :: b -> t) : 
+--                                 so why not use the identity function to simply carry the "t" along unmodified, essentially assuming our "b"s to be "t"s ; unAdapt is needed to convert after the passthrough strategy to our new composite types
 
 --But how can we actually take advantage of the adapterP profunction we made earlier? Just hand it over to our Optical
 -- Now we have a Profunctor that can map between whole structures, instead of just the types found within those structures 
