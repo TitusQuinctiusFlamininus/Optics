@@ -74,7 +74,6 @@ unAdapt      = undefined
 
 -- Let's define our transformation with what we have so far: 
 --This Profunctor goes from types : s' -> t' (choosing (Raw Old) and (Ripe New) as s' and t')
---adapterP :: FunAdapter Old New s' t'
 adapterP     :: FunAdapter Old New s' t'
 adapterP     = dimap preAdapt postAdapt (FAdapter adapt unAdapt)
 
