@@ -84,7 +84,7 @@ newtype NewComposite b        = NewComposite b
 ---------------------------------------------------------------------------------
 -- Defining the instances 
 
---Let's make the latter a Functor, in the hope of making it a Comonad, will explain lower down
+--Let's make the Composite a Functor, in the hope of making it a Comonad, will explain lower down
 instance Functor Composite where
     fmap f (Composite b)      =  Composite (f b)
 
