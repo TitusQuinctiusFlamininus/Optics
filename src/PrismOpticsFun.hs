@@ -2,7 +2,6 @@ module PrismOpticsFun where
 
 
 import Control.Lens.Combinators (Profunctor, dimap)
-import Control.Comonad          (Comonad   , duplicate, extract, extend )
 
 ---------------------------------------------------------------------------------
 
@@ -15,7 +14,7 @@ that the code was slowly built up
 class Profunctor p where
   lmap  :: (c -> a) -> p a b -> p c b
   rmap  :: (b -> d) -> p a b -> p a d
-  dimap :: (c -> a) -> (b -> d) -> p a b -> p c d
+  dimap :: (a1 -> b1) -> (c -> d) -> p b1 c -> p a1 d
 
 
 where p is a Profunctor : 
@@ -30,3 +29,48 @@ class Functor f where
 
 ---------------------------------------------------------------------------------
    
+-- Rocking our very own Prism
+data Polyhedron a b s t     = Poly {  peer    :: s  ->  Either b a, 
+                                      pack    :: b  ->  t
+                                   }
+
+
+-- Making a profunctor out of the polyhedron, its pretty straight forward
+instance Profunctor (Polyhedron a b) where 
+     dimap h g (Poly l v)   = Poly (l . h)  (g . v)       
+
+
+
+---------------------------------------------------------------------------------
+
+-- Next we need types that we could use to illustrate prisms and optics related to prisms
+data       Crystal       = Crystal
+
+data       Shard         = Shard
+
+newtype    Glass   a     = Glass   a
+
+newtype    Diamond b     = Diamond b
+
+
+---------------------------------------------------------------------------------
+
+-- Now we need functions that can deal with prisms
+
+
+-- we need a function that will provide the materials to make a wonderful prism
+preheat  :: a'           ->   Glass  b'
+preheat = undefined
+
+
+-- Now we need something that will polish up our prism before we display it
+cool     :: Diamond a    ->   d
+cool    = undefined
+
+
+-- This function will try and look inside some structure using the prism; prisms help us capture the idea of not finding what we are looking for
+magnify  :: Glass  b'    ->   Either c  b'
+magnify  = undefined
+
+
+
