@@ -36,7 +36,7 @@ data Polyhedron a b s t     = Poly {  peer    :: s  ->  Either b a,
 
 
 -- Making a profunctor out of the polyhedron, its pretty straight forward
-instance Profunctor (Polyhedron a b) where 
+instance Profunctor (Polyhedron s t) where 
      dimap h g (Poly l v)   = Poly (l . h)  (g . v)       
 
 

@@ -28,7 +28,7 @@ data FunAdapter a b s t = FAdapter { to  :: s -> a ,
                                    }
 
 -- Let's make it a Profunctor
-instance Profunctor (FunAdapter a b) where
+instance Profunctor (FunAdapter s t) where
     dimap h g (FAdapter i o) = FAdapter (i . h) (g . o)
 
 

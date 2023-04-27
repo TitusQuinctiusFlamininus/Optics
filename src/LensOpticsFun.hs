@@ -49,7 +49,7 @@ data OpticalLens a b s t = OptLens { look :: s         ->  a,
 
 
 -- Turning our custom type into a Profunctor
-instance Profunctor (OpticalLens a b) where
+instance Profunctor (OpticalLens s t) where
     dimap h g (OptLens l e )     = OptLens (l . h) (\(x,y)  -> g . e $ (x, h y))
 
 -- Explanation: 

@@ -50,7 +50,7 @@ data Multistar   f a b s t        = Multistar    {  up   :: a     -> f b,
 
 
 -- Now we construct a Profunctor, like we always do
-instance Functor f => Profunctor (Multistar f a b) where
+instance Functor f => Profunctor (Multistar f s t) where
     dimap h g (Multistar u d)     =    Multistar (u . id) (g . d . fmap h)
 
 -- Explanation: 
