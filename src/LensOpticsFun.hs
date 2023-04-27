@@ -132,7 +132,7 @@ telescope = OptLens (peep . preTreat) (\(a',c')  -> postTreat . comp $ (a', preT
 -- Left-Hand side: We had (s -> a) : and we had (p a b)      ------->>> Means if we have: (p s t) we have to replace a's with s , but if we do that in (s -> a), we will end up with (s -> s), and that is the identity function!
 -- Right-Hand side: v seems to simulate the type to modify our structure with; w seems to be a composite of the old type, but in order to give this tuple to macro, we need to extract w first    
 teleOptic  :: OpticalLens a Molecule Atom Molecule -> OpticalLens Atom Molecule (Composite a) (NewComposite Molecule)
-teleOptic (OptLens _ macro) = dimap preTreat postTreat $ OptLens peep (\(v,w)  -> NewComposite $ macro (v, peep w))
+teleOptic (OptLens _ macro) = dimap preTreat postTreat $ OptLens peep (\x  -> NewComposite $ macro (fst x, peep $ snd x))
 
 
 
