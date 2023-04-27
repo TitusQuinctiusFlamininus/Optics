@@ -85,12 +85,12 @@ newtype NewComposite b        = NewComposite b
 -- Defining the instances 
 
 --Let's make the latter a Functor, in the hope of making it a Comonad, will explain lower down
-instance Functor NewComposite where
-    fmap f (NewComposite b)   =  NewComposite (f b)
+instance Functor Composite where
+    fmap f (Composite b)      =  Composite (f b)
 
-instance Comonad NewComposite where
-    extract (NewComposite b)  =  b
-    duplicate  x              =  NewComposite x
+instance Comonad Composite where
+    extract (Composite b)     =  b
+    duplicate  x              =  Composite x
     extend     f              =  fmap f . duplicate
 
 
@@ -108,9 +108,9 @@ preTreat   = undefined
 postTreat    :: NewComposite Molecule  ->  n
 postTreat  = undefined
 
--- Let's define a function that acts as a magnifying glass
+-- Let's define a function that acts as a magnifying glass, but we can use our comonad function
 peep         ::   Composite Atom  ->   Atom
-peep      = undefined
+peep      = extract
 
 
 -- Let's define a function that can assemble new types and create new ones from parts
@@ -130,7 +130,7 @@ telescope = OptLens (peep . preTreat) (\(a',c')  -> postTreat . comp $ (a', preT
 -- Now we see the use of extract in the Optic's general definition: We needed to step-down from a Functor/Comonad of some type to that type
 -- Also notice that it does not matter what we used to do on the left hand side of our profunctor (almost like the Adapter case), but because the input type of the right-hand side it not trivial, the identity function is not enough 
 -- Left-Hand side: We had (s -> a) : and we had (p a b)      ------->>> Means if we have: (p s t) we have to replace a's with s , but if we do that in (s -> a), we will end up with (s -> s), and that is the identity function!
--- Right-Hand side: More complicated, but just take the long function we had above, and replace the types, except we need to extract something first    
+-- Right-Hand side: v seems to simulate the type to modify our structure with; v seems to be a composite of the old type, but in order to give this tuple to macro, we need to extract w first    
 teleOptic  :: OpticalLens a Molecule Atom Molecule -> OpticalLens Atom Molecule (Composite a) (NewComposite Molecule)
 teleOptic (OptLens _ macro) = dimap preTreat postTreat (OptLens peep (\(v,w)  -> NewComposite (macro (v, peep w))))
 
