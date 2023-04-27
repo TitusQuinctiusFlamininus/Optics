@@ -123,7 +123,7 @@ comp      = undefined
 
 -- Formulating a concrete profunctor type based our custom types
 telescope :: OpticalLens Atom Molecule s t
-telescope = OptLens (peep . preTreat) (\(a',c')  -> postTreat . comp $ (a', preTreat c'))
+telescope = OptLens (peep . preTreat) (\z  -> postTreat . comp $ (fst z, preTreat $ snd z))
 
 
 -- Let's create the Optic: 
