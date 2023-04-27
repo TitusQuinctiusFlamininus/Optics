@@ -59,18 +59,26 @@ newtype    Diamond b     = Diamond b
 
 
 -- we need a function that will provide the materials to make a wonderful prism
-preheat  :: a'           ->   Glass  b'
-preheat = undefined
+preheat      :: a'           ->  Glass  a
+preheat      = undefined
 
 
 -- Now we need something that will polish up our prism before we display it
-cool     :: Diamond a    ->   d
-cool    = undefined
+cool         :: Diamond b'   ->         d
+cool         = undefined
 
 
 -- This function will try and look inside some structure using the prism; prisms help us capture the idea of not finding what we are looking for
-magnify  :: Glass  b'    ->   Either c  b'
-magnify  = undefined
+magnify      :: Glass  a     ->  Either e  a
+magnify      = undefined
 
 
+-- This function can build a new structure from fragments of new material, using the prism
+pressurize   :: b'           ->  Diamond b'
+pressurize   = undefined
 
+---------------------------------------------------------------------------------
+
+-- Making our Polyhedron into a Profunctor
+hubble       :: Polyhedron Crystal Shard s t 
+hubble       = dimap preheat cool (Poly magnify pressurize)
