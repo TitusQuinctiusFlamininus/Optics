@@ -43,7 +43,7 @@ class Functor w => Comonad w where
 
 -- This time we are dealing with the powerful concept of a lens
 -- Let's roll our own 
-data OpticalLens a b s t = OptLens { look :: s         ->  a, 
+data OpticalLens a b s t         = OptLens { look :: s         ->  a, 
                                      edit :: (b, s)    ->  t 
                                    }
 
@@ -101,21 +101,22 @@ instance Comonad Composite where
 
 -- This contravariant function will supply our original structure
 preTreat     :: m   ->  Composite Atom
-preTreat   = undefined
+preTreat                = undefined
 
 
 -- This covariant function will absorb our resultant type structures and possibly modify them further
 postTreat    :: NewComposite Molecule  ->  n
-postTreat  = undefined
+postTreat               = undefined
+
 
 -- Let's define a function that acts as a magnifying glass, but we can use our comonad function
 peep         ::   Composite Atom  ->   Atom
-peep      = extract
+peep                    = extract
 
 
 -- Let's define a function that can assemble new types and create new ones from parts
 comp         ::   (Molecule, Composite Atom)  ->   NewComposite Molecule
-comp      = undefined
+comp                    = undefined
 
 
 ---------------------------------------------------------------------------------
@@ -123,7 +124,7 @@ comp      = undefined
 
 -- Formulating a concrete profunctor type based our custom types
 telescope :: OpticalLens Atom Molecule s t
-telescope = OptLens (peep . preTreat) (\z  -> postTreat . comp $ (fst z, preTreat $ snd z))
+telescope                    = OptLens (peep . preTreat) (\z  -> postTreat . comp $ (fst z, preTreat $ snd z))
 
 
 -- Let's create the Optic: 
@@ -132,7 +133,7 @@ telescope = OptLens (peep . preTreat) (\z  -> postTreat . comp $ (fst z, preTrea
 -- Left-Hand side: We had (s -> a) : and we had (p a b)      ------->>> Means if we have: (p s t) we have to replace a's with s , but if we do that in (s -> a), we will end up with (s -> s), and that is the identity function!
 -- Right-Hand side: v seems to simulate the type to modify our structure with; w seems to be a composite of the old type, but in order to give this tuple to macro, we need to extract w first    
 teleOptic  :: OpticalLens a Molecule Atom Molecule -> OpticalLens Atom Molecule (Composite a) (NewComposite Molecule)
-teleOptic (OptLens _ macro) = dimap preTreat postTreat $ OptLens peep (\x  -> NewComposite $ macro (fst x, peep . snd $ x))
+teleOptic (OptLens _ macro)   = dimap preTreat postTreat $ OptLens peep (\x  -> NewComposite $ macro (fst x, peep . snd $ x))
 
 
 
@@ -141,11 +142,12 @@ teleOptic (OptLens _ macro) = dimap preTreat postTreat $ OptLens peep (\x  -> Ne
 
 -- How can we use the new Profunctor to peer into some composite type
 microscope :: Composite Atom -> Atom
-microscope     = look (teleOptic telescope)
+microscope                = look (teleOptic telescope)
+
 
 -- How can we use the new Profunctor to build up some new composite type from smaller alternative parts
 structer   :: Molecule  -> Composite Atom -> NewComposite Molecule
-structer m o   = edit (teleOptic telescope) (m, o)
+structer m o              = edit (teleOptic telescope) (m, o)
 
 
 ---------------------------------------------------------------------------------

@@ -174,8 +174,9 @@ observeStarH        =    peer  (monocleFlexible pressurize hubble )
 observeStarW :: (Glass Crystal)  ->  Either Shard Crystal
 observeStarW        =    peer   (monocleFlexible compress webb    )
 
+
 -- Or we can just use a standard way, regardless of the input
-observeStar :: Polyhedron Crystal Shard a Shard -> (Glass a)  ->  Either Shard Crystal
+observeStar :: Polyhedron Crystal Shard a Shard     -> (Glass a)    ->  Either Shard Crystal
 observeStar    p    =    peer   (monocleFixed p                   )
 
 
