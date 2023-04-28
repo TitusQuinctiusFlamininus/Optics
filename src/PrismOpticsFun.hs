@@ -62,11 +62,15 @@ newtype    Diamond b         = Diamond b
 
 
 ---------------------------------------------------------------------------------
+-- We need Glass to be a Comonad so that we can handle whatever the contravariant 
+-- function is providing internally to our Profunctor
 
+-- So first we need to make it a functor....
 instance Functor Glass where
     fmap f (Glass x)          = Glass (f x)
 
 
+-- then we define the comonad instance
 instance Comonad Glass where
     extract (Glass x)         = x
     duplicate  x              =  Glass x
@@ -76,7 +80,7 @@ instance Comonad Glass where
 
 ---------------------------------------------------------------------------------
 
--- Now we need functions that can deal with prisms
+-- Ok: we need practical functions that can deal with prisms
 
 
 -- we need a function that will provide the materials to make a wonderful prism
@@ -98,6 +102,7 @@ magnify                       = undefined
 pressurize   :: b'           ->  Diamond b'
 pressurize                    = undefined
 
+
 ---------------------------------------------------------------------------------
 
 -- Making our Polyhedron into a Profunctor
@@ -106,5 +111,5 @@ hubble                        = dimap preheat cool (Poly magnify pressurize)
 
 
 -- Creating the Prismatic Optic
-monocle      :: Polyhedron Crystal Shard Crystal Shard     ->    Polyhedron Crystal Shard (Glass Crystal) (Diamond Shard) 
+monocle      :: Polyhedron Crystal Shard a Shard     ->    Polyhedron Crystal Shard (Glass a) (Diamond Shard) 
 monocle  (Poly ask _)   = Poly (ask . extract . preheat) pressurize   
