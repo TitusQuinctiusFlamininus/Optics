@@ -149,14 +149,17 @@ webb                          = dimap preheat cool (Poly magnify compress)
 --    we will simply use some manner in which we form the new composite 
 -- We can decide to pass in the final type formation function separately, or simply ignore how the profunctor provided forms the final type 
 
+-- Simplifying
+type Mirror a                         = Polyhedron Crystal Shard a Shard   ->  Polyhedron Crystal Shard (Glass a) (Diamond Shard) 
+
 -- Let's fix it
-monocleFixed      :: Polyhedron Crystal Shard a Shard   ->  Polyhedron Crystal Shard (Glass a) (Diamond Shard) 
+monocleFixed      :: Mirror a 
 monocleFixed     (Poly ask _)         = Poly (ask . extract . preheat) pressurize   
 
 
 
 -- Or we can make it a little more flexible   
-monocleFlexible   :: (Shard  ->  Diamond Shard)     -> Polyhedron Crystal Shard a Shard  ->  Polyhedron Crystal Shard (Glass a) (Diamond Shard) 
+monocleFlexible   :: (Shard  ->  Diamond Shard)    ->   Mirror a
 monocleFlexible f (Poly ask _)         = Poly (ask . extract . preheat) f   
 
 
