@@ -30,7 +30,12 @@ class Functor w => Comonad w where
     duplicate   ::  w a -> w (w a)
     extend      :: (w a -> b) -> w a -> w b    
 
+class Functor r => Applicative r where
+    pure        :: x           -> r x
+    <*>         :: f (a -> b)  -> f a   ->  f b
+
 --}   
+
 
 ---------------------------------------------------------------------------------
    
@@ -62,12 +67,14 @@ newtype    Diamond b         = Diamond b
 
 
 ---------------------------------------------------------------------------------
+
 -- We need Glass to be a Comonad so that we can handle whatever the contravariant 
 -- function is providing internally to our Profunctor
 
 -- So first we need to make it a functor....
 instance Functor Glass where
     fmap f (Glass x)          = Glass (f x)
+
 
 
 -- then we define the comonad instance
@@ -77,6 +84,17 @@ instance Comonad Glass where
     extend     f              =  fmap f . duplicate
 
 
+
+-- We also want to show a difference in implementation later, so let's make another type a functor
+instance Functor Diamond where
+    fmap f (Diamond y)        = Diamond (f y)
+
+
+
+-- Now let's make it an applicative
+instance Applicative Diamond where
+  pure x                       =  Diamond x
+  Diamond f   <*>  Diamond t   =  Diamond (f t)
 
 ---------------------------------------------------------------------------------
 
@@ -103,13 +121,72 @@ pressurize   :: b'           ->  Diamond b'
 pressurize                    = undefined
 
 
+-- This function can build a new structures in a slightly different way
+-- We compress by simply lifting the type into our Functor
+compress     :: c            ->  Diamond c
+compress                     = pure
+
+
 ---------------------------------------------------------------------------------
+
 
 -- Making our Polyhedron into a Profunctor
 hubble       :: Polyhedron Crystal Shard s t 
 hubble                        = dimap preheat cool (Poly magnify pressurize)
 
 
+-- Here's another kind of profunctor that forms the final type in the different way
+webb         :: Polyhedron Crystal Shard s t 
+webb                          = dimap preheat cool (Poly magnify compress)
+
+
+
+---------------------------------------------------------------------------------
+
+
 -- Creating the Prismatic Optic
-monocle      :: Polyhedron Crystal Shard a Shard     ->    Polyhedron Crystal Shard (Glass a) (Diamond Shard) 
-monocle  (Poly ask _)   = Poly (ask . extract . preheat) pressurize   
+-- An interesting difference from our Profunctor LensOptic : This time we don't need the RHS transformation from our input, 
+--    we will simply use some manner in which we form the new composite 
+-- We can decide to pass in the final type formation function separately, or simply ignore how the profunctor provided forms the final type 
+
+-- Let's fix it
+monocleFixed      :: Polyhedron Crystal Shard a Shard   ->  Polyhedron Crystal Shard (Glass a) (Diamond Shard) 
+monocleFixed     (Poly ask _)         = Poly (ask . extract . preheat) pressurize   
+
+
+
+-- Or we can make it a little more flexible   
+monocleFlexible   :: (Shard  ->  Diamond Shard)     -> Polyhedron Crystal Shard a Shard  ->  Polyhedron Crystal Shard (Glass a) (Diamond Shard) 
+monocleFlexible f (Poly ask _)         = Poly (ask . extract . preheat) f   
+
+
+
+---------------------------------------------------------------------------------
+
+-- Using the types to observe the universe!
+
+-- Let's use the Hubble Telescope to look around space...
+observeStarH :: (Glass Crystal)  ->  Either Shard Crystal
+observeStarH        =    peer  (monocleFlexible pressurize hubble )
+
+
+-- Now let's try to use the James T Webb Telescope to see if we can find a blackhole...
+observeStarW :: (Glass Crystal)  ->  Either Shard Crystal
+observeStarW        =    peer   (monocleFlexible compress webb    )
+
+-- Or we can just use a standard way, regardless of the input
+observeStar :: Polyhedron Crystal Shard a Shard -> (Glass a)  ->  Either Shard Crystal
+observeStar    p    =    peer   (monocleFixed p                   )
+
+
+-- Finally let's form Shards in a Hubbly way
+packH       :: Shard    ->    Diamond Shard
+packH               =    pack   (monocleFixed hubble              )
+
+-- And let'also form Shards in a Webby way
+packW       :: Shard    ->    Diamond Shard
+packW               =    pack   (monocleFixed webb                )
+
+
+
+---------------------------------------------------------------------------------
