@@ -152,6 +152,8 @@ webb                          = dimap preheat cool (Poly magnify compress)
 -- Simplifying
 type Mirror a                         = Polyhedron Crystal Shard a Shard   ->  Polyhedron Crystal Shard (Glass a) (Diamond Shard) 
 
+
+
 -- Let's fix it
 monocleFixed      :: Mirror a 
 monocleFixed     (Poly ask _)         = Poly (ask . extract . preheat) pressurize   
