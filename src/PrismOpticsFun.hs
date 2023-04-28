@@ -2,6 +2,7 @@ module PrismOpticsFun where
 
 
 import Control.Lens.Combinators (Profunctor, dimap)
+import Control.Comonad          (Comonad   , duplicate, extract, extend )
 
 ---------------------------------------------------------------------------------
 
@@ -24,6 +25,10 @@ type Optic p a b s t = p a b -> p s t
 class Functor f where
     <$> :: (a -> b) -> f a -> f b
 
+class Functor w => Comonad w where
+    extract     ::  w a -> a      
+    duplicate   ::  w a -> w (w a)
+    extend      :: (w a -> b) -> w a -> w b    
 
 --}   
 
@@ -44,13 +49,29 @@ instance Profunctor (Polyhedron s t) where
 ---------------------------------------------------------------------------------
 
 -- Next we need types that we could use to illustrate prisms and optics related to prisms
-data       Crystal       = Crystal
+data       Crystal           = Crystal
 
-data       Shard         = Shard
 
-newtype    Glass   a     = Glass   a
+data       Shard             = Shard
 
-newtype    Diamond b     = Diamond b
+
+newtype    Glass   a         = Glass   a
+
+
+newtype    Diamond b         = Diamond b
+
+
+---------------------------------------------------------------------------------
+
+instance Functor Glass where
+    fmap f (Glass x)          = Glass (f x)
+
+
+instance Comonad Glass where
+    extract (Glass x)         = x
+    duplicate  x              =  Glass x
+    extend     f              =  fmap f . duplicate
+
 
 
 ---------------------------------------------------------------------------------
@@ -60,25 +81,30 @@ newtype    Diamond b     = Diamond b
 
 -- we need a function that will provide the materials to make a wonderful prism
 preheat      :: a'           ->  Glass  a
-preheat      = undefined
+preheat                       = undefined
 
 
 -- Now we need something that will polish up our prism before we display it
 cool         :: Diamond b'   ->         d
-cool         = undefined
+cool                          = undefined
 
 
 -- This function will try and look inside some structure using the prism; prisms help us capture the idea of not finding what we are looking for
 magnify      :: Glass  a     ->  Either e  a
-magnify      = undefined
+magnify                       = undefined
 
 
 -- This function can build a new structure from fragments of new material, using the prism
 pressurize   :: b'           ->  Diamond b'
-pressurize   = undefined
+pressurize                    = undefined
 
 ---------------------------------------------------------------------------------
 
 -- Making our Polyhedron into a Profunctor
 hubble       :: Polyhedron Crystal Shard s t 
-hubble       = dimap preheat cool (Poly magnify pressurize)
+hubble                        = dimap preheat cool (Poly magnify pressurize)
+
+
+-- Creating the Prismatic Optic
+monocle      :: Polyhedron Crystal Shard Crystal Shard     ->    Polyhedron Crystal Shard (Glass Crystal) (Diamond Shard) 
+monocle  (Poly ask _)   = Poly (ask . extract . preheat) pressurize   
