@@ -10,7 +10,7 @@
 - :white_circle: Cartesian   (or Strong)
 - :white_circle: CoCartesian (or Choice)
 - :green_circle: Lens
-- :white_circle: Prism
+- :green_circle: Prism
 - :white_circle: Traversal
 - :white_circle: Closed
 
@@ -19,9 +19,25 @@
 - :white_circle: CoCartesian (or Choice)
 - :green_circle: Adapter
 - :green_circle: Lens
-- :white_circle: Prism
+- :green_circle: Prism
 - :white_circle: Affine
 - :white_circle: Traversal
+
+## Dorfunctor (a -> b) -> (d -> c -> e) -> m b c -> m a e
+(This is my own invention, let's see what works here)
+- :green_circle: Upstar
+- :green_circle: Downstar
+- :green_circle: Adapter
+- :white_circle: Forget
+- :white_circle: Tagged
+- :white_circle: Affine
+- :white_circle: Cartesian   (or Strong)
+- :white_circle: CoCartesian (or Choice)
+- :green_circle: Lens
+- :white_circle: Prism
+- :white_circle: Traversal
+- :white_circle: Closed
+
 
 ## Experimental
 - :green_circle: Multistar / Spike (Upstar-Downstar)
