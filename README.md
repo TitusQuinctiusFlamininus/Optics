@@ -27,7 +27,7 @@ Attempting to create Optics and other Computational structures from scratch
 
 # Experimental Types
 
-## Dorfunctor ((a -> b) -> (k -> c -> e) -> d b c -> d a e)
+## Dorfunctor ((a -> b) -> (k -> c -> e) -> p b c -> p a e)
 (This is my own invention, let's see what works here)
 - :white_circle: Upstar
 - :white_circle: Downstar
