@@ -26,8 +26,8 @@
 ## Dorfunctor (a -> b) -> (d -> c -> e) -> m b c -> m a e
 (This is my own invention, let's see what works here)
 - :green_circle: Upstar
-- :green_circle: Downstar
-- :green_circle: Adapter
+- :white_circle: Downstar
+- :white_circle: Adapter
 - :white_circle: Forget
 - :white_circle: Tagged
 - :white_circle: Affine
