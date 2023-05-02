@@ -161,8 +161,8 @@ monocleFixed     (Poly ask _)         = Poly (ask . extract . preheat) pressuriz
 
 
 -- Or we can make it a little more flexible   
-monocleFlexible   :: (Shard  ->  Diamond Shard)    ->   Mirror a
-monocleFlexible f (Poly ask _)        = Poly (ask . extract . preheat) f   
+monocleFlexible   :: (Shard  ->  Diamond Shard)   -> Mirror a
+monocleFlexible f                     = \k ->  Poly (peer k . extract . preheat) f
 
 
 
