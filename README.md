@@ -2,7 +2,7 @@
 
 Attempting to create Optics and other Computational structures from scratch
 
-## Profunctors ((a -> b) -> (c -> d) -> p b c -> p a d)
+## Profunctors (dimap :: (a -> b) -> (c -> d) -> p b c -> p a d)
 - :green_circle: Upstar
 - :green_circle: Downstar
 - :green_circle: Adapter
@@ -27,8 +27,10 @@ Attempting to create Optics and other Computational structures from scratch
 
 # Experimental Types
 
-## Dorfunctor ((a -> b) -> (k -> c -> e) -> p b c -> p a e)
+## Dorfunctor
 (This is my own invention, let's see what works here)
+![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/images/dorfunctor.png "Dorfunctor")
+
 - :white_circle: Upstar
 - :white_circle: Downstar
 - :white_circle: Adapter
