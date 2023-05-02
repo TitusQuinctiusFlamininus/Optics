@@ -25,7 +25,7 @@
 
 # Experimental Types
 
-## Dorfunctor (a -> b) -> (d -> c -> e) -> m b c -> m a e
+## Dorfunctor (a -> b) -> (k -> c -> e) -> d b c -> d a e
 (This is my own invention, let's see what works here)
 - :white_circle: Upstar
 - :white_circle: Downstar
