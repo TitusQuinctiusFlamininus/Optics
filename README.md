@@ -1,6 +1,6 @@
 # Fun With All Things Optics
 
-## Profunctors
+# Profunctors
 - :green_circle: Upstar
 - :green_circle: Downstar
 - :green_circle: Adapter
@@ -14,7 +14,7 @@
 - :white_circle: Traversal
 - :white_circle: Closed
 
-## Profunctor-Optics
+##Profunctor-Optics
 - :white_circle: Cartesian   (or Strong)
 - :white_circle: CoCartesian (or Choice)
 - :green_circle: Adapter
@@ -22,6 +22,8 @@
 - :green_circle: Prism
 - :white_circle: Affine
 - :white_circle: Traversal
+
+# Experimental Types
 
 ## Dorfunctor (a -> b) -> (d -> c -> e) -> m b c -> m a e
 (This is my own invention, let's see what works here)
