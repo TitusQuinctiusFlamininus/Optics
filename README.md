@@ -1,6 +1,6 @@
 # Fun With All Things Optics
 
-# Profunctors
+## Profunctors
 - :green_circle: Upstar
 - :green_circle: Downstar
 - :green_circle: Adapter
