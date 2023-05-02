@@ -41,6 +41,6 @@
 - :white_circle: Closed
 
 
-## Experimental
+## Others
 - :green_circle: Multistar / Spike (Upstar-Downstar)
 - :white_circle: Multistar / Ditch (Downstar-Upstar)
