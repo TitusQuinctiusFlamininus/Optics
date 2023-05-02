@@ -14,7 +14,7 @@
 - :white_circle: Traversal
 - :white_circle: Closed
 
-##Profunctor-Optics
+## Profunctor-Optics
 - :white_circle: Cartesian   (or Strong)
 - :white_circle: CoCartesian (or Choice)
 - :green_circle: Adapter
