@@ -1,6 +1,8 @@
 # Fun With All Things Optics
 
-## Profunctors
+Attempting to create Optics and other Computational structures from scratch
+
+## Profunctors ((a -> b) -> (c -> d) -> p b c -> p a d)
 - :green_circle: Upstar
 - :green_circle: Downstar
 - :green_circle: Adapter
@@ -14,7 +16,7 @@
 - :white_circle: Traversal
 - :white_circle: Closed
 
-## Profunctor-Optics
+## Profunctor-Optics (Optic p a b s t = p a b -> p s t)
 - :white_circle: Cartesian   (or Strong)
 - :white_circle: CoCartesian (or Choice)
 - :green_circle: Adapter
@@ -25,7 +27,7 @@
 
 # Experimental Types
 
-## Dorfunctor (a -> b) -> (k -> c -> e) -> d b c -> d a e
+## Dorfunctor ((a -> b) -> (k -> c -> e) -> d b c -> d a e)
 (This is my own invention, let's see what works here)
 - :white_circle: Upstar
 - :white_circle: Downstar
