@@ -27,9 +27,9 @@ Attempting to create Optics and other Computational structures from scratch
 
 # Experimental Types
 
-## Dorfunctor
+## TFunctor
 (This is my own invention, let's see what works here)
-![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/dorfunctor.png "Dorfunctor")
+![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/tfunctor.png "TFunctor")
 
 - :white_circle: Upstar
 - :white_circle: Downstar
