@@ -25,7 +25,7 @@
 
 ## Dorfunctor (a -> b) -> (d -> c -> e) -> m b c -> m a e
 (This is my own invention, let's see what works here)
-- :green_circle: Upstar
+- :white_circle: Upstar
 - :white_circle: Downstar
 - :white_circle: Adapter
 - :white_circle: Forget
@@ -33,7 +33,7 @@
 - :white_circle: Affine
 - :white_circle: Cartesian   (or Strong)
 - :white_circle: CoCartesian (or Choice)
-- :green_circle: Lens
+- :white_circle: Lens
 - :white_circle: Prism
 - :white_circle: Traversal
 - :white_circle: Closed
