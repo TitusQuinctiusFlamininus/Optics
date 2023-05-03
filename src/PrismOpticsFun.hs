@@ -73,28 +73,28 @@ newtype    Diamond b         = Diamond b
 
 -- So first we need to make it a functor....
 instance Functor Glass where
-    fmap f (Glass x)          = Glass (f x)
+    fmap f (Glass x)               = Glass (f x)
 
 
 
 -- then we define the comonad instance
 instance Comonad Glass where
-    extract (Glass x)         = x
-    duplicate  x              =  Glass x
-    extend     f              =  fmap f . duplicate
+    extract (Glass x)              = x
+    duplicate  x                   =  Glass x
+    extend     f                   =  fmap f . duplicate
 
 
 
 -- We also want to show a difference in implementation later, so let's make another type a functor
 instance Functor Diamond where
-    fmap f (Diamond y)        = Diamond (f y)
+    fmap f (Diamond y)             = Diamond (f y)
 
 
 
 -- Now let's make it an applicative
 instance Applicative Diamond where
-  pure x                       =  Diamond x
-  Diamond f   <*>  Diamond t   =  Diamond (f t)
+  pure x                           =  Diamond x
+  Diamond f   <*>  Diamond t       =  Diamond (f t)
 
 ---------------------------------------------------------------------------------
 
@@ -124,7 +124,7 @@ pressurize                    = undefined
 -- This function can build a new structures in a slightly different way
 -- We compress by simply lifting the type into our Functor
 compress     :: c            ->  Diamond c
-compress                     = pure
+compress                      = pure
 
 
 ---------------------------------------------------------------------------------
@@ -137,7 +137,7 @@ hubble                        = dimap preheat cool (Poly magnify pressurize)
 
 -- Here's another kind of profunctor that forms the final type in the different way
 webb         :: Polyhedron Crystal Shard s t 
-webb                          = dimap preheat cool (Poly magnify compress)
+webb                          = dimap preheat cool (Poly magnify compress  )
 
 
 
