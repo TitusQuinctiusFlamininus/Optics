@@ -60,19 +60,19 @@ newtype    Diamond b         = Diamond b
 
 --Inventing new functions for the types
 
-prep      ::  a'                   ->   Glass   a
+prep      ::             a'       ->   Glass    a
 prep      = undefined
 
 
-eject     :: Diamond b                     ->   d
+eject     :: Diamond     b        ->            d
 eject     = undefined
 
 
-search    :: Glass   a             ->   Either  b  a 
+search    :: Glass       a        ->   Either   b  a 
 search    = undefined
 
 
-raus      :: (b, Glass   a)        ->  Diamond b
+raus      :: (b, Glass   a)       ->  Diamond   b
 raus      = undefined
 
        
@@ -80,8 +80,8 @@ raus      = undefined
 
  -- Let's assemble an actual Profuctor based on our types and computational abilities
 
-appPro :: AffineP a b (Glass   a) (Diamond b )  
-appPro =  dimap prep eject (AffineOp search raus)
+appPro :: AffineP   a   b   (Glass  a)  (Diamond b )  
+appPro =  dimap prep eject $ AffineOp search raus
 
 
 
