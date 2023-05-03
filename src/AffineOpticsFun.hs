@@ -2,7 +2,6 @@ module AffineOpticsFun where
 
  
 import Control.Lens.Combinators  (Profunctor, dimap)
-import Control.Comonad           (Comonad, extract, extend, duplicate)
 
 {--
 
@@ -15,18 +14,28 @@ class Profunctor p where
   dimap :: (c -> a) -> (b -> d) -> p a b -> p c d
 
 
---This may come in useful, given the nature of a Downstar
-class Functor w => Comonad w where
-    extract     ::  w a -> a                       <--- we need only this, technically
-    duplicate   ::  w a -> w (w a)
-    extend      :: (w a -> b) -> w a -> w b
+where p is a Profunctor : 
+type Optic p a b s t = p a b -> p s t
+
+
+class Functor f where
+    <$> :: (a -> b) -> f a -> f b
+
 
 
 --}
 
 -- Defining the unique type
-data AffineOptical a b s t   = AffineOp  {   peer'  ::  s        ->   Either b a, 
+-- It seems to be a combination of a Lens and a Prism, such that it is possible the sought after target does not exist, 
+-- but at the same time, we need the original context to reassemble new composite types
+data AffineP a b s t                  = AffineOp  {   peer'  ::  s        ->   Either b a, 
+       
+                                                      rec    ::  (b, s)   ->   t
+                                                  }
 
-                                             rec    ::  (b, s)   ->   t
+                        
 
-                                         }
+-- Let's make our Affine into a Profunctor
+instance Profunctor (AffineP a b) where
+    dimap h g (AffineOp f f')        =  AffineOp (f . h) (\x -> g . f' $ (fst x, h . snd $ x)) 
+        
