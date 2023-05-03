@@ -2,7 +2,8 @@
 
 Attempting to create Optics and other Computational structures from scratch
 
-## Profunctors (dimap :: (a -> b) -> (c -> d) -> p b c -> p a d)
+## Profunctor
+![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/profunctor.png "Profunctor")
 - :green_circle: Upstar
 - :green_circle: Downstar
 - :green_circle: Adapter
@@ -16,7 +17,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle: Traversal
 - :white_circle: Closed
 
-## Profunctor-Optics (type Optic p a b s t = (p a b -> p s t))
+## Profunctor-Optics (Optic p a b s t = (p a b -> p s t))
 - :white_circle: Cartesian   (or Strong)
 - :white_circle: CoCartesian (or Choice)
 - :green_circle: Adapter
