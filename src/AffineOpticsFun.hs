@@ -100,5 +100,6 @@ affineC                          =   dimap prep eject . AffineOp search $ raus
 
 
 -- Now we construct the Affine Optic
+-- Seems to be a combination of how we dealt with Lenses and Prisms combined
 affineOptic :: AffineP a b s t   -> AffineP a b (Glass s) (Diamond t)
 affineOptic (AffineOp u v)       =   AffineOp (u . extract) (\y  -> eject . raus $ (fst y, prep . snd $ y))
