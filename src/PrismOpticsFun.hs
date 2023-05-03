@@ -156,7 +156,7 @@ type Mirror a                         = Polyhedron Crystal Shard a Shard   ->  P
 
 -- Let's fix it
 monocleFixed      :: Mirror a 
-monocleFixed     (Poly ask _)         = Poly (ask . extract . preheat) pressurize   
+monocleFixed     (Poly ask _)         = Poly (ask . extract) pressurize   
 
 
 

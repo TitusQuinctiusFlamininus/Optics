@@ -2,6 +2,7 @@ module AffineOpticsFun where
 
  
 import Control.Lens.Combinators  (Profunctor, dimap)
+import Control.Comonad           (Comonad   , duplicate, extract, extend )
 
 {--
 
@@ -21,7 +22,10 @@ type Optic p a b s t = p a b -> p s t
 class Functor f where
     <$> :: (a -> b) -> f a -> f b
 
-
+class Functor w => Comonad w where
+    extract     ::  w a -> a      
+    duplicate   ::  w a -> w (w a)
+    extend      :: (w a -> b) -> w a -> w b  
 
 --}
 
@@ -77,11 +81,24 @@ raus      = undefined
 
        
  ---------------------------------------------------------------------------------
+-- First we make Glass an Applicative, so ....
+instance Functor Glass where
+    fmap f (Glass x)            =  Glass (f x) 
+
+
+instance Comonad Glass where
+    extract (Glass x)           = x
+    duplicate  x                =  Glass x
+    extend     f                =  fmap f . duplicate
+ ---------------------------------------------------------------------------------
+
 
  -- Let's assemble an actual Profuctor based on our types and computational abilities
 
-appPro :: AffineP   a   b   (Glass  a)  (Diamond b )  
-appPro =  dimap prep eject $ AffineOp search raus
+affineC :: AffineP Shard Crystal s t
+affineC                          =   dimap prep eject . AffineOp search $ raus
 
 
-
+-- Now we construct the Affine Optic
+affineOptic :: AffineP a b s t   -> AffineP a b (Glass s) (Diamond t)
+affineOptic (AffineOp u v)       =   AffineOp (u . extract) (\y  -> eject . raus $ (fst y, prep . snd $ y))
