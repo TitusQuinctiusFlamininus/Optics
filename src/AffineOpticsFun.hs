@@ -28,9 +28,9 @@ class Functor f where
 -- Defining the unique type
 -- It seems to be a combination of a Lens and a Prism, such that it is possible the sought after target does not exist, 
 -- but at the same time, we need the original context to reassemble new composite types
-data AffineP a b s t                         = AffineOp  {   peer'  ::  s        ->   Either b a, 
+data AffineP a b s t                         = AffineOp  {   check    ::  s        ->   Either b a, 
        
-                                                             rec    ::  (b, s)   ->   t
+                                                             recon    ::  (b, s)   ->   t
                                                          }
 
                         
@@ -40,11 +40,48 @@ instance Profunctor (AffineP  a b  ) where
     dimap   h   g   (AffineOp f f' )         =  AffineOp   (f . h) (\x -> g . f' $ (fst x, h . snd $ x)) 
         
 
+---------------------------------------------------------------------------------
 
- ---------------------------------------------------------------------------------
---Let's invent types that we can model after   
+--Let's re-use types from the Prism example
 
--- Next we need types that we could use to illustrate prisms and optics related to prisms
 data       Crystal           = Crystal
 
+
+data       Shard             = Shard
+
+
+newtype    Glass   a         = Glass   a
+
+
+newtype    Diamond b         = Diamond b
+
+---------------------------------------------------------------------------------
+
+
+--Inventing new functions for the types
+
+prep      ::  a'                   ->   Glass   a
+prep      = undefined
+
+
+eject     :: Diamond b                     ->   d
+eject     = undefined
+
+
+search    :: Glass   a             ->   Either  b  a 
+search    = undefined
+
+
+raus      :: (b, Glass   a)        ->  Diamond b
+raus      = undefined
+
        
+ ---------------------------------------------------------------------------------
+
+ -- Let's assemble an actual Profuctor based on our types and computational abilities
+
+appPro :: AffineP a b (Glass   a) (Diamond b )  
+appPro =  dimap prep eject (AffineOp search raus)
+
+
+
