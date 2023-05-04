@@ -9,7 +9,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :green_circle: Adapter
 - :white_circle: Forget
 - :white_circle: Tagged
-- :white_circle: Affine
+- :green_circle: Affine
 - :white_circle: Cartesian   (or Strong)
 - :white_circle: CoCartesian (or Choice)
 - :green_circle: Lens
@@ -24,7 +24,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :green_circle: Adapter
 - :green_circle: Lens
 - :green_circle: Prism
-- :white_circle: Affine
+- :green_circle: Affine
 - :white_circle: Traversal
 
 # Experimental Types
