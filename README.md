@@ -9,6 +9,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :green_circle: Adapter
 - :white_circle: Forget
 - :white_circle: Fold
+- :white_circle: Arrow
 - :white_circle: Tagged
 - :green_circle: Affine
 - :white_circle: Cartesian   (or Strong)
@@ -24,6 +25,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle: CoCartesian (or Choice)
 - :green_circle: Adapter
 - :green_circle: Lens
+- :white_circle: Arrow
 - :white_circle: Fold
 - :green_circle: Prism
 - :green_circle: Affine
@@ -41,6 +43,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle: Forget
 - :white_circle: Tagged
 - :white_circle: Fold
+- :white_circle: Arrow
 - :white_circle: Affine
 - :white_circle: Cartesian   (or Strong)
 - :white_circle: CoCartesian (or Choice)
