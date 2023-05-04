@@ -74,19 +74,19 @@ newtype    Diamond b         = Diamond b
 --Inventing new functions for the types
 
 prep      ::             a'       ->   Glass    a
-prep      = undefined
+prep                             = undefined
 
 
 eject     :: Diamond     b        ->            d
-eject     = undefined
+eject                            = undefined
 
 
 search    :: Glass       a        ->   Either   b  a 
-search    = undefined
+search                           = undefined
 
 
 raus      :: (b, Glass   a)       ->  Diamond   b
-raus      = undefined
+raus                             = undefined
 
        
  ---------------------------------------------------------------------------------
@@ -122,11 +122,16 @@ instance Applicative Diamond where
 
  -- Let's assemble an actual Profuctor based on our types and computational abilities
 affineC :: AffineP Shard Crystal s t
-affineC                          =   dimap prep eject . AffineOp search $ raus
+affineC                           =   dimap prep eject . AffineOp search $ raus
 
 
 -- Now we construct the Affine Optic
 -- Seems to be a combination of how we dealt with Lenses and Prisms combined, but now i want to 
 -- show that both functions from the provided profunctor can be used to compose between composites
+-- Explanation :: 
+--      LHS : u goes from (s -> some_choice), but we need to go from composite to composite, so we need to dissociate the chosen type from its context first; or simply create function that can adapt between the twp types
+--      RHS : prep acts like h in the definition, so we need to perform something similar to the LHS to define our tuple's RHS;
+--            Also, in the attempt to keep the promise of mapping (finally) to composites, we have to reattach the applicative context before releasing it to the covariant function
 affineOptic :: AffineP a b s t   -> AffineP a b (Glass s) (Diamond t)
 affineOptic    (AffineOp u v)    =   AffineOp (u . extract) (\y  -> eject . pure . v $ (fst y, extract . prep . snd $ y))
+

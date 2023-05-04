@@ -12,10 +12,16 @@ class Profunctor p where
   rmap  :: (b -> d) -> p a b -> p a d
   dimap :: (c -> a) -> (b -> d) -> p a b -> p c d
 
+
 where p is a Profunctor : 
 type Optic p a b s t = p a b -> p s t
 
 --}
+
+
+
+ ---------------------------------------------------------------------------------
+
 
 --This will be an attempt to take the concept of an Adapter, and make an initial Profunctor, subsequent Optics and 
 -- a final profunctor that will traverse between input whole types (s) into target types (t)
@@ -23,13 +29,15 @@ type Optic p a b s t = p a b -> p s t
 --Let's define what we need, a type that we can work with
 -- We presume      : things of type a can be found within structures of type s
 -- We also presme  : we can create new structures of type t, simply by replacing things of type a with things of type b, within structures of type s
-data FunAdapter a b s t = FAdapter { to  :: s -> a , 
-                                     fro :: b -> t 
-                                   }
+data FunAdapter a b s t                 = FAdapter { to  :: s -> a , 
+
+                                                     fro :: b -> t 
+                                                   }
+
 
 -- Let's make it a Profunctor
 instance Profunctor (FunAdapter s t) where
-    dimap h g (FAdapter i o) = FAdapter (i . h) (g . o)
+    dimap h g (FAdapter i o)            = FAdapter (i . h) (g . o)
 
 
  ---------------------------------------------------------------------------------
@@ -40,34 +48,42 @@ instance Profunctor (FunAdapter s t) where
 -- we will be going from structures of type s, that could be defined like this (as an example)...
 newtype Raw a              = Raw a
 
+
 -- Its possible to end up with structures like this of type t, that could be defined like this (as an example)...
 newtype Ripe b             = Ripe b 
+
 
 -- We can transpose to things of this type from s
 data Old                   = Old 
 
+
 -- We can compose things of type t with this type
 data New                   = New
+
+
 ---------------------------------------------------------------------------------                       
 
 
 -- So now lets invent some functions that can take advantage of our types
 
 -- Lets invent a contravariant function that provides the dimap something of type s
-preAdapt     :: s' -> Raw Old
-preAdapt     = undefined
+preAdapt     :: s'          ->         Raw Old
+preAdapt                   = undefined
+
 
 -- We also need a covariant function that takes our profunctor output (t) and potentially manipulates it further 
-postAdapt    :: Ripe New -> t'
-postAdapt    = undefined
+postAdapt    :: Ripe New    ->         t'
+postAdapt                  = undefined
+
 
 -- Now we invent a function that represents how our adapter works primarily
-adapt        :: Raw Old -> Old
-adapt        = undefined
+adapt        :: Raw Old     ->         Old
+adapt                      = undefined
+
 
 -- Now we invent a function that represents how our adapter works primarily
-unAdapt      :: New -> Ripe New
-unAdapt      = undefined
+unAdapt      :: New         ->         Ripe New
+unAdapt                    = undefined
 
 
 ---------------------------------------------------------------------------------
@@ -77,6 +93,9 @@ unAdapt      = undefined
 adapterP     :: FunAdapter Old New s' t'
 adapterP     = dimap preAdapt postAdapt (FAdapter adapt unAdapt)
 
+
+
+-- OK, explaining how we are going to build our Optic
 -- We can write what we have above kinda like this:
 --adapterP  :: FunAdapter a b s' t'        <<------- (which was going from an s' to t')
 
@@ -105,16 +124,28 @@ adapterOptical (FAdapter i o) = dimap (i . adapt) (unAdapt . o) (FAdapter id id)
 -- Also        : dimap's outside o function has a signature  (b -> t), and our "fro" adapter function needs to produce the same type as well (fro :: b -> t) : 
 --                                 so why not use the identity function to simply carry the "t" along unmodified, essentially assuming our "b"s to be "t"s ; unAdapt is needed to convert after the passthrough strategy to our new composite types
 
+
+
+---------------------------------------------------------------------------------
+
+
 --But how can we actually take advantage of the adapterP profunction we made earlier? Just hand it over to our Optical
 -- Now we have a Profunctor that can map between whole structures, instead of just the types found within those structures 
 useOptical     :: FunAdapter Old New (Raw Old) (Ripe New)
 useOptical     = adapterOptical adapterP
+
 
       
 -- Creating some adapter utility optic for To, that can give a's from s's
 useOpticalTo   :: Raw Old -> Old
 useOpticalTo   = to useOptical
 
+
+
 -- Creating some adapter utility function for Fro, that will compose t's from b's   
 useOpticalFro  :: New  -> Ripe New
 useOpticalFro  = fro useOptical
+
+
+
+---------------------------------------------------------------------------------

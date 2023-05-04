@@ -21,10 +21,14 @@ class Functor f where
 newtype OpticalUpstar f' a' b' = OpticalUpstar {unstar :: a' -> f' b'}
 
 
+
+
 --Make it a Profunctor
 -- Whatever exits u is a functor of something, and we already have a function g, which means we have to fmap
 instance Functor f' => Profunctor (OpticalUpstar f') where
     dimap h g (OpticalUpstar u)     =  (OpticalUpstar (fmap g . u . h) ) 
+
+
 
 ---------------------------------------------------------------------------------
 
@@ -33,17 +37,24 @@ instance Functor f' => Profunctor (OpticalUpstar f') where
 -- this will help be our functor
 newtype OpFunc a            = OpFunc a 
 
+
+
 -- we will be going from this type...
 newtype From a              = From a
 
+
+
 -- and eventually end up with this type.... 
 newtype To a                = To a 
+
 
 ---------------------------------------------------------------------------------
 
 --First let's make our OpFunc a functor, since it will be represented in f'
 instance Functor OpFunc where
     fmap f (OpFunc x)        = OpFunc (f x)
+
+
 
 ---------------------------------------------------------------------------------
 
@@ -53,9 +64,13 @@ instance Functor OpFunc where
 preUpstar :: k   -> From a
 preUpstar  = undefined
 
+
+
 -- We also need a covariant function that takes our profunctor output (b) and potentially manipulates it further 
 postUpstar :: To a -> s'
 postUpstar = undefined
+
+
 
 -- Now we invent a function that represents how our upstar works primarily
 unstarter :: From a -> OpFunc (To b)
@@ -73,7 +88,12 @@ proUpstarP :: OpticalUpstar OpFunc k (To b)
 proUpstarP = dimap preUpstar postUpstar (OpticalUpstar unstarter)
 
 
+
 -- So now you can use our Profunctor transformer (or any similar one), like this: 
 -- Since we are going from : s -> s' , and not from some a', then lets just supply the s (which we are now calling type k)
 useUpstart :: OpticalUpstar OpFunc k (To b) -> k -> OpFunc (To b)
 useUpstart (OpticalUpstar t) = t
+
+
+
+---------------------------------------------------------------------------------

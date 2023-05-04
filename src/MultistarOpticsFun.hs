@@ -45,6 +45,7 @@ class Functor r => Applicative r where
 
 -- Combination of an Upstar and Downstar (It is an experimental type, purely for fun)
 data Multistar   f a b s t        = Multistar    {  up   :: a     -> f b,
+
                                                     down :: f s   -> t
                                                  }
 
@@ -63,6 +64,7 @@ instance Functor f => Profunctor (Multistar f s t) where
                   --  (d . h) makes no sense because d takes a functor of some type: So fmap is necessary : so now we have (d . fmap (a' -> ?)) : The ? turns out to be s : Why? Because u takes (f s) : So h is really : (a' -> s)
                   --  (d . fmap h) produces a type t: What consumes things of type t? loooks like g . So let's compose to get :  (g . d . fmap h)        
                   --  (g . d . fmap h)  seems to be of type : (input_of_h -> output_of_g), solving the type-mapping problem
+
 
 ---------------------------------------------------------------------------------
 
@@ -97,11 +99,15 @@ newtype  Cluster v          = Cluster v
 instance Functor SuperStar where
   fmap f  (Star n)          = Star (f n)
 
+
+
 -- This instance will come in useful when we need a type associated with a functor, rather than the composition of the two
 instance Comonad SuperStar where
     extract (Star x)        =  x
     duplicate  x            =  Star x
     extend     f            =  fmap f . duplicate
+
+
 
 -- This instance will come in useful when we have to deal with input as a type, rather than a functor of some type
 instance Applicative SuperStar where
@@ -119,14 +125,17 @@ epoch      ::  a'           ->   s
 epoch       = undefined
 
 
+
 -- We also need a covariant function that will eventually produce the space phenomenon we seek
 evolve     :: t             ->  d
 evolve      = undefined
 
 
+
 -- Let's invent a function that mimicks some process not really associated with star-formation (L.H.S Multistar)
 outflow    :: a             -> SuperStar b 
 outflow     = undefined
+
 
 
 -- Finally, inventing a function within which Stars die 
@@ -140,6 +149,7 @@ supernova   = undefined
 -- Formulating a praktisk profunctor
 multiFunctor :: Multistar SuperStar a b s t
 multiFunctor                    = dimap epoch evolve (Multistar outflow supernova)
+
 
 
 -- Coming up with our Optical, so that we can transform between simple Dust to Intersteller Dust
@@ -156,6 +166,9 @@ multiOptic (Multistar l _)      = Multistar l (extract . (<$>) epoch)
 -- NOTE THIS ALSO WORKS AS AN IMPLEMENTATION  :  ----->>>> Multistar l (evolve . extract . (<$>) epoch)   <<<<-------
 
 
+
+---------------------------------------------------------------------------------
+-- Let's use this stuff!
 
 -- Lifting Intersteller dust into our intersteller functor, using our Optic
 -- We don't really mind what type we get as input and what functor we create, as far as the Profunctor is concerned

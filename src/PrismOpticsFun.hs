@@ -41,8 +41,10 @@ class Functor r => Applicative r where
    
 -- Rocking our very own Prism
 data Polyhedron a b s t     = Poly {  peer    :: s  ->  Either b a, 
+
                                       pack    :: b  ->  t
                                    }
+
 
 
 -- Making a profunctor out of the polyhedron, its pretty straight forward
@@ -106,9 +108,11 @@ preheat      :: a'           ->  Glass  a
 preheat                       = undefined
 
 
+
 -- Now we need something that will polish up our prism before we display it
 cool         :: Diamond b'   ->         d
 cool                          = undefined
+
 
 
 -- This function will try and look inside some structure using the prism; prisms help us capture the idea of not finding what we are looking for
@@ -116,9 +120,11 @@ magnify      :: Glass  a     ->  Either e  a
 magnify                       = undefined
 
 
+
 -- This function can build a new structure from fragments of new material, using the prism
 pressurize   :: b'           ->  Diamond b'
 pressurize                    = undefined
+
 
 
 -- This function can build a new structures in a slightly different way
@@ -133,6 +139,7 @@ compress                      = pure
 -- Making our Polyhedron into a Profunctor
 hubble       :: Polyhedron Crystal Shard s t 
 hubble                        = dimap preheat cool (Poly magnify pressurize)
+
 
 
 -- Here's another kind of profunctor that forms the final type in the different way
@@ -175,9 +182,11 @@ observeStarH :: (Glass Crystal)  ->  Either Shard Crystal
 observeStarH        =    peer  (monocleFlexible pressurize hubble )
 
 
+
 -- Now let's try to use the James T Webb Telescope to see if we can find a blackhole...
 observeStarW :: (Glass Crystal)  ->  Either Shard Crystal
 observeStarW        =    peer   (monocleFlexible compress webb    )
+
 
 
 -- Or we can just use a standard way, regardless of the input
@@ -185,9 +194,12 @@ observeStar :: Polyhedron Crystal Shard a Shard     -> (Glass a)    ->  Either S
 observeStar    p    =    peer   (monocleFixed p                   )
 
 
+
 -- Finally let's form Shards in a Hubbly way
 packH       :: Shard    ->    Diamond Shard
 packH               =    pack   (monocleFixed hubble              )
+
+
 
 -- And let'also form Shards in a Webby way
 packW       :: Shard    ->    Diamond Shard

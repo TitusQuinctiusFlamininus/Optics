@@ -44,6 +44,7 @@ class Functor w => Comonad w where
 -- This time we are dealing with the powerful concept of a lens
 -- Let's roll our own 
 data OpticalLens a b s t         = OptLens { look :: s         ->  a, 
+
                                              edit :: (b, s)    ->  t 
                                            }
 
