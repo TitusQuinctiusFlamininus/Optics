@@ -22,7 +22,7 @@ class Profunctor p where
 -- Inventing our own Forgetful type 
 -- We completely forget about one of our types, effectively making it a phantom
 
-data    ForgetFul  r  a  b         =      Forget {   forget ::  a   ->  r  }
+data    ForgetFul  r  a  b             =       Forget {   forget ::  a   ->  r  }
 
 
 -- Alright, let's make it a Profunctor 
@@ -36,4 +36,4 @@ data    ForgetFul  r  a  b         =      Forget {   forget ::  a   ->  r  }
 --                                                                       :  If (r' /= r), it still will not matter, because it is not certain if we could provide r' from Forget 
 
 instance Profunctor (ForgetFul r) where
-    dimap  h  _  (Forget f )       =      Forget (f . h)
+       dimap  h  _  ( Forget f  )       =      Forget (f . h)
