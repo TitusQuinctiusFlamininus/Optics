@@ -27,6 +27,7 @@ library
   exposed-modules:
       AdapterOpticsFun
       AffineOpticsFun
+      Cartesian_Strong_OpticsFun
       DownstarFun
       LensOpticsFun
       MultistarOpticsFun
