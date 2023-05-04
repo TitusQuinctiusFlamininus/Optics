@@ -29,9 +29,9 @@ type Optic p a b s t = p a b -> p s t
 --Let's define what we need, a type that we can work with
 -- We presume      : things of type a can be found within structures of type s
 -- We also presme  : we can create new structures of type t, simply by replacing things of type a with things of type b, within structures of type s
-data FunAdapter a b s t                 = FAdapter { to  :: s -> a , 
+data FunAdapter a b s t                 = FAdapter { to  :: s     ->     a , 
 
-                                                     fro :: b -> t 
+                                                     fro :: b     ->     t 
                                                    }
 
 
@@ -116,7 +116,7 @@ adapterP     = dimap preAdapt postAdapt (FAdapter adapt unAdapt)
 
  -- So lets invent it now: It becomes:
  -- Optic p Old New (Raw Old) (Ripe New) =  (p Old New   -> p (Raw Old) (Ripe New))
-adapterOptical :: FunAdapter a b Old New -> FunAdapter a b (Raw Old) (Ripe New)
+adapterOptical :: FunAdapter a b Old New         ->        FunAdapter a b (Raw Old) (Ripe New)
 adapterOptical (FAdapter i o) = dimap (i . adapt) (unAdapt . o) (FAdapter id id)
 
 -- Explanation : dimap's inside i  function has a signature  (s -> a), and our "to"  adapter function needs to produce the same type as well (to  :: s -> a) : 
@@ -137,13 +137,13 @@ useOptical     = adapterOptical adapterP
 
       
 -- Creating some adapter utility optic for To, that can give a's from s's
-useOpticalTo   :: Raw Old -> Old
+useOpticalTo   :: Raw Old           ->        Old
 useOpticalTo   = to useOptical
 
 
 
 -- Creating some adapter utility function for Fro, that will compose t's from b's   
-useOpticalFro  :: New  -> Ripe New
+useOpticalFro  :: New               ->        Ripe New
 useOpticalFro  = fro useOptical
 
 

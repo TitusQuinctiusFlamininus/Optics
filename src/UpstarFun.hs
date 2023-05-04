@@ -18,7 +18,7 @@ class Functor f where
 --}
 
 -- Ok, Let us invent our own Upstar
-newtype OpticalUpstar f' a' b' = OpticalUpstar {unstar :: a' -> f' b'}
+newtype OpticalUpstar f' a' b'      = OpticalUpstar {unstar ::     a'    ->      f' b'}
 
 
 
@@ -61,19 +61,19 @@ instance Functor OpFunc where
 -- So now lets invent some functions that can take advantage of our types
 
 -- Lets invent a contravariant function that provides the dimap something of type a
-preUpstar :: k   -> From a
+preUpstar :: k          ->       From a
 preUpstar  = undefined
 
 
 
 -- We also need a covariant function that takes our profunctor output (b) and potentially manipulates it further 
-postUpstar :: To a -> s'
+postUpstar :: To a      ->       s'
 postUpstar = undefined
 
 
 
 -- Now we invent a function that represents how our upstar works primarily
-unstarter :: From a -> OpFunc (To b)
+unstarter :: From a     ->       OpFunc (To b)
 unstarter  = undefined
 
 
@@ -91,7 +91,7 @@ proUpstarP = dimap preUpstar postUpstar (OpticalUpstar unstarter)
 
 -- So now you can use our Profunctor transformer (or any similar one), like this: 
 -- Since we are going from : s -> s' , and not from some a', then lets just supply the s (which we are now calling type k)
-useUpstart :: OpticalUpstar OpFunc k (To b) -> k -> OpFunc (To b)
+useUpstart :: OpticalUpstar OpFunc k (To b)     ->    k     -> OpFunc (To b)
 useUpstart (OpticalUpstar t) = t
 
 

@@ -40,9 +40,9 @@ class Functor r => Applicative r where
 ---------------------------------------------------------------------------------
    
 -- Rocking our very own Prism
-data Polyhedron a b s t     = Poly {  peer    :: s  ->  Either b a, 
+data Polyhedron a b s t     = Poly {  peer    :: s     ->     Either b a, 
 
-                                      pack    :: b  ->  t
+                                      pack    :: b     ->     t
                                    }
 
 

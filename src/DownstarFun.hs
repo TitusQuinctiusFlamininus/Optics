@@ -24,14 +24,14 @@ class Functor w => Comonad w where
 --}
 
 -- Imagining a type that encompasses the idea of a Downstar
-newtype OpticalDownstar f a b = OpDownstar { downer :: f a -> b }
+newtype OpticalDownstar f a b          = OpDownstar { downer :: f a    ->    b }
 
 
 
 -- Ok, lets go ahead and make it a Profunctor
 -- Whatever d consumes, it needs to be a functor of something, so we have to fmap h
 instance Functor f => Profunctor (OpticalDownstar f) where
-  dimap h g ( OpDownstar d ) = OpDownstar (  g . d . fmap h )
+  dimap h g ( OpDownstar d )           = OpDownstar (  g . d . fmap h )
 
 
 
@@ -79,7 +79,7 @@ instance Comonad OpFunc where
 -- Let us come up with a few functions we can use for our dimap instance and build up one example of how to use the Downstar
 
 -- Lets invent a contravariant function that provides the dimap something of type (f a), from the functional expression: (f a -> b)
-preDownstar :: m   -> From a
+preDownstar ::   m                 ->   From a
 preDownstar  = undefined
 
 
@@ -87,7 +87,7 @@ preDownstar  = undefined
 
 -- We also need a covariant function that takes our profunctor output (To a) and 
 -- potentially manipulates it further (here (To a) represented abstractly as b, from the functional expression: (f a -> b)
-postDownstar :: To a -> s'
+postDownstar ::  To a              ->    s'
 postDownstar = undefined
 
 
@@ -95,7 +95,7 @@ postDownstar = undefined
 
 -- Now we invent a function that represents how our Downstar works primarily
 -- As mentioned before, since OpFunc is a comonad, and example of an implementation here is to convert what's extracted into our Downstar output type
-downer' :: OpFunc (From a)  -> To a
+downer'      ::  OpFunc (From a)    ->  To a
 downer' p          = To x
   where ( From x ) = extract p
 
@@ -112,7 +112,7 @@ proDownstar = dimap preDownstar postDownstar (OpDownstar downer')
 -- Now its time to use the Downstar. All we need to do is provide something of type (OpFunc m)
 -- since we are 'fmapping' h, we need to give the profunctor a functor computational type
 -- we see that: fmap (m -> From a) -> OpFunc m -> OpFunc (From a)        <<----and this looks like what our Downstar (downer') takes
-useProDownstar :: OpticalDownstar OpFunc m (To a) -> OpFunc m -> To a
+useProDownstar :: OpticalDownstar OpFunc m (To a)        ->        OpFunc m -> To a
 useProDownstar (OpDownstar d)    = d
 
 

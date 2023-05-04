@@ -44,9 +44,9 @@ class Functor r => Applicative r where
 
 
 -- Combination of an Upstar and Downstar (It is an experimental type, purely for fun)
-data Multistar   f a b s t        = Multistar    {  up   :: a     -> f b,
+data Multistar   f a b s t        = Multistar    {  up   ::   a     ->    f b,
 
-                                                    down :: f s   -> t
+                                                    down ::   f s   ->    t
                                                  }
 
 
@@ -121,25 +121,25 @@ instance Applicative SuperStar where
 -- Analogy of star-formation in galaxies used, just as an example
 
 -- We need a contravariant function for providing our intersteller material during Star formation
-epoch      ::  a'           ->   s
+epoch      ::  a'           ->        s
 epoch       = undefined
 
 
 
 -- We also need a covariant function that will eventually produce the space phenomenon we seek
-evolve     :: t             ->  d
+evolve     :: t              ->       d
 evolve      = undefined
 
 
 
 -- Let's invent a function that mimicks some process not really associated with star-formation (L.H.S Multistar)
-outflow    :: a             -> SuperStar b 
+outflow    :: a              ->       SuperStar b 
 outflow     = undefined
 
 
 
 -- Finally, inventing a function within which Stars die 
-supernova  :: SuperStar s   ->  t
+supernova  :: SuperStar s    ->       t
 supernova   = undefined
 
 
@@ -160,7 +160,7 @@ multiFunctor                    = dimap epoch evolve (Multistar outflow supernov
 --                    fourth  : Now that we have : (SuperStar Stardust), we extract to dissociate it from the functor 
 --                    fifth   : We then hand it over to a function that with type : (Stardust -> Cluster StarDust) ....... but evolve goes from any-type to any-type : Perfect!
 -- So our final signature is: Multistar SuperStar a b Dust StarDust  -> Multistar SuperStar a b (Cloud Dust) (Cluster StarDust)
-multiOptic   :: (Comonad f) => Multistar f a b s' s  -> Multistar f a b t t'
+multiOptic   :: (Comonad f) => Multistar f a b s' s       ->       Multistar f a b t t'
 multiOptic (Multistar l _)      = Multistar l (extract . (<$>) epoch)
 
 -- NOTE THIS ALSO WORKS AS AN IMPLEMENTATION  :  ----->>>> Multistar l (evolve . extract . (<$>) epoch)   <<<<-------
@@ -172,14 +172,14 @@ multiOptic (Multistar l _)      = Multistar l (extract . (<$>) epoch)
 
 -- Lifting Intersteller dust into our intersteller functor, using our Optic
 -- We don't really mind what type we get as input and what functor we create, as far as the Profunctor is concerned
-upper        :: c' -> SuperStar d'
+upper        :: c'             ->       SuperStar d'
 upper                           = up   (multiOptic multiFunctor)
 
 
 -- Transposing between Intersteller Composite types, using our Optic
 -- What we really want it to be able to transform from one composite type to another composite (intersteller) type
 -- We need pure to lift a type into a functor
-downer        :: Cloud a -> Cluster b
+downer        :: Cloud a       ->       Cluster b
 downer                          = down (multiOptic multiFunctor) . pure
 
 
