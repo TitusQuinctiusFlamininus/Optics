@@ -135,3 +135,11 @@ affineC                           =   dimap prep eject . AffineOp search $ raus
 affineOptic :: AffineP a b s t           ->            AffineP a b (Glass s) (Diamond t)
 affineOptic    (AffineOp u v)    =   AffineOp (u . extract) (\y  -> eject . pure . v $ (fst y, extract . prep . snd $ y))
 
+
+
+ ---------------------------------------------------------------------------------
+
+-- Using the Affine Optic with the rudimentary functions
+
+
+
