@@ -29,6 +29,7 @@ library
       AffineOpticsFun
       Cartesian_Strong_OpticsFun
       DownstarFun
+      ForgetFun
       LensOpticsFun
       MultistarOpticsFun
       PrismOpticsFun

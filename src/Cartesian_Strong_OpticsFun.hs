@@ -21,14 +21,6 @@ class Profunctor p => Cartesian p where
   second :: p a b -> p (c, a) (c, b)
 
 
-class Functor f where
-    <$> :: (a -> b) -> f a -> f b
-
-
-class Functor w => Comonad w where
-    extract     ::  w a -> a      
-    duplicate   ::  w a -> w (w a)
-    extend      :: (w a -> b) -> w a -> w b  
 
 --}
 
