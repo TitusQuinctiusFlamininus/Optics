@@ -121,7 +121,7 @@ instance Applicative Diamond where
 
 
  -- Let's assemble an actual Profuctor based on our types and computational abilities
-affineC :: AffineP Shard Crystal s t
+affineC :: AffineP a b s t
 affineC                           =   dimap prep eject . AffineOp search $ raus
 
 
@@ -141,5 +141,17 @@ affineOptic    (AffineOp u v)    =   AffineOp (u . extract) (\y  -> eject . pure
 
 -- Using the Affine Optic with the rudimentary functions
 
+-- Let's try finding out what our composite is made of; we may find what we're looking for, or not
+investigate :: (Glass a)                ->            Either b a
+investigate                     =     check $ affineOptic affineC
 
 
+
+-- We need to put something back together again, but we need to know how it had previously been built before
+humptyDumpty :: b     ->  Glass a      ->   Diamond t
+humptyDumpty    ingred orig     =     recon (affineOptic affineC) (ingred, orig)
+
+
+
+
+ ---------------------------------------------------------------------------------
