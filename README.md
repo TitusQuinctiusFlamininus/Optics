@@ -5,6 +5,7 @@ Attempting to create Optics and other Computational structures from scratch
 ## Profunctor
 ![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/profunctor.png "Profunctor")
 - :green_circle: Upstar
+- :white_circle: Strong Upstar
 - :green_circle: Downstar
 - :green_circle: Adapter
 - :green_circle: Forget
@@ -12,7 +13,6 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle: Arrow
 - :white_circle: Tagged
 - :green_circle: Affine
-- :white_circle: Cartesian   (or Strong)
 - :white_circle: CoCartesian (or Choice)
 - :white_circle: Monoidal
 - :green_circle: Lens
