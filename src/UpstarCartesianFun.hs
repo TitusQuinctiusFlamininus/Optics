@@ -29,15 +29,15 @@ class Profunctor p => Cartesian p where
 
 
 -- Let's revisit our vanilla Upstar and Profunctor Instance
-newtype Cartesian f a b         =    StrongStar { upper ::   a  -> f b  }
+newtype Cartesian f a b               =    StrongUpStar { upper ::   a  -> f b  }
 
 
 instance Functor f =>  Profunctor (Cartesian f) where
-    dimap h g (StrongStar u)     =   StrongStar (fmap g . u . h) 
+    dimap h g (StrongUpStar u)        =    StrongUpStar (fmap g . u . h) 
 
 
 
 -- Alright, now we Strengthen it
 instance Functor f =>  Strong     (Cartesian f) where
-  first'  (StrongStar  u)           = StrongStar (\(a, x) -> fmap swap . (((,) x) <$>) $ (u a))
-  second' (StrongStar  u)           = undefined
+  first'  (StrongUpStar  u)           = StrongUpStar (\(a, x) -> fmap swap . (((,) x) <$>) $ (u a))
+  second' (StrongUpStar  u)           = StrongUpStar (\(x, a) ->             (((,) x) <$>) $ (u a))
