@@ -10,11 +10,6 @@ To understand this better, read from top to bottom, in the style
 that the code was slowly built up
 
 
-data Lens a b s t = Lens { view   ::  s      ->  a, 
-                           update :: (b, s)  ->  t
-                         }
-
-
 class Profunctor p where
   lmap  :: (c -> a) -> p a b -> p c b
   rmap  :: (b -> d) -> p a b -> p a d
