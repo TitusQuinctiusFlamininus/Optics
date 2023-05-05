@@ -7,7 +7,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :green_circle: Upstar
 - :green_circle: Downstar
 - :green_circle: Adapter
-- :white_circle: Forget
+- :green_circle: Forget
 - :white_circle: Fold
 - :white_circle: Arrow
 - :white_circle: Tagged

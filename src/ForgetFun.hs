@@ -36,3 +36,34 @@ data    ForgetFul  r  a  b             =       Forget {   forget ::  a   ->  r  
 --                                                                       :  If (r' /= r), it still will not matter, because it is not certain if we could provide r' from Forget 
 instance Profunctor (ForgetFul r) where
        dimap  h  _  ( Forget f  )       =      Forget (f . h)
+
+
+
+---------------------------------------------------------------------------------
+
+-- Let's re-use types from the Lens module
+
+data    Atom                    =   Atom
+
+
+---------------------------------------------------------------------------------
+
+-- Also re-visiting 2 functions defined in the Lens module
+
+-- This contravariant function will supply our original structure
+before         ::   m         ->   Atom
+before                          = undefined
+
+
+forgetting     ::   Atom      ->   w
+forgetting                      = undefined
+
+
+---------------------------------------------------------------------------------
+
+-- We are in a position to roll our own concrete Profunctor, using the identity function as a lame duck substitute
+forgetP :: ForgetFul  w  Atom  e
+forgetP                         = dimap before id  . Forget $ forgetting
+
+
+---------------------------------------------------------------------------------
