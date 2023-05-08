@@ -50,29 +50,25 @@ instance Functor f =>  Strong     (Cartesian f) where
 
 ---------------------------------------------------------------------------------
 
--- Revisiting types from Vanilla Upstar
+-- Revisiting types from Vanilla Upstar, but somewhat simplified
 
-newtype OpFunc a            = OpFunc a 
-
-newtype From a              = From a
-
-newtype To a                = To a 
+newtype OpFunc a                 = OpFunc a 
 
 
-preUpstar :: k          ->       From a
-preUpstar  = undefined
+preUpstar :: k          ->       a
+preUpstar                        = undefined
 
 
-postUpstar :: To a      ->       s'
-postUpstar = undefined
+postUpstar :: b         ->       s'
+postUpstar                       = undefined
 
 
-unstarter :: From a     ->       OpFunc (To b)
-unstarter  = undefined
+unstarter :: a          ->       OpFunc b
+unstarter                        = undefined
 
 
 instance Functor OpFunc where
-    fmap f (OpFunc x)    = OpFunc (f x)
+    fmap f (OpFunc x)            = OpFunc (f x)
 
 
 ---------------------------------------------------------------------------------
