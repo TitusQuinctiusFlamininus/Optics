@@ -1,6 +1,6 @@
 module UpstarCoCartesianFun where
 
-
+import Data.Either                 (fromLeft, fromRight        )
 import Control.Lens.Combinators    (Profunctor, dimap          )
 import Data.Profunctor.Choice      (Choice    ,left' , right'  )
 
@@ -26,15 +26,16 @@ class Functor f where
 
 --}
 
--- Let's revisit our vanilla Upstar and Profunctor Instance
+-- Let's simply redefine what we had as a basic type, before all the frills
 newtype CoCartesian f a b               =    ChoiceUpStar { upper ::   a  -> f b  }
 
 
+-- Making it a Profunctor is easy enough....
 instance Functor f =>  Profunctor (CoCartesian f) where
     dimap h g (ChoiceUpStar u)          =    ChoiceUpStar (fmap g . u . h) 
 
 
--- Alright, now we Strengthen it
+-- Going ahead and Co-Strengthening it
 instance Functor f =>  Choice (CoCartesian f)     where
-  left'  (ChoiceUpStar  u)           =    undefined
-  right' (ChoiceUpStar  u)           =    undefined
+  left'  (ChoiceUpStar  u)              =    ChoiceUpStar (\(Left a) -> Left    <$> (u a))
+  right' (ChoiceUpStar  u)              =    undefined
