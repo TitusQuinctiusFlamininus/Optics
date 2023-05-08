@@ -16,17 +16,12 @@ class Profunctor p where
   dimap   :: (c -> a) ->  (b -> d) -> p a b -> p c d
 
 
-where p is a Profunctor : 
-type Optic p a b s t = p a b -> p s t
-
-class Functor f where
-    <$> :: (a -> b) -> f a -> f b
-
--- Here is the Cartesian / Strong Typeclass definition: 
-
 class Profunctor p => Strong p where
   first  ::  p a b -> p (a, c) (b, c)
   second ::  p a b -> p (c, a) (c, b)
+
+class Functor f where
+    <$> :: (a -> b) -> f a -> f b
 
 
 --}
