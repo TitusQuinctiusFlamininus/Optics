@@ -36,7 +36,6 @@ type Tuple' a a'                      =    (a, a')
 newtype Cartesian f a b               =    StrongUpStar { upper ::   a  -> f b  }
 
 
-
 instance Functor f =>  Profunctor (Cartesian f) where
     dimap h g (StrongUpStar u)        =    StrongUpStar (fmap g . u . h) 
 
