@@ -36,6 +36,7 @@ type Tuple' a a'                      =    (a, a')
 newtype Cartesian f a b               =    StrongUpStar { upper ::   a  -> f b  }
 
 
+
 instance Functor f =>  Profunctor (Cartesian f) where
     dimap h g (StrongUpStar u)        =    StrongUpStar (fmap g . u . h) 
 
@@ -43,8 +44,8 @@ instance Functor f =>  Profunctor (Cartesian f) where
 
 -- Alright, now we Strengthen it
 instance Functor f =>  Strong     (Cartesian f) where
-  first'  (StrongUpStar  u)           = StrongUpStar (\(a, x) -> fmap swap . (((,) x) <$>) $ (u a))
-  second' (StrongUpStar  u)           = StrongUpStar (\(x, a) ->             (((,) x) <$>) $ (u a))
+  first'  (StrongUpStar  u)           =    StrongUpStar (\(a, x) -> fmap swap . (((,) x) <$>) $ (u a))
+  second' (StrongUpStar  u)           =    StrongUpStar (\(x, a) ->             (((,) x) <$>) $ (u a))
 
 
 ---------------------------------------------------------------------------------
@@ -84,13 +85,13 @@ vanillaP               = dimap preUpstar postUpstar . StrongUpStar $ unstarter
 -- Let's  create and use strong profunctors from our base type
 
 -- We can now create functors of tuples instead of just types
-leftStrongP   :: Tuple' a a'   ->   OpFunc (Tuple' a a')
-leftStrongP            = upper . first'  $ vanillaP
+upStrong   :: Tuple' a a'   ->   OpFunc (Tuple' a a')
+upStrong               = upper . first'  $ vanillaP
 
  
 -- Let's keep the tuple argument order the same, but since we are using a different strengthener, we need to swap 
-rightStrongP  :: Tuple' a a'   ->   OpFunc (Tuple' a' a)
-rightStrongP           = (upper . second' $ vanillaP) . swap
+upStrong'  :: Tuple' a a'   ->   OpFunc (Tuple' a' a)
+upStrong'              = (upper . second' $ vanillaP) . swap
 
 
 ---------------------------------------------------------------------------------
