@@ -1,8 +1,8 @@
 module UpstarCartesianFun where
 
-import Data.Tuple                (swap                           )
-import Control.Lens.Combinators (Profunctor, dimap               )
-import Data.Profunctor.Strong   (Strong    , first', second'     )
+import Data.Tuple                  (swap                         )
+import Control.Lens.Combinators    (Profunctor, dimap            )
+import Data.Profunctor.Strong      (Strong    , first', second'  )
 
 
  {--
