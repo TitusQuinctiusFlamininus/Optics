@@ -17,11 +17,11 @@ class Profunctor p where
 
 
 class Profunctor p => Strong p where
-  first  ::  p a b -> p (a, c) (b, c)
-  second ::  p a b -> p (c, a) (c, b)
+  first   ::  p a b   -> p (c, a) (c, b)
+
 
 class Functor f where
-    <$> :: (a -> b) -> f a -> f b
+    <$>   :: (a -> b) -> f a -> f b
 
 
 --}
@@ -42,7 +42,7 @@ instance Functor f =>  Profunctor (Cartesian f) where
 
 
 -- Alright, now we Strengthen it
-instance Functor f =>  Strong     (Cartesian f) where
+instance Functor f =>  Strong (Cartesian f)     where
   first'  (StrongUpStar  u)           =    StrongUpStar (\(a, x) -> fmap swap . (((,) x) <$>) $ (u a))
   second' (StrongUpStar  u)           =    StrongUpStar (\(x, a) ->             (((,) x) <$>) $ (u a))
 
