@@ -33,6 +33,7 @@ library
       MultistarOpticsFun
       PrismOpticsFun
       UpstarCartesianFun
+      UpstarCoCartesianFun
       UpstarFun
   other-modules:
       Paths_optics_fun
