@@ -24,11 +24,11 @@ class Functor f where
 
 -- Here is the Cartesian / Strong Typeclass definition: 
 
-class Profunctor p => Cartesian p where
+class Profunctor p => Strong p where
   first  ::  p a b -> p (a, c) (b, c)
   second ::  p a b -> p (c, a) (c, b)
 
-  
+
 --}
 
 
