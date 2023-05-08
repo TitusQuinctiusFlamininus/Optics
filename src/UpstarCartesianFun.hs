@@ -19,12 +19,16 @@ class Profunctor p where
 where p is a Profunctor : 
 type Optic p a b s t = p a b -> p s t
 
+class Functor f where
+    <$> :: (a -> b) -> f a -> f b
+
+-- Here is the Cartesian / Strong Typeclass definition: 
 
 class Profunctor p => Cartesian p where
   first  ::  p a b -> p (a, c) (b, c)
   second ::  p a b -> p (c, a) (c, b)
 
-
+  
 --}
 
 
