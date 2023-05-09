@@ -84,3 +84,6 @@ instance Applicative Select where
 
 ---------------------------------------------------------------------------------
 
+-- First, we establish the Profunctor instance concretely
+coStarVanilla :: CoCartesian Select a b
+coStarVanilla          = dimap preUpstar postUpstar . ChoiceUpStar $ topper
