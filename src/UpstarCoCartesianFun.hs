@@ -54,31 +54,33 @@ instance (Applicative f) =>  Choice (CoCartesian f)     where
 
 ---------------------------------------------------------------------------------
 
--- Revisiting Upstar types once again
+-- Let's invent some types we can use as a practical example
 
-newtype OpFunc a                 = OpFunc a 
+-- We can use this as a Functor
+newtype Select a                 = Select a 
 
 
-preUpstar :: k          ->       a
+preUpstar :: a'          ->       a
 preUpstar                        = undefined
 
 
-postUpstar :: b         ->       s'
+postUpstar :: b          ->       t
 postUpstar                       = undefined
 
 
-unstarter :: a          ->       OpFunc b
-unstarter                        = undefined
+topper     :: a          ->       Select b
+topper                           = undefined
 
 
-instance Functor OpFunc where
-    fmap f (OpFunc x)            = OpFunc (f x)
+-- Functor instance is needed
+instance Functor Select where
+    fmap f (Select x)            = Select (f x)
 
 
 -- Remember, it also need to be an Applicative, so let's do that
-instance Applicative OpFunc where
-  pure x                         =  OpFunc x
-  OpFunc f   <*>  OpFunc t       =  OpFunc (f t)
+instance Applicative Select where
+  pure   x                       =  Select x
+  Select f   <*>  Select v       =  Select (f v)
 
 ---------------------------------------------------------------------------------
 
