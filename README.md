@@ -15,7 +15,6 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle: Arrow
 - :white_circle: Tagged
 - :green_circle: Affine
-- :white_circle: CoCartesian (or Choice)
 - :white_circle: Monoidal
 - :green_circle: Lens
 - :green_circle: Prism
@@ -42,6 +41,9 @@ Attempting to create Optics and other Computational structures from scratch
 ![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/tfunctor.png "TFunctor")
 
 - :white_circle: Upstar
+- :white_circle: Strong Upstar
+- :white_circle: Choice Upstar
+- :white_circle: Monoidal Upstar
 - :white_circle: Downstar
 - :white_circle: Adapter
 - :white_circle: Forget
@@ -49,8 +51,6 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle: Fold
 - :white_circle: Arrow
 - :white_circle: Affine
-- :white_circle: Cartesian   (or Strong)
-- :white_circle: CoCartesian (or Choice)
 - :white_circle: Lens
 - :white_circle: Prism
 - :white_circle: Traversal
