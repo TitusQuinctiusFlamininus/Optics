@@ -1,8 +1,8 @@
 module UpstarCoCartesianFun where
 
 
-import Control.Lens.Combinators    (Profunctor, dimap          )
-import Data.Profunctor.Choice      (Choice    ,left' , right'  )
+import Control.Lens.Combinators    (Profunctor, dimap           )
+import Data.Profunctor.Choice      (Choice    , left' , right'  )
 
  {--
 
@@ -21,7 +21,7 @@ class Profunctor p => Cocartesian p where
 
 
 class Functor f where
-    <$>   :: (a -> b) -> f a -> f b
+    <$>         :: (a -> b) -> f a -> f b
 
 
 --}
@@ -57,33 +57,51 @@ instance (Applicative f) =>  Choice (CoCartesian f)     where
 -- Let's invent some types we can use as a practical example
 
 -- We can use this as a Functor
-newtype Select a                 = Select a 
+newtype Select a                  =      Select a 
 
 
-preUpstar :: a'          ->       a
-preUpstar                        = undefined
+-- Also, we'll invent a new type whose position in a choice can shift
+data    This                      =      This
+
+preUpstar :: a'                   ->       a
+preUpstar                         = undefined
+
+-- This is the covariant functor
+postUpstar :: Select b            ->       t
+postUpstar                        = undefined
 
 
-postUpstar :: b          ->       t
-postUpstar                       = undefined
+topper     :: a                   ->       Select b
+topper                            = undefined
 
-
-topper     :: a          ->       Select b
-topper                           = undefined
+---------------------------------------------------------------------------------
 
 
 -- Functor instance is needed
 instance Functor Select where
-    fmap f (Select x)            = Select (f x)
+    fmap f (Select x)             = Select (f x)
 
 
 -- Remember, it also need to be an Applicative, so let's do that
 instance Applicative Select where
-  pure   x                       =  Select x
-  Select f   <*>  Select v       =  Select (f v)
+  pure   x                        =  Select x
+  Select f   <*>  Select v        =  Select (f v)
+
 
 ---------------------------------------------------------------------------------
 
 -- First, we establish the Profunctor instance concretely
 coStarVanilla :: CoCartesian Select a b
 coStarVanilla          = dimap preUpstar postUpstar . ChoiceUpStar $ topper
+
+
+--- Let's implement how we can use the co-reinforced profunctors from the Left
+thisWay      :: Either a c    ->  Select (Either b c)
+thisWay               =  upper . left'   $ coStarVanilla
+
+
+-- And from the Right
+thatWay      :: Either c a    ->  Select (Either c b)
+thatWay               =  upper . right'  $ coStarVanilla
+
+---------------------------------------------------------------------------------
