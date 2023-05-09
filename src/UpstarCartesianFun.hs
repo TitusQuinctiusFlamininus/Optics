@@ -43,8 +43,8 @@ instance Functor f =>  Profunctor (Cartesian f) where
 
 -- Alright, now we Strengthen it
 instance Functor f =>  Strong (Cartesian f)     where
-  first'  (StrongUpStar  u)           =    StrongUpStar (\(a, x) -> fmap swap . (((,) x) <$>) .  u $ a)
-  second' (StrongUpStar  u)           =    StrongUpStar (\(x, a) ->             (((,) x) <$>) .  u $ a)
+  first'  (StrongUpStar  u)           =    StrongUpStar (\z -> fmap swap . (((,) . snd $ z) <$>) .  u . fst $ z)
+  second' (StrongUpStar  u)           =    StrongUpStar (\z ->             (((,) . fst $ z) <$>) .  u . snd $ z)
 
 
 ---------------------------------------------------------------------------------
