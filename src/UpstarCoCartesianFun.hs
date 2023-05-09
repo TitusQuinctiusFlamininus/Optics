@@ -1,6 +1,6 @@
 module UpstarCoCartesianFun where
 
-import Data.Either                 (fromLeft, fromRight        )
+
 import Control.Lens.Combinators    (Profunctor, dimap          )
 import Data.Profunctor.Choice      (Choice    ,left' , right'  )
 
@@ -36,6 +36,9 @@ instance Functor f =>  Profunctor (CoCartesian f) where
 
 
 -- Going ahead and Co-Strengthening it
-instance Functor f =>  Choice (CoCartesian f)     where
-  left'  (ChoiceUpStar  u)              =    ChoiceUpStar (\(Left  a)  -> Left     <$> (u a))
+instance (Applicative f) =>  Choice (CoCartesian f)     where
+  left'  (ChoiceUpStar  u)              =    ChoiceUpStar (\x  -> case x of
+                                                                    Left a  ->  Left     <$> (u a)
+                                                                    Right c ->  Right    <$> (pure c)           
+                                                          )
   right' (ChoiceUpStar  u)              =    ChoiceUpStar (\(Right a)  -> Right    <$> (u a))
