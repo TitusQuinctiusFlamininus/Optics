@@ -37,5 +37,5 @@ instance Functor f =>  Profunctor (CoCartesian f) where
 
 -- Going ahead and Co-Strengthening it
 instance (Applicative f) =>  Choice (CoCartesian f)     where
-  left'  (ChoiceUpStar  u)              =    ChoiceUpStar . either ((Left <$>) . u) $ ((Right <$>) . pure)                                                           
-  right' (ChoiceUpStar  u)              =    ChoiceUpStar (\(Right a)  -> Right    <$> (u a))
+  left'  (ChoiceUpStar  u)              =    ChoiceUpStar . either ((Left <$>) . u   ) $ ((Right <$>) . pure)                                                           
+  right' (ChoiceUpStar  u)              =    ChoiceUpStar . either ((Left <$>) . pure) $ ((Right <$>) . u   )               
