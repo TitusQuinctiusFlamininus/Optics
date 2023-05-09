@@ -41,7 +41,7 @@ instance (Applicative f) =>  Choice (CoCartesian f)     where
   left'  (ChoiceUpStar  u)              =    ChoiceUpStar . either ((Left <$>) . u   ) $ ((Right <$>) . pure)                                                           
   right' (ChoiceUpStar  u)              =    ChoiceUpStar . either ((Left <$>) . pure) $ ((Right <$>) . u   )               
 
-  -- I'll explain how we got to this arrangement: 
+  -- Explaining how this arrangement was achieved: 
        -- In co-strengthening the upper function, instead of going like this : (a  -> f b), we are now going like this: ((Either a c)  -> f (Either b c))
        -- Ok, so the input could be Left or Right; So in a CASE statement, we would reason it out this way: 
        --                ----->>>   If it's Left, then we have access to the type a , give it to u, and we get (f b); fmap it with a "Left" and we get: 
@@ -60,13 +60,10 @@ instance (Applicative f) =>  Choice (CoCartesian f)     where
 newtype Select a                  =      Select a 
 
 
--- Also, we'll invent a new type whose position in a choice can shift
-data    This                      =      This
-
 preUpstar :: a'                   ->       a
 preUpstar                         = undefined
 
--- This is the covariant functor
+
 postUpstar :: Select b            ->       t
 postUpstar                        = undefined
 
