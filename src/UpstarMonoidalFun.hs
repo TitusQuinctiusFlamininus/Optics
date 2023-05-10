@@ -43,6 +43,12 @@ instance Functor f =>  Profunctor (MonoStar f) where
 
 
 -- And now making it Monoidal...
+
+-- Explanation  : 
+--         ------>>> Take the first tuple type and apply it to v, we obtain a (f b);
+--                   Then fmap that to a tuple function; we end up with a partial tuple function associated with a functor context : f (\some_type ->  (b, some_type))
+--                   We can produce an (f d) by using the second profunctor, by applying the second tuple type to w;
+--                   Now all we need to do it apply the two applicative functors together with the 'starship' function
 instance Applicative f =>  Monoidal   (MonoStar f) where
     par   (MonoidalStar v) (MonoidalStar w)  =   MonoidalStar (\x  ->  ((,) <$> (v . fst $ x)) <*>  (w . snd $ x))
     empty                                    =   MonoidalStar pure 
