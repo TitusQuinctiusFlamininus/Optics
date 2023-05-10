@@ -42,7 +42,8 @@ instance Functor f =>  Profunctor (Cartesian f) where
 
 
 -- Alright, now we Strengthen it
--- Explanation : We simply take the tuple input and feed it to our upstar function, obtaining a functor and subsequently fmap it (if needed) to a partial function depending on tuple type order
+-- Explanation : We simply take the tuple input and feed the appropriate type to our upstar function, obtaining a functor;  
+--               We then subsequently fmap that to a partial function and reverse the order depending on the order we need
 instance Functor f =>  Strong (Cartesian f)     where
   first'  (StrongUpStar  u)           =    StrongUpStar (\z -> fmap swap . (((,) . snd $ z) <$>) .  u . fst $ z)
   second' (StrongUpStar  u)           =    StrongUpStar (\z ->             (((,) . fst $ z) <$>) .  u . snd $ z)
