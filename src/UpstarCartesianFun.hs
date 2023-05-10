@@ -79,11 +79,12 @@ vanillaP      :: Cartesian OpFunc a b
 vanillaP               = dimap preUpstar postUpstar . StrongUpStar $ unstarter
 
 
--- Let's  create and use strong profunctors from our base type
+-- Let's create and use strong profunctors from our base type
 
 -- We can now create functors of tuples instead of just types
 upStrong   :: Tuple' a a'   ->   OpFunc (Tuple' a a')
 upStrong               = upper . first'  $ vanillaP
+
 
  
 -- Let's keep the tuple argument order the same, but since we are using a different strengthener, we need to swap 
