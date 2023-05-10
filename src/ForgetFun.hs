@@ -32,7 +32,7 @@ data    ForgetFul  r  a  b             =       Forget {   forget ::  a   ->  r  
 --                   Normally, our ForgetFul type is meant to give us a type we can provide to our covariant function, but we have "forgotten" that type; it will never be provided
 --                   This means that it does not matter what the covariant function does, or even what types it maps; it could map things of type r, who knows...
 --                   All we know is that whatever type the entire computation points to must be the same type as the last computational type we produced (that we COULD produce) : So d must be identical to r
---                   We can re-write the definition, in this case, to be :  {  dimap :: (c -> a) -> (r' -> r) -> p a r -> p c r  }  =  {  dimap :: (c -> a) -> id -> p a r -> p c r  } if (r' = r)
+--                   We can re-write the definition, in this case, to be :  If (r' == r), {  dimap :: (c -> a) -> (r' -> r) -> p a r -> p c r  }  =  {  dimap :: (c -> a) -> id -> p a r -> p c r  } 
 --                                                                       :  If (r' /= r), it still will not matter, because it is not certain if we could provide r' from Forget 
 instance Profunctor (ForgetFul r) where
        dimap  h  _  ( Forget f  )       =      Forget (f . h)
