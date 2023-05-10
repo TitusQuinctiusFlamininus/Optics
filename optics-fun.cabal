@@ -35,6 +35,7 @@ library
       UpstarCartesianFun
       UpstarCoCartesianFun
       UpstarFun
+      UpstarMonoidalFun
   other-modules:
       Paths_optics_fun
   hs-source-dirs:
