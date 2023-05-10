@@ -23,9 +23,14 @@ class Functor f where
 
 --}
 
+
+-- Could not find a 'standard' library that contained this definition, so i'll just spell it out here for the typechecker
+
 class Profunctor p => Monoidal p where
   par   :: p a b  -> p c d -> p (a, c) (b, d)
   empty :: p () ()
+
+
 
 -- Ok, Let us invent our own Upstar
 newtype MonoStar f  a  b                     =   MonoidalStar { unstar ::  a  ->  f b }
