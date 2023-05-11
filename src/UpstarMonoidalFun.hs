@@ -35,9 +35,9 @@ class functor f => Applicative f where
 
 
 -- Could not find this definition in the combinators lib, nor in another haskell library , so i'll just spell it out here formally for the typechecker
-class Profunctor p => Monoidal p where
-  par   :: p a b  -> p c d -> p (a, c) (b, d)
-  empty :: p () ()
+class Profunctor  p => Monoidal p where
+  par        ::   p a b     ->    p c d     -> p (a, c) (b, d)
+  empty      ::   p () ()
 
 
 
@@ -48,7 +48,7 @@ newtype MonoStar f  a  b                     =   MonoidalStar { unstar ::  a  ->
 
 -- Alright, making it a Profunctor...
 instance Functor f =>  Profunctor (MonoStar f) where
-    dimap h g (MonoidalStar r)               =   MonoidalStar (fmap g . r . h) 
+    dimap   h   g   (MonoidalStar r)         =   MonoidalStar ( fmap g . r . h ) 
 
 
 
@@ -58,7 +58,7 @@ instance Functor f =>  Profunctor (MonoStar f) where
 --        ------->>> First, we take the first tuple type and apply it to v; Then fmap that to a tuple function; We end up with a partial tuple function associated with a functor contextxw
 --                   Next, we provide type d to the second profunctor's unstar; Finally, we match both with the starship operator
 --        ------->>> For empty, we have to associate a functor with our resultant type, which implies an applicative lift
-instance Applicative f =>  Monoidal   (MonoStar f) where
+instance Applicative f =>  Monoidal  (MonoStar f)  where
     par   (MonoidalStar v) (MonoidalStar w)  =   MonoidalStar (\x  ->  ((,) <$> (v . fst $ x)) <*>  (w . snd $ x))
     empty                                    =   MonoidalStar pure 
 
