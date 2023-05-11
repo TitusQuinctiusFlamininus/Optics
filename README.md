@@ -9,6 +9,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :green_circle: CoCartesian / Choice Upstar
 - :white_circle: Monoidal Upstar
 - :green_circle: Downstar
+- :white_circle: Sieve
 - :green_circle: Adapter
 - :green_circle: Forget
 - :white_circle: Fold
@@ -28,6 +29,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :green_circle: Lens
 - :white_circle: Arrow
 - :white_circle: Fold
+- :white_circle: Sieve
 - :green_circle: Prism
 - :green_circle: Affine
 - :white_circle: Traversal
@@ -44,6 +46,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle: CoCartesian / Choice Upstar
 - :white_circle: Monoidal Upstar
 - :white_circle: Downstar
+- :white_circle: Sieve
 - :white_circle: Adapter
 - :white_circle: Forget
 - :white_circle: Isomorphism
