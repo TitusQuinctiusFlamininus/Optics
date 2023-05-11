@@ -65,3 +65,46 @@ instance Applicative f =>  Monoidal  (MonoStar f)  where
 
 
   ---------------------------------------------------------------------------------
+
+
+-- Let's invent some Billing Types for Household services in a contrived example
+
+
+-- Here's are the kinds of service one can get from a Service Provider
+data  Service   =  Phone      |   Internet
+
+
+
+-- When you pay for a Service, you get one of these types
+data  Bill  b   =  Bill  b
+
+
+-- However: 
+-- A Service Provider could still be operating like in the 80s...
+data PaperReceipt     
+
+
+-- Or they could be hipsters and keep payment records in crypto form...
+data BitcoinReceipt
+
+
+type AllReceipts     =  (Bill PaperReceipt, Bill BitcoinReceipt)
+
+
+-- How about some functions to go along with these types
+
+cashRegister      ::    Service       ->    f (Bill PaperReceipt)
+cashRegister      = undefined
+
+
+chainBilling      ::    Service       ->    f (Bill BitcoinReceipt)
+chainBilling      = undefined
+
+
+---------------------------------------------------------------------------------
+
+
+-- How about we bundle our everything from our Service Providers and have billing in one place
+
+oneStopShop      :: Applicative f =>  (Service, Service) -> f (Bill PaperReceipt, Bill BitcoinReceipt)
+oneStopShop    = unstar . par (dimap id id (MonoidalStar cashRegister)) $ (dimap id id (MonoidalStar chainBilling ))
