@@ -22,6 +22,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle: Traversal
 - :white_circle: Traversing
 - :white_circle: Closed
+- :white_circle: Right Kan Lift
 
 ## Profunctor-Optics
 ![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/optic.png "Optic")
@@ -34,6 +35,9 @@ Attempting to create Optics and other Computational structures from scratch
 - :green_circle: Affine
 - :white_circle: Traversal
 - :white_circle: Traversing
+- :white_circle: Procompose
+
+
 
 # Experimental Types
 
@@ -60,6 +64,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle: Monoidal
 - :white_circle: Traversing
 - :white_circle: Closed
+- :white_circle: Right Kan Lift
 
 
 ## Others
