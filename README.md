@@ -24,9 +24,6 @@ Attempting to create Optics and other Computational structures from scratch
 
 ## Profunctor-Optics
 ![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/optic.png "Optic")
-- :white_circle: Cartesian / Strong Upstar
-- :white_circle: CoCartesian / Choice Upstar
-- :white_circle: Monoidal Upstar
 - :green_circle: Adapter
 - :green_circle: Lens
 - :white_circle: Arrow
