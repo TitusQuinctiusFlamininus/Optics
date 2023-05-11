@@ -5,7 +5,7 @@ Attempting to create Optics and other Computational structures from scratch
 ## Profunctor
 ![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/profunctor.png "Profunctor")
 - :green_circle: Upstar
-- :green_circle: Cartesiam / Strong Upstar
+- :green_circle: Cartesian / Strong Upstar
 - :green_circle: CoCartesian / Choice Upstar
 - :white_circle: Monoidal Upstar
 - :green_circle: Downstar
@@ -24,7 +24,7 @@ Attempting to create Optics and other Computational structures from scratch
 
 ## Profunctor-Optics
 ![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/optic.png "Optic")
-- :white_circle: Cartesiam / Strong Upstar
+- :white_circle: Cartesian / Strong Upstar
 - :white_circle: CoCartesian / Choice Upstar
 - :white_circle: Monoidal Upstar
 - :green_circle: Adapter
@@ -43,7 +43,7 @@ Attempting to create Optics and other Computational structures from scratch
 ![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/tfunctor.png "TFunctor")
 
 - :white_circle: Upstar
-- :white_circle: Cartesiam / Strong Upstar
+- :white_circle: Cartesian / Strong Upstar
 - :white_circle: CoCartesian / Choice Upstar
 - :white_circle: Monoidal Upstar
 - :white_circle: Downstar
