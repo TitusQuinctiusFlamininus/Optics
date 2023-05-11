@@ -62,8 +62,9 @@ forgetting                      = undefined
 ---------------------------------------------------------------------------------
 
 -- We are in a position to roll our own concrete Profunctor, using the identity function as a lame duck substitute
-forgetP :: ForgetFul  w  Atom  e
-forgetP                         = dimap before id  . Forget $ forgetting
+-- Even if we promised to return the same type as forgetting does, from the b-type signature, it has no effect
+forgetP :: ForgetFul  w  Atom  w
+forgetP                         = dimap before id  (Forget forgetting)
 
 
 ---------------------------------------------------------------------------------
