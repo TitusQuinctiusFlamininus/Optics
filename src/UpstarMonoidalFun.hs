@@ -104,7 +104,7 @@ chainBilling         = undefined
 ---------------------------------------------------------------------------------
 -- Time for the more interesting part: How can we use the Monoidal 
 
--- Here's an General Monoidal Profunctor for the masses
+-- Here's a General Monoidal Profunctor for the masses
 monoP          :: Applicative f =>  (Service   ->   f (Bill b))  ->  MonoStar f  Service  (Bill b)
 monoP                      =  dimap id id . MonoidalStar
 
@@ -115,7 +115,7 @@ monoP                      =  dimap id id . MonoidalStar
 oneStopShop    :: Applicative f =>  [Service]  ->  [Service]   ->   [f (Bill PaperReceipt, Bill BitcoinReceipt)]
 oneStopShop  _      []      =  []
 oneStopShop  []     _       =  []
-oneStopShop  (x:xs) (y:ys)  =  ((unstar . par (monoP cashRegister) $ (monoP chainBilling)) . (,) x $ y) : oneStopShop xs ys
+oneStopShop  s      s'      =  ((unstar . par (monoP cashRegister) $ (monoP chainBilling)) . (,) (head s) $ (head s')) : oneStopShop (tail s) (tail s')
 
 
 
