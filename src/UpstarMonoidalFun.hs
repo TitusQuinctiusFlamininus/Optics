@@ -67,21 +67,21 @@ instance Applicative f =>  Monoidal  (MonoStar f)  where
   ---------------------------------------------------------------------------------
 
 
--- Let's invent some Billing Types for Household services in a contrived example
+-- Let's invent some Billing Types for Household services in a (very) contrived example
 
 
 -- Here's are the kinds of service one can get from a Service Provider
-data  Service   =  Phone      |   Internet
+data  Service       =  Phone      |   Internet
 
 
 
 -- When you pay for a Service, you get one of these types
-data  Bill  b   =  Bill  b
+data  Bill  b       =  Bill  b
 
 
 -- However: 
 -- A Service Provider could still be operating like in the 80s...
-data PaperReceipt     
+data PaperReceipt  
 
 
 -- Or they could be hipsters and keep payment records in crypto form...
@@ -94,23 +94,34 @@ type AllReceipts     =  (Bill PaperReceipt, Bill BitcoinReceipt)
 -- How about some functions to go along with these types
 
 cashRegister      ::    Service       ->    f (Bill PaperReceipt)
-cashRegister      = undefined
+cashRegister         = undefined
 
 
 chainBilling      ::    Service       ->    f (Bill BitcoinReceipt)
-chainBilling      = undefined
+chainBilling         = undefined
 
 
 ---------------------------------------------------------------------------------
+-- Time for the more interesting part: How can we use the Monoidal 
 
--- Here's an General Profunctor for the masses
-monoP :: Applicative f =>  (Service   ->   f (Bill b))  ->  MonoStar f  Service  (Bill b)
-monoP             =  dimap id id . MonoidalStar
+-- Here's an General Monoidal Profunctor for the masses
+monoP          :: Applicative f =>  (Service   ->   f (Bill b))  ->  MonoStar f  Service  (Bill b)
+monoP                      =  dimap id id . MonoidalStar
 
 
--- How about we bundle our everything from our Service Providers and have billing in one place
--- Provide individual lists of services and you
-oneStopShop      :: Applicative f =>  [Service]   ->  [Service]   -> [f (Bill PaperReceipt, Bill BitcoinReceipt)]
+
+-- How about we bundle our everything from our Service Providers ....
+-- Just make sure we have pairs for each service reflecting billing for each month
+oneStopShop    :: Applicative f =>  [Service]  ->  [Service]   ->   [f (Bill PaperReceipt, Bill BitcoinReceipt)]
 oneStopShop  _      []      =  []
 oneStopShop  []     _       =  []
 oneStopShop  (x:xs) (y:ys)  =  ((unstar . par (monoP cashRegister) $ (monoP chainBilling)) . (,) x $ y) : oneStopShop xs ys
+
+
+
+-- If we prefer, we can organize all our bills in one place for next year's taxes
+accountant     :: Applicative f =>  [f (Bill a, Bill b)]  -> f ([Bill a], [Bill b])
+accountant                  =  head . ((\x  -> (\s  -> ([fst s], [snd s])) <$> x) <$>)
+
+
+---------------------------------------------------------------------------------
