@@ -84,9 +84,12 @@ data  Bill  b       =  Bill  b
 data PaperReceipt  
 
 
+
 -- Or they could be hipsters and keep payment records in crypto form...
 data BitcoinReceipt
 
+
+---------------------------------------------------------------------------------
 
 -- How about some functions to go along with these types
 
@@ -99,15 +102,18 @@ chainBilling         = undefined
 
 
 ---------------------------------------------------------------------------------
+
 -- Time for the more interesting part: How can we use the Monoidal 
 
--- Here's a General Monoidal Profunctor for the masses
+
+-- Here's a General Monoidal Profunctor for the masses, we just need the appropriate means of billing...
 monoP          :: Applicative f =>  (Service   ->   f (Bill b))  ->  MonoStar f  Service  (Bill b)
 monoP                      =  dimap id id . MonoidalStar
 
 
 
--- How about we bundle our everything from our Service Providers ....
+
+-- How about we bundle everything from our Service Providers ....
 -- Just make sure we have pairs for each service reflecting billing for each month
 oneStopShop    :: Applicative f =>  [Service]  ->  [Service]   ->   [f (Bill PaperReceipt, Bill BitcoinReceipt)]
 oneStopShop  _      []      =  []
@@ -116,9 +122,11 @@ oneStopShop  s      s'      =  ((unstar . par (monoP cashRegister) $ (monoP chai
 
 
 
+
 -- If we prefer, we can organize all our bills in one place for next year's taxes
 accountant     :: Applicative f =>  [f (Bill a, Bill b)]  -> f ([Bill a], [Bill b])
 accountant                  =  head . ((\x  -> (\s  -> ([fst s], [snd s])) <$> x) <$>)
+
 
 
 ---------------------------------------------------------------------------------
