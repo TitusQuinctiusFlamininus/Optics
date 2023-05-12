@@ -55,7 +55,7 @@ instance Functor f =>  Profunctor (MonoStar f) where
 -- And now making it Monoidal...
 
 -- Explanation  : 
---        ------->>> First, we take the first tuple type and apply it to v; Then fmap that to a tuple function; We end up with a partial tuple function associated with a functor contextxw
+--        ------->>> First, we take the first tuple type and apply it to v; Then fmap that to a tuple function; We end up with a partial tuple function associated with a functor context
 --                   Next, we provide type d to the second profunctor's unstar; Finally, we match both with the starship operator
 --        ------->>> For empty, we have to associate a functor with our resultant type, which implies an applicative lift
 instance Applicative f =>  Monoidal  (MonoStar f)  where
