@@ -105,6 +105,6 @@ chainBilling      = undefined
 
 
 -- How about we bundle our everything from our Service Providers and have billing in one place
-
-oneStopShop      :: Applicative f =>  (Service, Service) -> f (Bill PaperReceipt, Bill BitcoinReceipt)
-oneStopShop    = unstar . par (dimap id id (MonoidalStar cashRegister)) $ (dimap id id (MonoidalStar chainBilling ))
+-- Provide individual lists of services and you
+oneStopShop      :: Applicative f =>  [Service]   ->  [Service]   -> f (Bill PaperReceipt, Bill BitcoinReceipt)
+oneStopShop  m n  =  unstar (par (dimap id id (MonoidalStar cashRegister)) (dimap id id (MonoidalStar chainBilling ))) (head . zipWith (\x y -> (x, y)) m $ n)
