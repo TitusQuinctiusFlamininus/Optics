@@ -88,9 +88,6 @@ data PaperReceipt
 data BitcoinReceipt
 
 
-type AllReceipts     =  (Bill PaperReceipt, Bill BitcoinReceipt)
-
-
 -- How about some functions to go along with these types
 
 cashRegister      ::    Service       ->    f (Bill PaperReceipt)
