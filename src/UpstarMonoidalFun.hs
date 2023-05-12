@@ -103,8 +103,14 @@ chainBilling      = undefined
 
 ---------------------------------------------------------------------------------
 
+-- Here's an General Profunctor for the masses
+monoP :: Applicative f =>  (Service   ->   f (Bill b))  ->  MonoStar f  Service  (Bill b)
+monoP             =  dimap id id . MonoidalStar
+
 
 -- How about we bundle our everything from our Service Providers and have billing in one place
 -- Provide individual lists of services and you
-oneStopShop      :: Applicative f =>  [Service]   ->  [Service]   -> f (Bill PaperReceipt, Bill BitcoinReceipt)
-oneStopShop  m n  =  unstar (par (dimap id id (MonoidalStar cashRegister)) (dimap id id (MonoidalStar chainBilling ))) (head . zipWith (\x y -> (x, y)) m $ n)
+oneStopShop      :: Applicative f =>  [Service]   ->  [Service]   -> [f (Bill PaperReceipt, Bill BitcoinReceipt)]
+oneStopShop  _      []      =  []
+oneStopShop  []     _       =  []
+oneStopShop  (x:xs) (y:ys)  =  ((unstar . par (monoP cashRegister) $ (monoP chainBilling)) . (,) x $ y) : oneStopShop xs ys
