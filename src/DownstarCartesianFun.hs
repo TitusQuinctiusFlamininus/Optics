@@ -42,9 +42,9 @@ Why is it not possible to establish a Strong instance for Downstar?
 --                    Second : Ok, so we have : f (a, c) as input; Let's fmap with a function that takes (a, c)
 --                    Third  : If we take (a, c) and simply map to a, then the entire fmap computation would produce ; (f a); Ok so far.....
 --                    Fourth : What can we do with (f a) ? We can apply d to this, giving us : b
---                    So it looks like this now                      :   (\m   ->   d .  fmap fst $ m)
+--                    So it looks like this now                      :   (d .  fmap fst)
 --                    Fifth  : We don't need just b, but : (b, c) ; But there is no way to bring a new type c, into scope! 
---                    We need the whole structure to look like this  :  ((\m   ->   d .  fmap fst $ m), c)
+--                    We need the whole structure to look like this  :  ((d .  fmap fst), c)
 --         Hence the typechecker complains : "Couldn't match expected type ‘(b, c)’ with actual type ‘b’". Game over.
 --         The same applies to the second' cartesian function :(
 
