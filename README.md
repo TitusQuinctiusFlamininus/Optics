@@ -6,7 +6,7 @@ Attempting to create Optics and other Computational structures from scratch
 ![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/profunctor.png "Profunctor")
 - :green_circle: Upstar
 - :green_circle: Cartesian (Strong) Upstar
-- :red_circle: Cartesian (Strong) Downstar
+- :red_circle:  Strong Downstar (Not possible)
 - :green_circle: CoCartesian (Choice) Upstar
 - :green_circle: Monoidal Upstar
 - :green_circle: Downstar
