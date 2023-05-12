@@ -1,8 +1,7 @@
 module DownstarCartesianFun where
 
 
-import Control.Lens.Combinators    (Profunctor, dimap           )
-import Data.Profunctor.Strong      (Strong    , first', second' )
+import Control.Lens.Combinators    (Profunctor, dimap)
 
  {--
 
@@ -36,6 +35,19 @@ instance Functor f => Profunctor (CartesianDown f) where
 
 
 -- Ok, so far so good. Now let's make it Strong
+{--
+
+Why is it not possible to establish a Strong instance for Downstar?
+----------->>>>>      First  : Instead of going like this:  (f a  -> b) , we are going like this:  (f (a, c)   -> (b, c))
+--                    Second : Ok, so we have : f (a, c) as input; Let's fmap with a function that takes (a, c)
+--                    Third  : If we take (a, c) and simply map to a, then the entire fmap computation would produce ; (f a); Ok so far.....
+--                    Fourth : What can we do with (f a) ? We can apply low to this, giving us : b
+--                    Fifth  : We don't need just b, but : (b, c) ; But there is no way to bring a new type c, into scope! 
+--         Hence the typechecker complains : "Couldn't match expected type ‘(b, c)’ with actual type ‘b’".
+
+
 instance Functor f => Strong (CartesianDown f) where
-    first'   ( StrongDown d )        =    StrongDown undefined
-    second'  ( StrongDown d )        =    StrongDown undefined
+    first'   ( StrongDown d )        =    Not Possible 
+    second'  ( StrongDown d )        =    Not Possible 
+
+ --} 
