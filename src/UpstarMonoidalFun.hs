@@ -115,7 +115,7 @@ monoP                      =  dimap id id . MonoidalStar
 
 -- How about we bundle everything from our Service Providers ....
 -- Just make sure we have pairs for each service reflecting billing for each month
-monoTax    :: Applicative f =>  [Service]  ->  [Service]   ->   [f (Bill PaperReceipt, Bill BitcoinReceipt)]
+monoTax        :: Applicative f =>  [Service]  ->  [Service]   ->   [f (Bill PaperReceipt, Bill BitcoinReceipt)]
 monoTax  _      []      =  []
 monoTax  []     _       =  []
 monoTax  s      s'      =  ((unstar . par (monoP cashRegister) $ (monoP chainBilling)) . (,) (head s) $ (head s')) : monoTax (tail s) (tail s')
