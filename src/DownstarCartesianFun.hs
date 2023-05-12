@@ -38,12 +38,15 @@ instance Functor f => Profunctor (CartesianDown f) where
 {--
 
 Why is it not possible to establish a Strong instance for Downstar?
------------>>>>>      First  : Instead of going like this:  (f a  -> b) , we are going like this:  (f (a, c)   -> (b, c))
+----------->>>>>      First  : Instead of going like this:  (f a  ->  b) , we are going like this:  (f (a, c)   ->   (b, c))
 --                    Second : Ok, so we have : f (a, c) as input; Let's fmap with a function that takes (a, c)
 --                    Third  : If we take (a, c) and simply map to a, then the entire fmap computation would produce ; (f a); Ok so far.....
 --                    Fourth : What can we do with (f a) ? We can apply low to this, giving us : b
+--                    So it looks like this now                      :   (\m   ->   low .  fmap (fst) $ m)
 --                    Fifth  : We don't need just b, but : (b, c) ; But there is no way to bring a new type c, into scope! 
---         Hence the typechecker complains : "Couldn't match expected type ‘(b, c)’ with actual type ‘b’".
+--                    We need the whole structure to look like this  :  ((\m   ->   low .  fmap (fst) $ m), c)
+--         Hence the typechecker complains : "Couldn't match expected type ‘(b, c)’ with actual type ‘b’". Game over.
+--         The same applies to the second' cartesian function :(
 
 
 instance Functor f => Strong (CartesianDown f) where
