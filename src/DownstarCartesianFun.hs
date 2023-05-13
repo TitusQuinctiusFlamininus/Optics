@@ -41,7 +41,8 @@ instance Functor f => Profunctor (CartesianDown f) where
 {--
 
 
-Why is it not possible to establish a Strong instance for Downstar?
+Is is not possible to establish a Strong instance for Downstar. Why? 
+
 ----------->>>>>      First  : Instead of going like this:  (f a  ->  b) , we are going like this:  (f (a, c)   ->   (b, c))
                       Second : Ok, so we have : f (a, c) as input; Let's fmap with a function that takes (a, c)
                       Third  : If we take (a, c) and simply map to a, then the entire fmap computation would produce ; (f a); Ok so far.....
