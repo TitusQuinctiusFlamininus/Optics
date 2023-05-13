@@ -51,7 +51,7 @@ Why is it not possible to establish a Strong instance for Downstar?
                       Sixth  : (\m -> ((d . fmap fst $ m),  (fmap snd $ m))) has this type :   (b, f c)  .  
            Now the typechecker complains : "......Couldn't match expected type ‘c’ with actual type ‘f c’......". 
 
-          Here is the best we can do :  ---->>>>>>          StrongDown (\m -> ((d . fmap fst $ m),  (fmap snd $ m)))   :: (b, f c)    <<<<<-------
+          Here is the best we can do :  ---->>>>>>          (\m -> ((d . fmap fst $ m),  (fmap snd $ m)))   :: (b, f c)    <<<<<-------
 
           Without adjusting/modifying the Contextual type constraint, there is no way to really resolve (f c). 
 
