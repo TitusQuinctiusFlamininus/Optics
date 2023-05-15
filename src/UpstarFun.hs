@@ -18,13 +18,13 @@ class Functor f where
 --}
 
 -- Ok, Let us invent our own Upstar
-newtype OpticalUpstar f' a' b'      =   OpticalUpstar {unstar ::     a'    ->      f' b'}
+newtype OpticalUpstar f' a' b'      =   OpticalUpstar { unstar ::   a'   ->    f' b' }
 
 
 -- Make it a Profunctor
 -- Whatever exits u is a functor of something, and we already have a function g, which means we have to fmap
 instance Functor f' => Profunctor (OpticalUpstar f') where
-    dimap h g (OpticalUpstar u)     =  OpticalUpstar (fmap g . u . h) 
+    dimap h g (OpticalUpstar u)     =   OpticalUpstar (fmap g . u . h) 
 
 
 
