@@ -4,6 +4,7 @@ module AffineOpticsFun where
 import Control.Lens.Combinators  (Profunctor, dimap)
 import Control.Comonad           (Comonad   , duplicate, extract, extend )
 
+
 {--
 
 To understand this better, read from top to bottom, in the style 
@@ -44,6 +45,7 @@ data AffineP a b s t                         = AffineOp  {   check    ::  s     
 
                         
 
+
 -- Let's make our Affine into a Profunctor
 instance Profunctor (AffineP  a b  ) where
     dimap   h   g   (AffineOp f f' )         =  AffineOp   (f . h) (\x -> g . f' $ (fst x, h . snd $ x)) 
@@ -57,11 +59,14 @@ instance Profunctor (AffineP  a b  ) where
 data       Crystal           = Crystal
 
 
+
 data       Shard             = Shard
+
 
 
 -- This is kind-of a composite type; no reason for it to be structured this way, its just for clarity
 newtype    Glass   a         = Glass   a
+
 
 
 -- This is another kind-of a composite type
@@ -77,12 +82,15 @@ prep      ::             a'       ->   Glass   a
 prep                             = undefined
 
 
+
 eject     :: Diamond     b        ->           d
 eject                            = undefined
 
 
+
 search    :: Glass       a        ->   Either  b  a 
 search                           = undefined
+
 
 
 raus      :: (b, Glass   a)       ->  Diamond  b
@@ -97,6 +105,7 @@ instance Functor Glass where
 
 
 
+
 -- Why this? We need types from a functor context
 instance Comonad Glass where
     extract (Glass x)             = x
@@ -105,9 +114,12 @@ instance Comonad Glass where
 
 
 
+
 -- We'll need to push these types into an Applicative context
 instance Functor Diamond where
     fmap f (Diamond x)            =  Diamond (f x) 
+
+
 
 
 -- So making the diamonds shine... (like a diamond)
@@ -121,7 +133,7 @@ instance Applicative Diamond where
 
 
  -- Let's assemble an actual Profuctor based on our types and computational abilities
-affineC :: AffineP a b s t
+affineC      :: AffineP a b s t
 affineC                           =   dimap prep eject . AffineOp search $ raus
 
 
@@ -132,7 +144,7 @@ affineC                           =   dimap prep eject . AffineOp search $ raus
 --      LHS : u goes from (s -> some_choice), but we need to go from composite to composite, so we need to dissociate the chosen type from its context first; or simply create function that can adapt between the two types
 --      RHS : prep acts like h in the definition, so we need to perform something similar to the LHS to define our tuple's RHS;
 --            Also, in the attempt to keep the promise of mapping (finally) to composites, we have to reattach the applicative context before releasing it to the covariant function
-affineOptic :: AffineP a b s t           ->            AffineP a b (Glass s) (Diamond t)
+affineOptic  :: AffineP  a  b  s  t    ->         AffineP  a  b  (Glass s)  (Diamond t)
 affineOptic    (AffineOp u v)    =   AffineOp (u . extract) (\y  -> eject . pure . v $ (fst y, extract . prep . snd $ y))
 
 
@@ -142,13 +154,13 @@ affineOptic    (AffineOp u v)    =   AffineOp (u . extract) (\y  -> eject . pure
 -- Using the Affine Optic with the rudimentary functions
 
 -- Let's try finding out what our composite is made of; we may find what we're looking for, or not
-investigate :: (Glass a)                ->            Either b a
+investigate  :: (Glass a)       ->          Either b a
 investigate                     =     check $ affineOptic affineC
 
 
 
 -- We need to put something back together again, but we need to know how it had previously been built before
-humptyDumpty :: b     ->  Glass a      ->   Diamond t
+humptyDumpty :: b              ->           Glass a      ->   Diamond t
 humptyDumpty    ingred orig     =     recon (affineOptic affineC) (ingred, orig)
 
 
