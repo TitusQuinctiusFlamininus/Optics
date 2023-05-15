@@ -115,6 +115,8 @@ monoP                      =  dimap id id . MonoidalStar
 
 -- How about we bundle everything from our Service Providers ....
 -- Just make sure we have pairs for each service reflecting billing for each month
+-- Explanation :    -- Par now gives up the ability to transform between strengthened inputs, so all we need to do is prepare our input to be in the that form
+--                  -- We will cycle through each input until we're done pairing each month's bills together
 monoTax        :: Applicative f =>  [Service]  ->  [Service]   ->   [f (Bill PaperReceipt, Bill BitcoinReceipt)]
 monoTax  s      s'      =  ((unstar . par (monoP cashRegister) $ (monoP chainBilling)) . (,) (head s) $ (head s')) : monoTax (tail s) (tail s')
 
