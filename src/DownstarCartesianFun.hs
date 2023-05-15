@@ -30,6 +30,7 @@ class Functor f where
 newtype CartesianDown   f  a  b      =   StrongDown {  low ::   f  a    ->   b  }
 
 
+
 -- And revisiting how we would make this a Profunctor.....
 instance Functor f => Profunctor (CartesianDown f) where
   dimap h g ( StrongDown d )         =   StrongDown (  g . d . fmap h )
