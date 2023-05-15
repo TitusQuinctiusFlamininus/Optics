@@ -23,6 +23,7 @@ class Profunctor p => Monoidal p where
 class Functor f where
     <$>     :: (a -> b) -> f a -> f b
 
+
 class functor f => Applicative f where
     pure      :: x           -> f x
     <*>       :: f (a -> b)  -> f a   ->  f b      
@@ -33,15 +34,18 @@ class functor f => Applicative f where
 ---------------------------------------------------------------------------------
 
 
+-- Refreshing our memory.....
 class Profunctor  p => Monoidal p where
   par        ::   p a b     ->    p c d     -> p (a, c) (b, d)
   empty      ::   p () ()
 
 
---Checking out the Downstar 
+
+--Ok, then we define our own...
 newtype DownMonoid  f  a  b                    =     LowMonoidal   {  down ::   f  a    ->   b  }
 
 
--- Making it a Profunctor is easy enough....
+
+-- And roll up a Monoidal Profunctor for the Downstar ...
 instance Functor f =>  Profunctor (DownMonoid f) where
     dimap   h   g    (LowMonoidal u)          =      LowMonoidal  (  g . u . fmap h )
