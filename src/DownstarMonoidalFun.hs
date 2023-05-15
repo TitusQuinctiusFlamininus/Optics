@@ -62,7 +62,7 @@ instance Functor f =>  Profunctor (DownMonoid f) where
 --             We will not tamper with the definition, but leave it as it is. 
 
 ------ >>>>>>  For our emtpy implementation :  
---             What about for empty? : Same problem of context disassociation
+--             What about for empty? : Same problem of context disassociation  : We need  :  f () -> ()
 --
 --             instance Functor f  => Monoidal (DownMonoid f) where
 --                     par      (LowMonoidal u)  (LowMonoidal v)  =   Not possible (UNLESS you raise the abstraction of f)
