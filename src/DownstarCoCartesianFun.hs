@@ -28,9 +28,26 @@ class Functor f where
 
 
 --Checking out the Downstar 
-newtype CoStrong f a b               =    DownCoStar  {  low ::   f  a    ->   b  }
+newtype CoStrong  f  a  b                    =     DownCoStar   {  low ::   f  a    ->   b  }
 
 
 -- Making it a Profunctor is easy enough....
 instance Functor f =>  Profunctor (CoStrong f) where
-    dimap h g (DownCoStar u)          =    DownCoStar (  g . u . fmap h )
+    dimap   h   g    (DownCoStar u)          =     DownCoStar  (  g . u . fmap h )
+
+
+-- Attempting to Add Choice to our Downstar 
+--   It seems like this is not possible
+
+-- Explanation ::  ----->>>>>  The intent is to attempt going from :  (f a    ->   b)     to    :  (f (Either a c)    ->   (Either b c))
+--                             Ok. So we need to fmap the input with a function that goes from  :  (  (Either a c)    ->   c           )
+--                             If it is ( Right c ) :  No problem, we have access to our required type
+--                             If it is ( Left  b ) :  Now we need a function that goes like this:  (b  ->  c) . We don't have a means to produce such types from types of our output, even before we made DownCoStar a Profunctor (:
+
+--   instance (Functor f) =>  Choice (CoStrong f) where 
+--       left'    (DownCoStar u)                  =     Not Possible
+--       right'   (DownCoStar u)                  =     Not Possible
+
+
+
+---------------------------------------------------------------------------------

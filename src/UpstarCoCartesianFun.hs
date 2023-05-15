@@ -54,6 +54,7 @@ instance (Applicative f) =>  Choice (CoCartesian f)     where
 
 ---------------------------------------------------------------------------------
 
+
 -- Let's invent some types we can use as a practical example
 
 -- We can use this as a Functor
