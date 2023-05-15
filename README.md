@@ -6,11 +6,11 @@ Attempting to create Optics and other Computational structures from scratch
 ![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/profunctor.png "Profunctor")
 - :green_circle: Upstar
 - :green_circle: Cartesian (Strong) Upstar
-- :red_circle:  Cartesian Downstar (Not possible)
+- :red_circle:  Cartesian (Choice) Downstar (Not possible)
 - :green_circle: CoCartesian (Choice) Upstar
 - :green_circle: Monoidal Upstar
 - :green_circle: Downstar
-- :red_circle:  CoCartesian Downstar (Not possible)
+- :red_circle:  CoCartesian (Choice) Downstar (Not possible)
 - :white_circle: Sieve
 - :green_circle: Adapter
 - :green_circle: Forget
