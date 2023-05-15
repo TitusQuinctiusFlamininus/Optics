@@ -30,6 +30,7 @@ library
       DownstarCartesianFun
       DownstarCoCartesianFun
       DownstarFun
+      DownstarMonoidalFun
       ForgetFun
       LensOpticsFun
       MultistarOpticsFun
