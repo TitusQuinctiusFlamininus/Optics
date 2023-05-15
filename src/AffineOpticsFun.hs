@@ -108,7 +108,7 @@ instance Functor Glass where
 
 -- Why this? We need types from a functor context
 instance Comonad Glass where
-    extract (Glass x)             = x
+    extract (Glass x)             =  x
     duplicate  x                  =  Glass x
     extend     f                  =  fmap f . duplicate
 
