@@ -67,8 +67,8 @@ Is is not possible to establish a Strong instance for Downstar. Why?
 
 But, as it stands for now (For Downstar): 
 instance Functor f => Strong (CartesianDown f) where
-    first'   ( StrongDown d )        =    Not Possible 
-    second'  ( StrongDown d )        =    Not Possible 
+    first'   ( StrongDown d )        =    Not Possible (unless we lift the abstraction of the functor in the type sig context)
+    second'  ( StrongDown d )        =    Not Possible (unless we lift the abstraction of the functor in the type sig context)
 
 
  --} 
