@@ -28,6 +28,7 @@ library
       AdapterOpticsFun
       AffineOpticsFun
       DownstarCartesianFun
+      DownstarCoCartesianFun
       DownstarFun
       ForgetFun
       LensOpticsFun
