@@ -8,8 +8,6 @@ Attempting to create Optics and other Computational structures from scratch
 ### Base
 - :green_circle: Adapter
 - :green_circle: Forget
-- :white_circle: Fold
-- :white_circle: Isomorphism
 - :white_circle: Arrow
 - :white_circle: Tagged
 - :green_circle: Affine
@@ -29,7 +27,14 @@ Attempting to create Optics and other Computational structures from scratch
 - :red_circle:  CoCartesian (Choice) Downstar 
 - :red_circle:  Monoidal Downstar 
 
+### Bazaar
+- :white_circle: Bazaar
+- :white_circle:  Cartesian (Strong) Bazaar 
+- :white_circle:  CoCartesian (Choice) Bazaar 
+- :white_circle:  Monoidal Bazaar 
+
 ### Others
+
 - :white_circle: Closed
 - :white_circle: Sieve
 - :white_circle: Traversing
