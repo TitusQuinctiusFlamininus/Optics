@@ -4,15 +4,8 @@ Attempting to create Optics and other Computational structures from scratch
 
 ## Profunctor
 ![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/profunctor.png "Profunctor")
-- :green_circle: Upstar
-- :green_circle: Cartesian (Strong) Upstar
-- :red_circle:  Cartesian (Strong) Downstar 
-- :green_circle: CoCartesian (Choice) Upstar
-- :green_circle: Monoidal Upstar
-- :green_circle: Downstar
-- :red_circle:  CoCartesian (Choice) Downstar 
-- :red_circle:  Monoidal Downstar 
-- :white_circle: Sieve
+
+### Base
 - :green_circle: Adapter
 - :green_circle: Forget
 - :white_circle: Fold
@@ -23,9 +16,26 @@ Attempting to create Optics and other Computational structures from scratch
 - :green_circle: Lens
 - :green_circle: Prism
 - :white_circle: Traversal
-- :white_circle: Traversing
+
+### Upstar
+- :green_circle: Upstar
+- :green_circle: Cartesian (Strong) Upstar
+- :green_circle: CoCartesian (Choice) Upstar
+- :green_circle: Monoidal Upstar
+
+### Downstar
+- :green_circle: Downstar
+- :red_circle:  Cartesian (Strong) Downstar 
+- :red_circle:  CoCartesian (Choice) Downstar 
+- :red_circle:  Monoidal Downstar 
+
+### Others
 - :white_circle: Closed
+- :white_circle: Sieve
+- :white_circle: Traversing
 - :white_circle: Right Kan Lift
+- :green_circle: Multistar / Spike (Upstar-Downstar)
+- :white_circle: Multistar / Ditch (Downstar-Upstar)
 
 ## Profunctor-Optics
 ![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/optic.png "Optic")
@@ -68,8 +78,3 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle: Traversing
 - :white_circle: Closed
 - :white_circle: Right Kan Lift
-
-
-## Others
-- :green_circle: Multistar / Spike (Upstar-Downstar)
-- :white_circle: Multistar / Ditch (Downstar-Upstar)
