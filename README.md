@@ -14,6 +14,16 @@ Attempting to create Optics and other Computational structures from scratch
 - :green_circle: Affine
 - :white_circle: Traversal
 
+### Lens
+- :white_circle: Cartesian (Strong) Lens
+- :white_circle: CoCartesian (Choice) Lens
+- :white_circle: Monoidal Lens
+
+### Prism
+- :white_circle: Cartesian (Strong) Prism
+- :white_circle: CoCartesian (Choice) Prism
+- :white_circle: Monoidal Prism
+
 ### Upstar
 - :green_circle: Upstar
 - :green_circle: Cartesian (Strong) Upstar
