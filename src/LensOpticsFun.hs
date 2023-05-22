@@ -11,9 +11,11 @@ that the code was slowly built up
 
 
 class Profunctor p where
-  lmap  :: (c -> a) -> p a b -> p c b
-  rmap  :: (b -> d) -> p a b -> p a d
-  dimap :: (c -> a) -> (b -> d) -> p a b -> p c d
+  lmap  :: (c -> a) -> p a b -> p c b                 <<-----
+                                                             |-------- Either implement these two ...
+  rmap  :: (b -> d) -> p a b -> p a d                 <<-----  
+
+  dimap :: (c -> a) -> (b -> d) -> p a b -> p c d     <<-------------- Or just this one
 
 
 where p is a Profunctor : 
