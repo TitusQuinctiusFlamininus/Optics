@@ -56,10 +56,18 @@ data Ghost      =   Ghost
 data It         =   It 
 
 
+-- Let's invent a real type
+data Actual       =   Actual
+
 
 -- Now we can invent a function that polishes a Tag
 stamp         ::   r    ->     u 
 stamp           = undefined
+
+
+-- This one polishes a Tag in a down-to-earth way
+stamp'         ::   r    ->     Actual
+stamp'           = undefined
 
 
 ---------------------------------------------------------------------------------
@@ -78,9 +86,10 @@ tagP'            = dimap  stamp  stamp  .  FunTag $ Ghost
 
 
 
--- We can label types with functions
-youAreIt      :: It     
-youAreIt        = untag tagP
+-- We can create new (actual) Tagged types even through combining the profunctor factories
+youAreIt      :: Tagged  x Actual
+youAreIt         =  dimap  (stamp . untag $ tagP) stamp'  . FunTag . FunTag . untag $ tagP'
+  
 
 
 ---------------------------------------------------------------------------------
