@@ -65,6 +65,7 @@ stamp         ::   r    ->     u
 stamp           = undefined
 
 
+
 -- This one polishes a Tag in a down-to-earth way
 stamp'         ::   r    ->     Actual
 stamp'           = undefined
