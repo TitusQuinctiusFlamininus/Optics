@@ -27,7 +27,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :red_circle:  Monoidal Downstar 
 
 ### Tagged
-- :white_circle: Tagged
+- :green_circle: Tagged
 - :white_circle:  Tagged Cartesian (Strong) 
 - :white_circle:  Tagged CoCartesian (Choice)
 - :white_circle:  Tagged Monoidal 
