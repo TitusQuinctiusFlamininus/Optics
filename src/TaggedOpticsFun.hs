@@ -18,21 +18,70 @@ class Profunctor p where
 
 
 
-class Profunctor p => Strong p where
-  first'  ::  p a b   -> p (a, c) (b, c)
-  second' ::  p a b   -> p (c, a) (c, b)
-
-
 class Functor f where
     <$>     :: (a -> b) -> f a -> f b
 
 --}    
 
 
+---------------------------------------------------------------------------------
+
+
 -- Defining the type
 newtype Tagged  s  b                =    FunTag   { untag ::  b }
 
 
+
 -- Making the Tagged type a Profunctor
+-- The contravariant function would have no effect on the Tagged type; 
+-- This means that the only requirement left is to make sure FunTag points to the SAME resultant type as the covariant function : d 
+-- To do that, we simply supply the covariant function with what it needs to give us that type : b
 instance Profunctor Tagged where
     dimap  _  g  (FunTag n)         =    FunTag  (g  n)
+
+
+
+---------------------------------------------------------------------------------
+
+
+-- Let's come up with a simple type example
+
+
+-- We cannot really see this type 
+data Ghost      =   Ghost
+
+
+
+-- When something is tagged, it seems to be of this type
+data It         =   It 
+
+
+
+-- Now we can invent a function that polishes a Tag
+stamp         ::   r    ->     u 
+stamp           = undefined
+
+
+---------------------------------------------------------------------------------
+
+
+-- So then we define the Profunctor in terms of the invented types
+tagP          ::  Tagged  Ghost  It
+tagP             = dimap  id    stamp   .  FunTag $ It
+
+
+
+
+-- Here is another completely ghoulish Profunctor, re-using the covariant function as a contravariant one
+tagP'         ::  Tagged  ()  Ghost
+tagP'            = dimap  stamp  stamp  .  FunTag $ Ghost
+
+
+
+-- We can label types with functions
+youAreIt      :: It     
+youAreIt        = untag tagP
+
+
+---------------------------------------------------------------------------------
+

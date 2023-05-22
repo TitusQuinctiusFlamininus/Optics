@@ -11,7 +11,6 @@ Attempting to create Optics and other Computational structures from scratch
 - :green_circle: Adapter
 - :green_circle: Forget
 - :white_circle: Arrow
-- :white_circle: Tagged
 - :green_circle: Affine
 - :white_circle: Traversal
 
@@ -27,11 +26,11 @@ Attempting to create Optics and other Computational structures from scratch
 - :red_circle:  CoCartesian (Choice) Downstar 
 - :red_circle:  Monoidal Downstar 
 
-### Bazaar
-- :white_circle: Bazaar
-- :white_circle:  Cartesian (Strong) Bazaar 
-- :white_circle:  CoCartesian (Choice) Bazaar 
-- :white_circle:  Monoidal Bazaar 
+### Tagged
+- :white_circle: Tagged
+- :white_circle:  Tagged Cartesian (Strong) 
+- :white_circle:  Tagged CoCartesian (Choice)
+- :white_circle:  Tagged Monoidal 
 
 ### Others
 
