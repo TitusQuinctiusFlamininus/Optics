@@ -48,7 +48,8 @@ instance Profunctor StrongTag where
 --                    According to the Strong requirements, we need to end up with :  CartTag (some_tuple)
 --                    The tuple needed is simply : (b, c), where : b is really v (see below)
 --                    So far then, we have       : (v, c)  ......
---                    But what is type c ?       : We have no way of knowing how to get it or even how to produce this type. Our hands are tied.  
+--                    But what is type c ?       : We have no way of knowing what this type is, how to obtain it, or even how to produce it from other types (or functions). 
+--                                                 Our hands are tied.  
 
 -- instance Strong StrongTag where
 --      first'   (CartTag v)               =    ?? (seems impossible)
