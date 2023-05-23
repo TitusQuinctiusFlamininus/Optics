@@ -18,9 +18,10 @@ class Profunctor p where
 
 
 
-class Profunctor p => Cocartesian p where
-  left'    :: p a b   ->  p (Either a c) (Either b c)
-  right'   :: p a b   ->  p (Either c a) (Either c b)
+class Profunctor p  =>  Cocartesian p where
+  left'    ::  p  a  b   ->  p  (Either  a  c)  (Either  b  c)
+  
+  right'   ::  p  a  b   ->  p  (Either  c  a)  (Either  c  b)
 
 
 class Functor f where

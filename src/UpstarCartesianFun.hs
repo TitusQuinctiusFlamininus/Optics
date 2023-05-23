@@ -20,8 +20,9 @@ class Profunctor p where
 
 
 class Profunctor p => Strong p where
-  first'    ::  p a b   -> p (a, c) (b, c)
-  second'   ::  p a b   -> p (c, a) (c, b)
+  first'  ::  p  a  b   -> p  (a,  c)  (b,  c)
+   
+  second' ::  p  a  b   -> p  (c,  a)  (c,  b)
 
 
 class Functor f where

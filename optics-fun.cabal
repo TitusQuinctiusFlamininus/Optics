@@ -35,6 +35,7 @@ library
       LensOpticsFun
       MultistarOpticsFun
       PrismOpticsFun
+      TaggedCartesianOpticsFun
       TaggedOpticsFun
       UpstarCartesianFun
       UpstarCoCartesianFun
