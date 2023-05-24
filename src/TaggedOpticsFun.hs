@@ -17,10 +17,6 @@ class Profunctor p where
   dimap :: (c -> a) -> (b -> d) -> p a b -> p c d     <<-------------- Or just this one
 
 
-
-class Functor f where
-    <$>     :: (a -> b) -> f a -> f b
-
 --}    
 
 

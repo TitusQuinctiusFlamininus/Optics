@@ -22,10 +22,6 @@ class Profunctor p => Strong p where
    
   second' ::  p  a  b   -> p  (c,  a)  (c,  b)
 
-
-class Functor f where
-    <$>     :: (a -> b) -> f a -> f b
-
 --}    
 
 

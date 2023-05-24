@@ -24,9 +24,6 @@ class Profunctor p  =>  Cocartesian p where
   right'   ::  p  a  b   ->  p  (Either  c  a)  (Either  c  b)
 
 
-class Functor f where
-    <$>     :: (a -> b) -> f a -> f b
-
 --}    
 
 
