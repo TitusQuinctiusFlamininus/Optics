@@ -10,7 +10,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle: --> means i haven't gotten to it yet
 
 
-### Base
+### Vanilla Profunctors
 
 - :green_circle: Lens
 - :green_circle: Prism
