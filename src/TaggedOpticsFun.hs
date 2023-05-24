@@ -35,8 +35,8 @@ newtype Tagged  s  b                =    FunTag   { untag ::  b }
 
 -- Making the Tagged type a Profunctor
 -- The contravariant function would have no effect on the Tagged type; 
--- This means that the only requirement left is to make sure FunTag points to the SAME resultant type as the covariant function : d 
--- To do that, we simply supply the covariant function with what it needs to give us that type : b
+-- This means that the only requirement left is to make sure FunTag points to the same resultant type as the covariant function : d 
+-- To do that, we simply supply the that function with what it needs to give us that type : b
 instance Profunctor Tagged where
     dimap  _  g  (FunTag n)         =    FunTag  (g  n)
 
@@ -88,7 +88,7 @@ tagP'            = dimap  stamp  stamp  .  FunTag $ Ghost
 
 
 
--- We can create new (actual) Tagged Profunctor types even through combining the profunctor factories
+-- We can even create new (actual) Tagged Profunctor types, by combining profunctor factories...
 youAreIt      :: Tagged  x Actual
 youAreIt         =  dimap  (stamp . untag $ tagP) stamp'  . FunTag . FunTag . untag $ tagP'
   
