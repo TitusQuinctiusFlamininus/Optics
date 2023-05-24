@@ -20,12 +20,20 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle: Cartesian (Strong) Lens
 - :white_circle: CoCartesian (Choice) Lens
 - :white_circle: Monoidal Lens
+- :white_circle:  InPhantom Lens
+- :white_circle:  OutPhantom Lens
+- :white_circle:  Cartographic Lens
+- :white_circle:  Wandering Lens
 
 ### Prism
 
 - :white_circle: Cartesian (Strong) Prism
 - :white_circle: CoCartesian (Choice) Prism
 - :white_circle: Monoidal Prism
+- :white_circle:  InPhantom Prism
+- :white_circle:  OutPhantom Prism
+- :white_circle:  Cartographic Prism
+- :white_circle:  Wandering Prism
 
 ### Upstar
 
@@ -33,6 +41,10 @@ Attempting to create Optics and other Computational structures from scratch
 - :green_circle: Cartesian (Strong) Upstar
 - :green_circle: CoCartesian (Choice) Upstar
 - :green_circle: Monoidal Upstar
+- :white_circle:  InPhantom Upstar
+- :white_circle:  OutPhantom Upstar
+- :white_circle:  Cartographic Upstar
+- :white_circle:  Wandering Upstar
 
 ### Downstar
 
@@ -40,6 +52,10 @@ Attempting to create Optics and other Computational structures from scratch
 - :red_circle:  Cartesian (Strong) Downstar 
 - :red_circle:  CoCartesian (Choice) Downstar 
 - :red_circle:  Monoidal Downstar 
+- :white_circle:  InPhantom Downstar
+- :white_circle:  OutPhantom Downstar
+- :white_circle:  Cartographic Downstar
+- :white_circle:  Wandering Downstar
 
 ### Tagged
 
@@ -47,6 +63,11 @@ Attempting to create Optics and other Computational structures from scratch
 - :red_circle:  Tagged Cartesian (Strong) 
 - :white_circle:  Tagged CoCartesian (Choice)
 - :white_circle:  Tagged Monoidal 
+- :white_circle:  Tagged InPhantom 
+- :white_circle:  Tagged OutPhantom 
+- :white_circle:  Tagged Cartographic
+- :white_circle:  Tagged Wandering 
+
 
 ### Others
 
