@@ -6,6 +6,7 @@ Attempting to create Optics and other Computational structures from scratch
 ![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/profunctor.png "Profunctor")
 
 ### Base
+
 - :green_circle: Lens
 - :green_circle: Prism
 - :green_circle: Adapter
@@ -15,28 +16,33 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle: Traversal
 
 ### Lens
+
 - :white_circle: Cartesian (Strong) Lens
 - :white_circle: CoCartesian (Choice) Lens
 - :white_circle: Monoidal Lens
 
 ### Prism
+
 - :white_circle: Cartesian (Strong) Prism
 - :white_circle: CoCartesian (Choice) Prism
 - :white_circle: Monoidal Prism
 
 ### Upstar
+
 - :green_circle: Upstar
 - :green_circle: Cartesian (Strong) Upstar
 - :green_circle: CoCartesian (Choice) Upstar
 - :green_circle: Monoidal Upstar
 
 ### Downstar
+
 - :green_circle: Downstar
 - :red_circle:  Cartesian (Strong) Downstar 
 - :red_circle:  CoCartesian (Choice) Downstar 
 - :red_circle:  Monoidal Downstar 
 
 ### Tagged
+
 - :green_circle: Tagged
 - :red_circle:  Tagged Cartesian (Strong) 
 - :white_circle:  Tagged CoCartesian (Choice)
