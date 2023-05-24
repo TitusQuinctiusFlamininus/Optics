@@ -40,6 +40,16 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle:  Cartographic Prism
 - :white_circle:  Wandering Prism
 
+### Affine
+
+- :white_circle: Cartesian (Strong) Affine
+- :white_circle: CoCartesian (Choice) Affine
+- :white_circle: Monoidal Affine
+- :white_circle:  InPhantom Affine
+- :white_circle:  OutPhantom Affine
+- :white_circle:  Cartographic Affine
+- :white_circle:  Wandering Affine
+
 ### Upstar
 
 - :green_circle: Upstar
