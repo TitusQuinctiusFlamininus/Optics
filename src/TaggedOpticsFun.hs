@@ -88,7 +88,7 @@ tagP'            = dimap  stamp  stamp  .  FunTag $ Ghost
 
 
 
--- We can create new (actual) Tagged types even through combining the profunctor factories
+-- We can create new (actual) Tagged Profunctor types even through combining the profunctor factories
 youAreIt      :: Tagged  x Actual
 youAreIt         =  dimap  (stamp . untag $ tagP) stamp'  . FunTag . FunTag . untag $ tagP'
   
