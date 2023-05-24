@@ -28,6 +28,7 @@ class Functor f where
 
 
 -- Defining the type
+-- One of our types, s,  seems to be a phantom. 
 newtype Tagged  s  b                =    FunTag   { untag ::  b }
 
 

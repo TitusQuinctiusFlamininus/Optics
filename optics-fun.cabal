@@ -36,6 +36,7 @@ library
       MultistarOpticsFun
       PrismOpticsFun
       TaggedCartesianOpticsFun
+      TaggedCoCartesianFun
       TaggedOpticsFun
       UpstarCartesianFun
       UpstarCoCartesianFun
