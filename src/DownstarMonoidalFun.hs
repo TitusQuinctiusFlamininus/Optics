@@ -63,7 +63,7 @@ instance Functor f =>  Profunctor (DownMonoid f) where
 --             And we also find that on the tuple right    :   (fmap (v . pure . snd) x)   :: f d     (but we need d, not (f d)
 --             Solution ?
 --             If we can disassociate the types from their contexts, we'd be in business; that could be done be raising the abstraction of the f;
---             We will not tamper with the definition, but leave it as it is. 
+--             We will not tamper with the context definition (....instance Functor f =>  ....), but leave it as it is. 
 
 ------ >>>>>>  For our emtpy implementation :  
 --             What about for empty? : Same problem of context disassociation  : We need  :  f () -> ()
