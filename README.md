@@ -16,11 +16,14 @@ Attempting to create Optics and other Computational structures from scratch
 - :green_circle: Prism
 - :green_circle: Adapter
 - :green_circle: Forget
+- :green_circle: Tagged
+- :green_circle: Upstar
+- :green_circle: Downstar
 - :white_circle: Arrow
 - :green_circle: Affine
 - :white_circle: Traversal
 
-### Lens
+### Lens Variants
 
 - :white_circle: Cartesian (Strong) Lens
 - :white_circle: CoCartesian (Choice) Lens
@@ -30,7 +33,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle:  Cartographic Lens
 - :white_circle:  Wandering Lens
 
-### Prism
+### Prism Variants
 
 - :white_circle: Cartesian (Strong) Prism
 - :white_circle: CoCartesian (Choice) Prism
@@ -40,7 +43,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle:  Cartographic Prism
 - :white_circle:  Wandering Prism
 
-### Affine
+### Affine Variants
 
 - :white_circle: Cartesian (Strong) Affine
 - :white_circle: CoCartesian (Choice) Affine
@@ -50,9 +53,8 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle:  Cartographic Affine
 - :white_circle:  Wandering Affine
 
-### Upstar
+### Upstar Variants
 
-- :green_circle: Upstar
 - :green_circle: Cartesian (Strong) Upstar
 - :green_circle: CoCartesian (Choice) Upstar
 - :green_circle: Monoidal Upstar
@@ -61,9 +63,8 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle:  Cartographic Upstar
 - :white_circle:  Wandering Upstar
 
-### Downstar
+### Downstar Variants
 
-- :green_circle: Downstar
 - :red_circle:  Cartesian (Strong) Downstar 
 - :red_circle:  CoCartesian (Choice) Downstar 
 - :red_circle:  Monoidal Downstar 
@@ -72,9 +73,8 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle:  Cartographic Downstar
 - :white_circle:  Wandering Downstar
 
-### Tagged
+### Tagged Variants
 
-- :green_circle: Tagged
 - :red_circle:  Tagged Cartesian (Strong) 
 - :white_circle:  Tagged CoCartesian (Choice)
 - :white_circle:  Tagged Monoidal 
@@ -84,7 +84,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle:  Tagged Wandering 
 
 
-### Others
+### Other Variants
 
 - :white_circle: Closed
 - :white_circle: Sieve
