@@ -20,7 +20,7 @@ class Profunctor p where
 
 
 class Profunctor p => Monoidal p where
-  par         :: p a b    -> p c d    -> p (a, c) (b, d)
+  par         :: p a b    ->   p c d    ->  p (a, c) (b, d)
   empty       :: p () ()
 
 
