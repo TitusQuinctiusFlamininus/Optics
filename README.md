@@ -83,6 +83,10 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle:  Tagged Cartographic
 - :white_circle:  Tagged Wandering 
 
+### Multistar Variants
+
+- :green_circle: Spike (Upstar-Downstar)
+- :white_circle: Ditch (Downstar-Upstar)
 
 ### Other Variants
 
@@ -90,8 +94,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle: Sieve
 - :white_circle: Traversing
 - :white_circle: Right Kan Lift
-- :green_circle: Multistar / Spike (Upstar-Downstar)
-- :white_circle: Multistar / Ditch (Downstar-Upstar)
+
 
 ## Profunctor-Optics
 ![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/optic.png "Optic")
