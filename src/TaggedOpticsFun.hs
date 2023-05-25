@@ -54,7 +54,7 @@ data It         =   It
 
 
 -- Let's invent a real type
-data Actual       =   Actual
+data Actual     =   Actual
 
 
 -- Now we can invent a function that polishes a Tag
@@ -65,7 +65,7 @@ stamp           = undefined
 
 -- This one polishes a Tag in a down-to-earth way
 stamp'         ::   r    ->     Actual
-stamp'           = undefined
+stamp'          = undefined
 
 
 ---------------------------------------------------------------------------------
@@ -73,20 +73,20 @@ stamp'           = undefined
 
 -- So then we define the Profunctor in terms of the invented types
 tagP          ::  Tagged  Ghost  It
-tagP             = dimap  id    stamp   .  FunTag $ It
+tagP            = dimap  id    stamp   .  FunTag $ It
 
 
 
 
 -- Here is another completely ghoulish Profunctor, re-using the covariant function as a contravariant one
 tagP'         ::  Tagged  ()  Ghost
-tagP'            = dimap  stamp  stamp  .  FunTag $ Ghost
+tagP'           = dimap  stamp  stamp  .  FunTag $ Ghost
 
 
 
 -- We can even create new (actual) Tagged Profunctor types, by combining profunctor factories...
 youAreIt      :: Tagged  x Actual
-youAreIt         =  dimap  (stamp . untag $ tagP) stamp'  . FunTag . FunTag . untag $ tagP'
+youAreIt        =  dimap  (stamp . untag $ tagP) stamp'  . FunTag . FunTag . untag $ tagP'
   
 
 
