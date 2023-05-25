@@ -73,6 +73,11 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle:  Cartographic Downstar
 - :white_circle:  Wandering Downstar
 
+### Multistar Variants
+
+- :green_circle: Spike (Upstar-Downstar)
+- :white_circle: Ditch (Downstar-Upstar)
+
 ### Tagged Variants
 
 - :red_circle:  Tagged Cartesian (Strong) 
@@ -82,11 +87,6 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle:  Tagged OutPhantom 
 - :white_circle:  Tagged Cartographic
 - :white_circle:  Tagged Wandering 
-
-### Multistar Variants
-
-- :green_circle: Spike (Upstar-Downstar)
-- :white_circle: Ditch (Downstar-Upstar)
 
 ### Other Variants
 
