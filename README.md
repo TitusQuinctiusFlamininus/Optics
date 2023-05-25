@@ -5,8 +5,8 @@ Attempting to create Optics and other Computational structures from scratch
 ## Profunctor
 ![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/profunctor.png "Profunctor")
 
-- :green_circle: --> means it can be formed
-- :red_circle: --> means it can't be formed
+- :green_circle: --> means profunctors can be formed
+- :red_circle: --> means profunctors can't be formed
 - :white_circle: --> means i haven't gotten to it yet
 
 
