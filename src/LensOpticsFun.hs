@@ -134,6 +134,7 @@ telescope :: OpticalLens Atom Molecule s t
 telescope                    = OptLens (peep . preTreat) (\z  -> postTreat . comp $ (fst z, preTreat $ snd z))
 
 
+
 -- Let's create the Optic: 
 -- Now we see the use of extract in the Optic's general definition: We needed to step-down from a Functor/Comonad of some type to that type
 -- Also notice that it does not matter what we used to do on the left hand side of our profunctor (almost like the Adapter case), but because the input type of the right-hand side it not trivial, the identity function is not enough 
@@ -150,6 +151,7 @@ teleOptic (OptLens _ macro)   = dimap preTreat postTreat $ OptLens peep (\x  -> 
 -- How can we use the new Profunctor to peer into some composite type
 microscope :: Composite Atom        ->        Atom
 microscope                = look (teleOptic telescope)
+
 
 
 -- How can we use the new Profunctor to build up some new composite type from smaller alternative parts
