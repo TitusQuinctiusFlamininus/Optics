@@ -19,7 +19,6 @@ Attempting to create Optics and other Computational structures from scratch
 - :green_circle: Tagged
 - :green_circle: Upstar
 - :green_circle: Downstar
-- :white_circle: Arrow
 - :green_circle: Affine
 - :white_circle: Traversal
 
