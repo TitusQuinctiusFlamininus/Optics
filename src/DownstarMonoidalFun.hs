@@ -25,12 +25,12 @@ class Profunctor p => Monoidal p where
 
 
 class Functor f where
-    <$>     :: (a -> b) -> f a -> f b
+    <$>       :: (a  ->  b)  ->  f a  ->  f b
 
 
 class functor f => Applicative f where
-    pure      :: x           -> f x
-    <*>       :: f (a -> b)  -> f a   ->  f b      
+    pure      ::  x           -> f x
+    <*>       :: f (a -> b)   -> f a   ->  f b      
 
 --}
 
