@@ -32,3 +32,8 @@ class Functor f where
 
 ---------------------------------------------------------------------------------
 
+-- Popping up the definition from before
+data  StrongLens  a  b  s  t          =    SLens    {   see    ::  s       ->   a,
+
+                                                        update ::  (b, s)  ->   t
+                                                    }
