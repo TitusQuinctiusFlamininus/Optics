@@ -39,6 +39,14 @@ instance Profunctor ChoiceTag where
     dimap  _  g  (BranchTag d)           =    BranchTag  (g  d)
 
 
+-- We can make it a Cartesian quite easily
+-- A question arises: ----->>>>>    Why seal the choice to Left for left' and Right for right' respectively ? After all, "Either" could be Left OR Right....
+--                                  The reason is that : For left' :  If the choice were RIGHT: We'd be dealing with things of type c ;
+--                                                                 :  Now, we know we can't create or form things of type c from any other types or functions;
+--                                                                 :  Also, ChoiceTag deals with only a single type, so we HAVE to use only the LEFT choice to succeed
+--                                  Same logic        : For right' :  This time the type we have access to would be on the RIGHT, so we bind it to the RIGHT constructor
 instance Choice ChoiceTag where
   left'    (BranchTag v)                 =    BranchTag . Left  $ v
   right'   (BranchTag v)                 =    BranchTag . Right $ v
+
+
