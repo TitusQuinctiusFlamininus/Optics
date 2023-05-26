@@ -47,7 +47,7 @@ instance Profunctor ChoiceTag where
 --                                                                 :  So either we cannot form a left' instance, or we go with the lowest common denominator and choose a side! We HAVE to use the LEFT choice on type v
 --                                  Same logic        : For right' :  This time, the only type we have access to is on the RIGHT; so we bind it to the RIGHT constructor
 instance Choice ChoiceTag where
-  left'                    =    BranchTag . Left  . untag 
-  right'                   =    BranchTag . Right . untag 
+              left'                      =    BranchTag . Left  . untag 
+              right'                     =    BranchTag . Right . untag 
 
 
