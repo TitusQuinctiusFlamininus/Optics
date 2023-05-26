@@ -80,7 +80,7 @@ Attempting to create Optics and other Computational structures from scratch
 ### Tagged Variants
 
 - :red_circle:  Tagged Cartesian (Strong) 
-- :white_circle:  Tagged CoCartesian (Choice)
+- :green_circle:  Tagged CoCartesian (Choice)
 - :white_circle:  Tagged Monoidal 
 - :white_circle:  Tagged InPhantom 
 - :white_circle:  Tagged OutPhantom 
