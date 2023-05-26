@@ -51,3 +51,10 @@ instance Choice ChoiceTag where
               right'                     =    BranchTag . Right . untag 
 
 
+
+-- The examples used in the Original Tag example (TaggedOpticsFun) can serve as a similar concrete example. The constructor 
+-- in our case, will simply be associated with a Either constructor instance, but the functions are identical
+
+---------------------------------------------------------------------------------
+
+
