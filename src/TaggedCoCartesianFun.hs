@@ -33,7 +33,12 @@ class Profunctor p  =>  Cocartesian p where
 newtype ChoiceTag  s  b                  =    BranchTag   { untag ::  b }
 
 
+
 -- And here is the Profunctor of the Tagged type
 instance Profunctor ChoiceTag where
     dimap  _  g  (BranchTag d)           =    BranchTag  (g  d)
 
+
+instance Choice ChoiceTag where
+  left'    (BranchTag v)                 =    BranchTag . Left  $ v
+  right'   (BranchTag v)                 =    BranchTag . Right $ v
