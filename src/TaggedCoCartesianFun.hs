@@ -41,13 +41,13 @@ instance Profunctor ChoiceTag where
 
 -- We can make it a Cartesian quite easily
 -- A question arises: ----->>>>>    Why seal the choice to Left for left' and Right for right' respectively ? After all, "Either" could be Left OR Right....
---                                  The reason is that : For left' :  If the choice were RIGHT: We'd be dealing with things of type c ;
+--                                  The reason is that : For left' :  If the choice were RIGHT: We'd be dealing with things of type c (see definition above);
 --                                                                 :  Now, we know we can't form things of type c from other types or functions, nor do we have access to it in any other way....
 --                                                                 :  Also, ChoiceTag deals with only a single type in its constructor; 
 --                                                                 :  So either we cannot form a left' instance, or we go with the lowest common denominator and choose a side! We HAVE to use the LEFT choice on type v
---                                  Same logic        : For right' :  This time, the only type we have access to (v) is on the RIGHT; so we bind it to the RIGHT constructor
+--                                  Same logic        : For right' :  This time, the only type we have access to is on the RIGHT; so we bind it to the RIGHT constructor
 instance Choice ChoiceTag where
-  left'    (BranchTag v)                 =    BranchTag . Left  $ v
-  right'   (BranchTag v)                 =    BranchTag . Right $ v
+  left'                    =    BranchTag . Left  . untag 
+  right'                   =    BranchTag . Right . untag 
 
 
