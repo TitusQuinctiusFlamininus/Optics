@@ -2,7 +2,8 @@ module LensCartesianOpticalFun where
 
 
 
-import Control.Lens.Combinators (Profunctor, dimap)
+import Control.Lens.Combinators    (Profunctor, dimap            )
+import Data.Profunctor.Strong      (Strong    , first', second'  )
 
 {--
 
@@ -16,6 +17,12 @@ class Profunctor p where
   rmap  :: (b -> d) -> p a b -> p a d                 <<-----  
 
   dimap :: (c -> a) -> (b -> d) -> p a b -> p c d     <<-------------- Or just this one
+
+
+class Profunctor p => Strong p where
+  first'  ::  p  a  b   -> p  (a,  c)  (b,  c)
+   
+  second' ::  p  a  b   -> p  (c,  a)  (c,  b)
 
 
 where p is a Profunctor : 
@@ -37,3 +44,13 @@ data  StrongLens  a  b  s  t          =    SLens    {   see    ::  s       ->   
 
                                                         update ::  (b, s)  ->   t
                                                     }
+
+
+-- Making it a Profunctor first like we did before...
+instance Profunctor (StrongLens a b) where
+    dimap  h  g   (SLens v  w)        =    SLens  (v . h) (\x  ->   g $ w (fst x, (h $ snd x)))
+
+
+instance Strong (StrongLens a b) where
+    first'       (SLens  m   n)       =    SLens   (m . fst) (\x ->   (n (fst x, (fst . snd $ x)), (snd . snd $ x)))
+    second'      (SLens  m   n)       =    undefined
