@@ -52,5 +52,5 @@ instance Profunctor (StrongLens a b) where
 
 
 instance Strong (StrongLens a b) where
-    first'       (SLens  m   n)       =    SLens   (m . fst) (\x ->   (n (fst x, (fst . snd $ x)), (snd . snd $ x)))
+    first'       (SLens  m   n)       =    SLens   (m . fst) (\x ->  (,)  (n . ((,) (fst x)) $ (fst . snd $ x)) (snd . snd $ x))
     second'      (SLens  m   n)       =    undefined
