@@ -6,7 +6,7 @@ Attempting to create Optics and other Computational structures from scratch
 ![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/profunctor.png "Profunctor")
 
 - :green_circle: --> means profunctors can be formed
-- :red_circle: --> means profunctors can't be formed
+- :orange_circle: --> means profunctors can't be formed
 - :white_circle: --> means i haven't gotten to it yet
 
 
@@ -64,9 +64,9 @@ Attempting to create Optics and other Computational structures from scratch
 
 ### Downstar Variants
 
-- :red_circle:  Cartesian (Strong) Downstar 
-- :red_circle:  CoCartesian (Choice) Downstar 
-- :red_circle:  Monoidal Downstar 
+- :orange_circle:  Cartesian (Strong) Downstar 
+- :orange_circle:  CoCartesian (Choice) Downstar 
+- :orange_circle:  Monoidal Downstar 
 - :white_circle:  InPhantom Downstar
 - :white_circle:  OutPhantom Downstar
 - :white_circle:  Cartographic Downstar
@@ -79,7 +79,7 @@ Attempting to create Optics and other Computational structures from scratch
 
 ### Tagged Variants
 
-- :red_circle:  Tagged Cartesian (Strong) 
+- :orange_circle:  Tagged Cartesian (Strong) 
 - :green_circle:  Tagged CoCartesian (Choice)
 - :white_circle:  Tagged Monoidal 
 - :white_circle:  Tagged InPhantom 
