@@ -66,3 +66,44 @@ instance Strong (StrongLens a b) where
 
 
 ---------------------------------------------------------------------------------
+
+-- Revisiting the types from the Vanilla Lens to see how things change with strength
+
+data Atom                     =   Atom
+
+
+newtype Composite a           = Composite a
+
+
+data Molecule                 = Molecule
+
+
+newtype NewComposite b        = NewComposite b
+
+
+
+---------------------------------------------------------------------------------
+-- The functions from before....
+
+preTreat     ::   m                              ->  Composite Atom
+preTreat                      = undefined
+
+
+postTreat    ::   NewComposite Molecule          ->   n
+postTreat                     = undefined
+
+
+peep         ::   Composite Atom                ->   Atom
+peep                          = undefined
+
+
+comp         ::   (Molecule, Composite Atom)    ->   NewComposite Molecule
+comp                          = undefined
+
+
+---------------------------------------------------------------------------------
+
+
+-- Ok, the profunctor we can form really hasn't changed at all
+strongTelescopeP :: StrongLens Atom Molecule s t
+strongTelescopeP  = SLens (peep . preTreat) (\z  -> postTreat . comp $ (fst z, preTreat $ snd z))
