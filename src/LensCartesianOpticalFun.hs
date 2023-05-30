@@ -46,11 +46,13 @@ data  StrongLens  a  b  s  t          =    SLens    {   see    ::  s       ->   
                                                     }
 
 
+
 -- Making it a Profunctor first like we did before...
 instance Profunctor (StrongLens a b) where
-    dimap  h  g   (SLens v  w)        =    SLens  (v . h) (\x  ->   g $ w (fst x, (h $ snd x)))
+    dimap  h  g   (SLens v  w)        =    SLens   (v . h  ) (\x  ->  g $ w (fst x, (h $ snd x)))
+
 
 
 instance Strong (StrongLens a b) where
-    first'       (SLens  m   n)       =    SLens   (m . fst) (\x ->  (,)  (n . ((,) (fst x)) $ (fst . snd $ x)) (snd . snd $ x))
-    second'      (SLens  m   n)       =    undefined
+    first'       (SLens  m   n)       =    SLens   (m . fst) (\x ->   (,)  (n   . ((,) (fst x)) $ (fst . snd $ x)) (snd . snd $ x ))
+    second'      (SLens  m   n)       =    SLens   (m . snd) (\x ->   (,)  (fst . snd $ x) (n . ((,) (fst x)) $ (snd . snd $ x   )))
