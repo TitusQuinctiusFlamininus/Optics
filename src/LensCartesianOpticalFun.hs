@@ -72,13 +72,13 @@ instance Strong (StrongLens a b) where
 data Atom                     =   Atom
 
 
-newtype Composite a           = Composite a
+newtype Composite a           =   Composite a
 
 
-data Molecule                 = Molecule
+data Molecule                 =   Molecule
 
 
-newtype NewComposite b        = NewComposite b
+newtype NewComposite b        =   NewComposite b
 
 
 
@@ -93,11 +93,11 @@ postTreat    ::   NewComposite Molecule          ->   n
 postTreat                     = undefined
 
 
-peep         ::   Composite Atom                ->   Atom
+peep         ::   Composite Atom                 ->   Atom
 peep                          = undefined
 
 
-comp         ::   (Molecule, Composite Atom)    ->   NewComposite Molecule
+comp         ::   (Molecule, Composite Atom)     ->   NewComposite Molecule
 comp                          = undefined
 
 
@@ -105,5 +105,27 @@ comp                          = undefined
 
 
 -- Ok, the profunctor we can form really hasn't changed at all
-strongTelescopeP :: StrongLens Atom Molecule s t
-strongTelescopeP  = SLens (peep . preTreat) (\z  -> postTreat . comp $ (fst z, preTreat $ snd z))
+telescopicP :: StrongLens Atom Molecule Atom Molecule 
+telescopicP  = SLens (peep . preTreat) (\z  -> postTreat . comp $ (fst z, preTreat $ snd z))
+
+
+-- Fine, let's strengthen what we already have then, first in one way...
+leftTelescopicP :: StrongLens Atom Molecule (Atom, d) (Molecule, d) 
+leftTelescopicP  = first' telescopicP
+
+
+
+-- then in the other way....
+rightTelescopicP :: StrongLens Atom Molecule (d, Atom) (d, Molecule) 
+rightTelescopicP  = second' telescopicP
+
+
+---------------------------------------------------------------------------------
+
+-- Let's create a Left Optical
+leftOptical   ::  StrongLens Atom Molecule (Atom, d) (Molecule, d)   ->   StrongLens Atom Molecule (Composite Atom, d) (NewComposite Molecule, d) 
+leftOptical   = undefined
+
+
+
+--- try this : interesting   ::  StrongLens Atom Molecule (Atom, d) (Molecule, d)   ->    StrongLens Atom Molecule (d, Composite Atom) (d, NewComposite Molecule) 
