@@ -1,7 +1,7 @@
 module LensOpticsFun where
 
 
-import Control.Lens.Combinators (Profunctor, dimap   )
+import Control.Lens.Combinators (Profunctor, dimap)
 
 {--
 
@@ -20,15 +20,7 @@ class Profunctor p where
 where p is a Profunctor : 
 type Optic p a b s t = p a b -> p s t
 
-
-class Functor f where
-    <$> :: (a -> b) -> f a -> f b
-
-
-class Functor w => Comonad w where
-    extract     ::  w a -> a      
-    duplicate   ::  w a -> w (w a)
-    extend      :: (w a -> b) -> w a -> w b                 
+        
 
 --}
 
@@ -121,7 +113,6 @@ telescope                    = OptLens (peep . preTreat) (\z  -> postTreat . com
 
 
 -- Let's create the Optic: 
--- Now we see the use of extract in the Optic's general definition: We needed to step-down from a Functor/Comonad of some type to that type
 -- Also notice that it does not matter what we used to do on the left hand side of our profunctor (almost like the Adapter case), but because the input type of the right-hand side it not trivial, the identity function is not enough 
 -- Left-Hand side: We had (s -> a) : and we had (p a b)      ------->>> Means if we have: (p s t) we have to replace a's with s , but if we do that in (s -> a), we will end up with (s -> s), and that is the identity function!
 -- Right-Hand side: v seems to simulate the type to modify our structure with; w seems to be a composite of the old type, but in order to give this tuple to macro, we need to dissociate w from its context    
