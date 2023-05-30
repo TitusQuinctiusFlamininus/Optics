@@ -26,12 +26,9 @@ class Profunctor p => Strong p where
 
 
 where p is a Profunctor : 
-type Optic p a b s t = p a b -> p s t
+type  Optic  p  a  b  s  t    =  p  a  b    ->   p  s  t
 
-
-class Functor f where
-    <$> :: (a -> b) -> f a -> f b
-                
+          
 
 --}
 
@@ -52,6 +49,7 @@ instance Profunctor (StrongLens a b) where
     dimap  h  g   (SLens v  w)        =    SLens   (v . h  ) (\x  ->  g $ w (fst x, (h $ snd x)))
 
 
+
 -- We can make our Lens Cartesian now. 
 --     Explanation :: -------->>>> For first' : binding the see function with the first tuple type would give us our required composite type (m . fst)
 --                                            : (1) : the first tuple type represents the new types from which we can create new composites (b)
@@ -63,3 +61,6 @@ instance Profunctor (StrongLens a b) where
 instance Strong (StrongLens a b) where
     first'       (SLens  m   n)       =    SLens   (m . fst) (\x ->   (,)  (n   . ((,) (fst x)) $ (fst . snd $ x)) (snd . snd $ x ))
     second'      (SLens  m   n)       =    SLens   (m . snd) (\x ->   (,)  (fst . snd $ x) (n . ((,) (fst x)) $ (snd . snd $ x   )))
+
+
+
