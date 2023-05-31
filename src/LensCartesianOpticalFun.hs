@@ -68,16 +68,16 @@ instance Strong (StrongLens a b) where
 
 -- Revisiting the types from the Vanilla Lens to see how things change with strength
 
-data Atom                     =   Atom
+data     Atom                     =   Atom
 
 
-newtype Composite a           =   Composite a
+newtype  Composite    a           =   Composite    a
 
 
-data Molecule                 =   Molecule
+data     Molecule                 =   Molecule
 
 
-newtype NewComposite b        =   NewComposite b
+newtype  NewComposite b           =   NewComposite b
 
 
 
@@ -109,9 +109,11 @@ telescopicP            = SLens (peep . preTreat) (\z  -> postTreat . comp $ (fst
 
 
 
+
 -- Using just the convenience functions directly, fwe can form the Left Profunctor......                                                             
 leftTelescopic   ::   StrongLens Atom Molecule (Composite Atom, d) (NewComposite Molecule, d) 
 leftTelescopic         = SLens (peep . fst) (\y -> (comp (fst y, fst . snd $ y), snd . snd $ y))
+
 
 
 -- And for the Right.....
