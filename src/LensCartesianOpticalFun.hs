@@ -29,14 +29,6 @@ where p is a Profunctor :
 type  Optic  p  a  b  s  t    =  p  a  b    ->   p  s  t
 
 
-class Functor f where
-    <$> :: (a -> b) -> f a -> f b
-
-
-class Functor r => Applicative r where
-    pure        :: x           -> r x
-    <*>         :: f (a -> b)  -> f a   ->  f b
-
 --}
 
 
@@ -89,16 +81,6 @@ newtype NewComposite b        =   NewComposite b
 
 
 
--- We will need this later
-instance Functor NewComposite where
-    fmap f (NewComposite x)             = NewComposite (f x)
-
-
-instance Applicative NewComposite where
-    pure                                = NewComposite
-    NewComposite f  <*> NewComposite x  = NewComposite (f x)
-
-
 ---------------------------------------------------------------------------------
 -- The functions from before....
 
@@ -139,6 +121,7 @@ rightTelescopic        = SLens (peep . snd) (\y -> (fst . snd $ y, comp (fst y, 
 
 
 ---------------------------------------------------------------------------------
+
 -- Now for the Optics....
 
 -- Or we can take the scenic route, using an Optical definition 
@@ -172,4 +155,4 @@ rightOptical'  k     =  SLens (\x -> see   (first' k) ((peep . snd $ x), fst x) 
 
 -- Adding this for more fun. 
 flipOptical   ::  StrongLens Atom Molecule (Atom, d) (Molecule, d)   ->    StrongLens Atom Molecule (d, Composite Atom) (d, NewComposite Molecule) 
-flipOptical    k     =  SLens (\x  -> see  (second' k) (fst x, ((peep . snd $ x), fst x)))  undefined
+flipOptical    k     =  SLens (\x  -> see  (second' k) (fst x, ((peep . snd $ x), fst x)))  (\y ->   ((fst . snd $ y), comp ((fst y), snd . snd $ y)))
