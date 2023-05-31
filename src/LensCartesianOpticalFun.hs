@@ -121,12 +121,12 @@ rightTelescopic   ::   StrongLens Atom Molecule (d, Composite Atom) (d, NewCompo
 rightTelescopic        = SLens (peep . snd) (\y -> (fst . snd $ y, comp (fst y, snd . snd $ y)))
 
 
+-- Or we could take the scenic route, using an Optical definition below .....
 
 ---------------------------------------------------------------------------------
 
 -- Now for the Optics....
 
--- Or we can take the scenic route, using an Optical definition 
 -- We are taking a vanilla profunctor and not only left-strengthening it, but also transforming between composite types, rather than just between types that make up those composites
 --    Explanation :  ------>>>>>  The see function : We will be transforming things from :  (s  -> a)   to             :  ((s, c)    ->  a)
 --                                                 : What does that mean exactly? It means instead of going like this  :  (Atom  ->   Atom) , it will be :    ((Composite Atom, d)  -> Atom)
