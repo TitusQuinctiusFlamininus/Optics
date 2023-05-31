@@ -123,26 +123,27 @@ comp                          = undefined
 
 -- Ok, the profunctor we can form really hasn't changed at all
 telescopicP :: StrongLens Atom Molecule Atom Molecule 
-telescopicP  = SLens (peep . preTreat) (\z  -> postTreat . comp $ (fst z, preTreat $ snd z))
+telescopicP          = SLens (peep . preTreat) (\z  -> postTreat . comp $ (fst z, preTreat $ snd z))
 
 
 
 
 -- Or we can take the scenic route, using an Optical definition 
 -- We are taking a vanilla profunctor and not only left-strengthening it, but also converting it to transform between composite types, rather than just between types that make up those composites
---    Explanation :  ------>>>>>  The see function : We will be transforming things from :  (s  -> a)   to    :  ((s, c)    ->  a)
---                                                 : What does that mean exactly? It means instead of going like this :    (Atom  ->   Atom) , it will be :    ((Composite Atom, d)  -> Atom)
---                                                 : So, x is really now something like this :     ((Composite Atom, d)  -> Atom)
+--    Explanation :  ------>>>>>  The see function : We will be transforming things from :  (s  -> a)   to            :  ((s, c)    ->  a)
+--                                                 : What does that mean exactly? It means instead of going like this :  (Atom  ->   Atom) , it will be :    ((Composite Atom, d)  -> Atom)
+--                                                 : So, our new see function's input is really                       :  ((Composite Atom, d)  -> Atom)
 --                                                 : How can we use the input profunctor ?   Well, if we left-strengthened it and asked for its "see", then we would get a function that compose : ((Atom, w)  ->  Atom) where w is some type....
---                                                 : Now, x gives us access to both inputs from the above function (with w); just assume w is identical to c; So it is just a matter of supplying (see (first' k)) with its parameters, from x.....
---                                The update func  : We can't really use k, because we do not have a way to tranform   :    (Atom   ->  Composite Atom)
+--                                                 : Now, x gives us access to both input types from the above function (with w); just assume w is identical to c; So it is just a matter of supplying : (see (first' k)) with its parameters, from x.....
+--                   ------>>>>>  The update func  : We can't really use k, because we do not have a way to tranform   :    (Atom   ->  Composite Atom)                        <<<---- at least, not in any of the above definitions....
 --                                                 :       If we use (update k)            :  The transformation is    :    ((Molecule, Atom)       ->   Molecule     )        <<<---- not useful.....
 --                                                 :       If we use (update . first' k)   :  The transformation is    :    ((Molecule, (Atom, d))  ->   (Molecule, d))        <<<---- still dealing with Atoms....
 --                                                 : The function comp seems eager to take parts of our input and give us part of our required output (NewComposite Molecule), we just need to include the pass-through type as well (d) ...                                          
-leftOptical   ::   StrongLens Atom Molecule Atom Molecule     ->     StrongLens Atom Molecule (Composite Atom, d) (NewComposite Molecule, d) 
+leftOptical   ::   StrongLens Atom Molecule Atom Molecule      ->     StrongLens Atom Molecule (Composite Atom, d) (NewComposite Molecule, d) 
 leftOptical   k      = SLens (\x -> see  (first' k) ((peep . fst $ x), snd x)) (\y -> (comp (fst y, fst . snd $ y), snd . snd $ y))
 
 
-
+rightOptical   ::   StrongLens Atom Molecule Atom Molecule     ->    StrongLens Atom Molecule (d, Composite Atom) (d, NewComposite Molecule) 
+rightOptical  k      = SLens (peep . snd) (\y -> (fst . snd $ y, comp (fst y, snd . snd $ y)))
 
 --- try this : interesting   ::  StrongLens Atom Molecule (Atom, d) (Molecule, d)   ->    StrongLens Atom Molecule (d, Composite Atom) (d, NewComposite Molecule) 
