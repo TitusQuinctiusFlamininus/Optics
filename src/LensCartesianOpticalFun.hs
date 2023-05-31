@@ -45,7 +45,7 @@ data  StrongLens  a  b  s  t          =    SLens    {   see    ::  s       ->   
 
 -- Making it a Profunctor first like we did before...
 instance Profunctor (StrongLens a b) where
-    dimap  h  g   (SLens v  w)        =    SLens   (v . h  ) (\x  ->  g $ w (fst x, (h $ snd x)))
+    dimap  h  g   (SLens v  w)        =    SLens   ( v . h ) (\x  ->  g $ w (fst x, (h $ snd x)))
 
 
 
@@ -58,8 +58,8 @@ instance Profunctor (StrongLens a b) where
 --                                                 --->> make sure to associate that new composite type with the passthrough type (c) from the function input, in a tuple : (new_composite, (snd . snd $ x ))
 --                    -------->>>> For second' : Flip the tuple order we obtained in first' ; also, the original composite type (s) is in the second position, which the passthrough type (c) is the in second position                      
 instance Strong (StrongLens a b) where
-    first'       (SLens  m   n)       =    SLens   (m . fst) (\x ->   (,)  (n   . ((,) (fst x)) $ (fst . snd $ x)) (snd . snd $ x ))
-    second'      (SLens  m   n)       =    SLens   (m . snd) (\x ->   (,)  (fst . snd $ x) (n . ((,) (fst x)) $ (snd . snd $ x   )))
+    first'       (SLens  m   n)       =    SLens   (m . fst) (\x ->   (,)  (n   . ((,) (fst x)) $ (fst . snd $ x)) (snd . snd $ x  ))
+    second'      (SLens  m   n)       =    SLens   (m . snd) (\x ->   (,)  (fst . snd $ x) (n . ((,) (fst x))  $   (snd . snd $ x )))
 
 
 
