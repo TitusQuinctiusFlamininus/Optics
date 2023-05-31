@@ -141,9 +141,11 @@ leftOptical'   k       =     SLens (\x -> see  (first' k)  ((peep . fst $ x), sn
 
 
 
+
 -- Same logic applies except now the pass-through type is in the first position....., the update function is just reverse order
 rightOptical   ::   StrongLens Atom Molecule Atom Molecule            ->    StrongLens Atom Molecule (d, Composite Atom) (d, NewComposite Molecule) 
 rightOptical   k       =     SLens (\x -> see   (second' k) (fst x, peep . snd $ x)  )  (\y -> (fst . snd $ y, comp (fst y, snd . snd $ y)))
+
 
 
 
@@ -153,6 +155,10 @@ rightOptical'  k       =     SLens (\x -> see   (first' k) ((peep . snd $ x), fs
 
 
 
+
 -- Adding this for more fun. First' could also have been used....
 flippyOptical   ::  StrongLens Atom Molecule (Atom, d) (Molecule, d)   ->   StrongLens Atom Molecule (d, Composite Atom) (d, NewComposite Molecule) 
 flippyOptical    k     =     SLens  (\x  -> see  (second' k) (fst x, ((peep . snd $ x), fst x)))  (\y ->   ((fst . snd $ y), comp ((fst y), snd . snd $ y)))
+
+
+---------------------------------------------------------------------------------
