@@ -131,17 +131,16 @@ rightTelescopicP :: StrongLens Atom Molecule (d, Atom) (d, Molecule)
 rightTelescopicP  = second' telescopicP
 
 
----------------------------------------------------------------------------------
 
--- Let's create a Left Profunctor directly....
+-- Let's create a Left Composite Profunctor directly....
 leftTelescopeP  ::  StrongLens Atom Molecule (Composite Atom, d) (NewComposite Molecule, d) 
 leftTelescopeP       = SLens (peep . fst) (\x -> ((pure . fst $ x), (snd . snd $ x)))
 
 
--- Here is the scenic way of creating the same things above, using an Optical definition 
+-- Or we can take the scenic route, using an Optical definition 
 -- We are taking a vanilla profunctor and not only left-strengthening it, but also converting it to transform between composite types, rather than just between types that make up those composites
 leftOptical   ::   StrongLens Atom Molecule Atom Molecule     ->     StrongLens Atom Molecule (Composite Atom, d) (NewComposite Molecule, d) 
-leftOptical   k      = SLens (\x -> see  (first' k) ((peep . fst $ x), snd x)) undefined
+leftOptical   k      = SLens (\x -> see  (first' k) ((peep . fst $ x), snd x)) (\y -> (comp (fst y, fst . snd $ y), snd . snd $ y))
 
 
 
