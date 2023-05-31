@@ -123,10 +123,23 @@ comp                          = undefined
 
 -- Ok, the profunctor we can form really hasn't changed at all
 telescopicP :: StrongLens Atom Molecule Atom Molecule 
-telescopicP          = SLens (peep . preTreat) (\z  -> postTreat . comp $ (fst z, preTreat $ snd z))
+telescopicP            = SLens (peep . preTreat) (\z  -> postTreat . comp $ (fst z, preTreat $ snd z))
 
 
 
+-- Just purely the convenience functions we provided earlier, for the Left......                                                             
+leftTelescopic   ::   StrongLens Atom Molecule (Composite Atom, d) (NewComposite Molecule, d) 
+leftTelescopic         = SLens (peep . fst) (\y -> (comp (fst y, fst . snd $ y), snd . snd $ y))
+
+
+-- And for the Right.....
+rightTelescopic   ::   StrongLens Atom Molecule (d, Composite Atom) (d, NewComposite Molecule) 
+rightTelescopic        = SLens (peep . snd) (\y -> (fst . snd $ y, comp (fst y, snd . snd $ y)))
+
+
+
+---------------------------------------------------------------------------------
+-- Now for the Optics....
 
 -- Or we can take the scenic route, using an Optical definition 
 -- We are taking a vanilla profunctor and not only left-strengthening it, but also converting it to transform between composite types, rather than just between types that make up those composites
@@ -139,11 +152,15 @@ telescopicP          = SLens (peep . preTreat) (\z  -> postTreat . comp $ (fst z
 --                                                 :       If we use (update k)            :  The transformation is    :    ((Molecule, Atom)       ->   Molecule     )        <<<---- not useful.....
 --                                                 :       If we use (update . first' k)   :  The transformation is    :    ((Molecule, (Atom, d))  ->   (Molecule, d))        <<<---- still dealing with Atoms....
 --                                                 : The function comp seems eager to take parts of our input and give us part of our required output (NewComposite Molecule), we just need to include the pass-through type as well (d) ...                                          
-leftOptical   ::   StrongLens Atom Molecule Atom Molecule      ->     StrongLens Atom Molecule (Composite Atom, d) (NewComposite Molecule, d) 
-leftOptical   k      = SLens (\x -> see  (first' k) ((peep . fst $ x), snd x)) (\y -> (comp (fst y, fst . snd $ y), snd . snd $ y))
+leftOptical'   ::   StrongLens Atom Molecule Atom Molecule      ->     StrongLens Atom Molecule (Composite Atom, d) (NewComposite Molecule, d) 
+leftOptical'   k      = SLens (\x -> see  (first' k)  ((peep . fst $ x), snd x)) (\y -> (comp (fst y, fst . snd $ y), snd . snd $ y))
 
 
-rightOptical   ::   StrongLens Atom Molecule Atom Molecule     ->    StrongLens Atom Molecule (d, Composite Atom) (d, NewComposite Molecule) 
-rightOptical  k      = SLens (peep . snd) (\y -> (fst . snd $ y, comp (fst y, snd . snd $ y)))
+
+
+
+rightOptical   ::   StrongLens Atom Molecule Atom Molecule      ->    StrongLens Atom Molecule (d, Composite Atom) (d, NewComposite Molecule) 
+rightOptical  k      = SLens (\x -> see   (second' k) (fst x, peep . snd $ x)  ) (\y -> (fst . snd $ y, comp (fst y, snd . snd $ y)))
+
 
 --- try this : interesting   ::  StrongLens Atom Molecule (Atom, d) (Molecule, d)   ->    StrongLens Atom Molecule (d, Composite Atom) (d, NewComposite Molecule) 
