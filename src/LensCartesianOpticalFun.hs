@@ -110,7 +110,7 @@ telescopicP            = SLens (peep . preTreat) (\z  -> postTreat . comp $ (fst
 
 
 
--- Using just the convenience functions directly, fwe can form the Left Profunctor......                                                             
+-- Using just the convenience functions directly, we can form the Left Profunctor......                                                             
 leftTelescopic   ::   StrongLens Atom Molecule (Composite Atom, d) (NewComposite Molecule, d) 
 leftTelescopic         = SLens (peep . fst) (\y -> (comp (fst y, fst . snd $ y), snd . snd $ y))
 
