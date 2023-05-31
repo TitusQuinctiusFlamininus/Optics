@@ -99,6 +99,7 @@ Attempting to create Optics and other Computational structures from scratch
 ![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/optic.png "Optic")
 
 - :green_circle: Lens
+- :green_circle: Strong Lens
 - :green_circle: Prism
 - :green_circle: Adapter
 - :white_circle: Arrow
