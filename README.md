@@ -24,7 +24,7 @@ Attempting to create Optics and other Computational structures from scratch
 
 ### Lens Variants
 
-- :white_circle: Cartesian (Strong) Lens
+- :green_circle: Cartesian (Strong) Lens
 - :white_circle: CoCartesian (Choice) Lens
 - :white_circle: Monoidal Lens
 - :white_circle:  InPhantom Lens
