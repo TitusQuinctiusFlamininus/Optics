@@ -35,7 +35,7 @@ type  Optic  p  a  b  s  t    =  p  a  b    ->   p  s  t
 
 ---------------------------------------------------------------------------------
 
--- Popping up the definition from before
+-- Exposing the Vanilla definition
 data  ChoiceLens  a  b  s  t          =    Lens    {    seek    ::  s       ->   a,
 
                                                         mod     ::  (b, s)  ->   t
@@ -43,7 +43,7 @@ data  ChoiceLens  a  b  s  t          =    Lens    {    seek    ::  s       ->  
 
 
 
--- Making it a Profunctor first like we did before...
+-- Again, our Vanilla Profunctor....
 instance Profunctor (ChoiceLens a b) where
     dimap  h  g   (Lens q  r)        =    Lens   ( q . h ) (\y  ->  g $ r (fst y, (h $ snd y)))
 
