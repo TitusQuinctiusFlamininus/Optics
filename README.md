@@ -27,6 +27,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :green_circle: Cartesian (Strong) Lens
 - :white_circle: CoCartesian (Choice) Lens
 - :white_circle: Monoidal Lens
+- :white_circle: Traversing Lens
 - :white_circle:  InPhantom Lens
 - :white_circle:  OutPhantom Lens
 - :white_circle:  Cartographic Lens
@@ -39,6 +40,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle: Monoidal Prism
 - :white_circle:  InPhantom Prism
 - :white_circle:  OutPhantom Prism
+- :white_circle: Traversing Prism
 - :white_circle:  Cartographic Prism
 - :white_circle:  Wandering Prism
 
@@ -49,6 +51,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle: Monoidal Affine
 - :white_circle:  InPhantom Affine
 - :white_circle:  OutPhantom Affine
+- :white_circle: Traversing Affine
 - :white_circle:  Cartographic Affine
 - :white_circle:  Wandering Affine
 
@@ -83,6 +86,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :green_circle:  Tagged CoCartesian (Choice)
 - :white_circle:  Tagged Monoidal 
 - :white_circle:  Tagged InPhantom 
+- :white_circle: Tagged Traversing
 - :white_circle:  Tagged OutPhantom 
 - :white_circle:  Tagged Cartographic
 - :white_circle:  Tagged Wandering 
@@ -99,14 +103,13 @@ Attempting to create Optics and other Computational structures from scratch
 ![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/optic.png "Optic")
 
 - :green_circle: Lens
+- :white_circle: Traversing Lens
 - :green_circle: Strong Lens
 - :green_circle: Prism
 - :green_circle: Adapter
-- :white_circle: Arrow
 - :white_circle: Sieve
 - :green_circle: Affine
 - :white_circle: Traversal
-- :white_circle: Traversing
 - :white_circle: Procompose
 
 
