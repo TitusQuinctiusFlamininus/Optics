@@ -25,7 +25,7 @@ Attempting to create Optics and other Computational structures from scratch
 ### Lens Variants
 
 - :green_circle: Cartesian (Strong) Lens
-- :white_circle: CoCartesian (Choice) Lens
+- :orange_circle: CoCartesian (Choice) Lens
 - :white_circle: Monoidal Lens
 - :white_circle: Traversing Lens
 - :white_circle:  InPhantom Lens
@@ -103,7 +103,6 @@ Attempting to create Optics and other Computational structures from scratch
 ![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/optic.png "Optic")
 
 - :green_circle: Lens
-- :white_circle: Traversing Lens
 - :green_circle: Strong Lens
 - :green_circle: Prism
 - :green_circle: Adapter
