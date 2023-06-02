@@ -60,7 +60,7 @@ instance Profunctor (ChoiceLens a b) where
 --                            :                   Two problems now exist : First, we have no way to create t's, because fix needs a Lens of type : (ChoiceLens a b s (Either t c)), but what we provide on the L.H.S is only (ChoiceLens a b s t)
 --                            :                                          : Second, within the first argument function of an "either", we have no access to type c , (Right c), to create  this tuple: (t, c)
 
---   -------->>>    Right' will not change things, since all that really happens is a Contextual positional shift between (c and s), and between (c and t)
+--   -------->>>   Right' will not change things, since all that really happens is a Contextual positional shift between (c and s), and between (c and t)
 --instance Choice (ChoiceLens  a  b) where
 --    left'          (Lens v  w )         =    ??    (Cannot be formed)
 --    right'         (Lens v  w )         =    ??    (Cannot be formed)
