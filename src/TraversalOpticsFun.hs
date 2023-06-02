@@ -44,8 +44,8 @@ data Traversal  s  t  a  b      =    forall f. Traversal {  traverse ::  (a -> f
 --                                 :  We need something of type                           :    (f t)
 --                                 :  And x is really of type                             :    s
 --                                 :  So, perhaps this is the solution                    :    ((k (f' . h)) x)
---                                 :  Suppose                                             :    d :: (a' -> a)          and         g :: (b -> d)    then: 
---                                 :  The problem with  : ((k (f' . h)) x) , is that f' is transforming : (a' -> f d) instead of (a' -> f b)
+--                                 :  Suppose                                             :    d :: (a' -> a)    and         g :: (b -> d)    then: 
+--                                 :  ((k (f' . h)) x) is problematic because             :    f' here is now :  (a' -> f d) instead of   : (a' -> f b)
 --                                 :  This cannot be resolved. 
 
 --instance Profunctor   (Traversal  s  t ) where
