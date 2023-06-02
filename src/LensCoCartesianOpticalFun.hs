@@ -56,7 +56,7 @@ instance Profunctor (ChoiceLens a b) where
 --                            :              If   (Right c)   : we have no way of creating the required type (c -> a)
 --    -------->>>>    For fix                          : 
 --                 For Left'  :  We are shifting from  :   ((b, s)  ->  t)   to   :  ((b, (Either s c))  ->  (Either t c)) 
---                            :  ----->>     If   (Left s)    : It may be possibel to form the fix function's tuple  :  ((fst y), w)  (where y is (b,s) and w is s within the first argument of "either")
+--                            :  ----->>     If   (Left s)    : It may be possible to form the fix function's tuple  :  ((fst y), w)  (where y is (b,s) and w is s within the first argument of "either")
 --                            :                   Two problems now exist : First, we have no way to create t's, because fix needs a Lens of type : (ChoiceLens a b s (Either t c)), but what we provide on the L.H.S is only (ChoiceLens a b s t)
 --                            :                                          : Second, within the first argument function of an "either", we have no access to type c , (Right c), to create  this tuple: (t, c)
 
