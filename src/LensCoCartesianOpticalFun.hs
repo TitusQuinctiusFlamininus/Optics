@@ -62,6 +62,6 @@ instance Profunctor (ChoiceLens a b) where
 
 --   -------->>>    Right' will not change things, since all that really happens is a Contextual positional shift between (c and s), and between (c and t)
 --instance Choice (ChoiceLens  a  b) where
---    left'          (Lens v  w )         =    ?? 
---    right'         (Lens v  w )         =    ?? 
+--    left'          (Lens v  w )         =    ??    (Cannot be formed)
+--    right'         (Lens v  w )         =    ??    (Cannot be formed)
                                                          
