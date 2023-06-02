@@ -28,7 +28,7 @@ class Functor f where
     <$>       :: (a  ->  b)  ->  f a  ->  f b
 
 
-class functor f => Applicative f where
+class Functor f => Applicative f where
     pure      ::  x           -> f x
     <*>       :: f (a -> b)   -> f a   ->  f b      
 
