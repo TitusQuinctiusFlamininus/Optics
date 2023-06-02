@@ -36,16 +36,16 @@ type  Optic  p  a  b  s  t    =  p  a  b    ->   p  s  t
 ---------------------------------------------------------------------------------
 
 -- Popping up the definition from before
-data  StrongLens  a  b  s  t          =    SLens    {   see    ::  s       ->   a,
+data  StrongLens  a  b  s  t               =     SLens    {   see    ::  s       ->   a,
 
-                                                        update ::  (b, s)  ->   t
-                                                    }
+                                                              update ::  (b, s)  ->   t
+                                                          }
 
 
 
 -- Making it a Profunctor first like we did before...
 instance Profunctor (StrongLens a b) where
-    dimap  h  g   (SLens v  w)        =    SLens   ( v . h ) (\x  ->  g $ w (fst x, (h $ snd x)))
+    dimap  h   g    (SLens v  w    )        =    SLens   ( v . h ) (\x  ->  g $ w (fst x, (h $ snd x)))
 
 
 
