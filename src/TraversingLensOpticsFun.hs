@@ -66,6 +66,6 @@ class Functor f where
 
 -- We cannot create a TraversingLens, based on the Traversing Typeclass. 
 -- Why not ? --->>>> We can certainly make a Lens Profunctor Strong.....
---           --->>>> Another requirement of making a Profunctor, a Traversing Profunctor, is that it also needs to be CoCartesian (Choice), which is not possible (see LensCoCartesianOpticalFun)
+--           --->>>> Another requirement of making a Lens Profunctor, a Traversing Profunctor, is that it also needs to be CoCartesian (Choice), which is not possible (see LensCoCartesianOpticalFun)
 
--- So must abandon the exercise here.                   
+-- So we abandon the exercise here.                   
