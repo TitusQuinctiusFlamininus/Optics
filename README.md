@@ -20,7 +20,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :green_circle: Upstar
 - :green_circle: Downstar
 - :green_circle: Affine
-- :white_circle: Traversal
+- :orange_circle: Traversal
 
 ### Lens Variants
 
