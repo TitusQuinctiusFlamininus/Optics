@@ -18,6 +18,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :green_circle: Forget
 - :green_circle: Tagged
 - :green_circle: Upstar
+- :white_circle: Iso
 - :green_circle: Downstar
 - :green_circle: Affine
 - :orange_circle: Traversal
@@ -54,6 +55,17 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle: Traversing Affine
 - :white_circle:  Cartographic Affine
 - :white_circle:  Wandering Affine
+
+### Iso Variants
+
+- :white_circle: Cartesian (Strong) Iso
+- :white_circle: CoCartesian (Choice) Iso
+- :white_circle: Monoidal Iso
+- :white_circle: Traversing Iso
+- :white_circle:  InPhantom Iso
+- :white_circle:  OutPhantom Iso
+- :white_circle:  Cartographic Iso
+- :white_circle:  Wandering Iso
 
 ### Upstar Variants
 
@@ -105,6 +117,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :green_circle: Lens
 - :green_circle: Strong Lens
 - :green_circle: Prism
+- :white_circle: Iso
 - :green_circle: Adapter
 - :white_circle: Sieve
 - :green_circle: Affine
@@ -122,6 +135,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle: Lens
 - :white_circle: Prism
 - :white_circle: Upstar
+- :white_circle: Iso
 - :white_circle: Cartesian (Strong) Upstar
 - :white_circle: CoCartesian (Choice) Upstar
 - :white_circle: Monoidal Upstar

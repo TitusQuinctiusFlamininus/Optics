@@ -3,8 +3,6 @@
 module TraversalOpticsFun where
 
 
-import Control.Lens.Combinators    (Profunctor, dimap)
-
 
  {--
 
