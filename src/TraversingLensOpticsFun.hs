@@ -27,6 +27,15 @@ class Profunctor p => Strong p where
   second'    ::  p  a  b   -> p  (c,  a)  (c,  b)
 
 
+
+where p is a Profunctor : 
+type  Optic  p  a  b  s  t    =  p  a  b    ->   p  s  t
+
+
+
+---------------------------------------------------------------------------------
+
+
 class Profunctor p  =>  Cocartesian p where
   left'      ::  p  a  b   ->  p  (Either  a  c)  (Either  b  c)
   right'     ::  p  a  b   ->  p  (Either  c  a)  (Either  c  b)
@@ -39,20 +48,16 @@ class (Choice p, Strong p) => Traversing p where
 
 class (Functor t, Foldable t) => Traversable t where
   traverse   :: Applicative f => (a -> f b) -> t a -> f (t b)
-  sequenceA  :: Applicative f => t (f a) -> f (t a)
+  sequenceA  :: Applicative f => t (f a)    -> f (t a)
 
 
-where p is a Profunctor : 
-type  Optic  p  a  b  s  t    =  p  a  b    ->   p  s  t
-
-
-class functor f => Applicative f where
-    pure      :: x           -> f x
-    <*>       :: f (a -> b)  -> f a   ->  f b    
+class Functor f => Applicative f where
+    pure      ::    x           -> f x
+    <*>       ::    f (a -> b)  -> f a   ->  f b    
 
 
 class Functor f where
-    <$> :: (a -> b) -> f a -> f b
+    <$>       ::      (a -> b)  -> f a   ->  f b
 --}
 
 
