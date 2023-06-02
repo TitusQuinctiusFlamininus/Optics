@@ -31,6 +31,7 @@ class Functor f => Applicative f where
 
 ---------------------------------------------------------------------------------
 
+
 -- Let's define what we mean by a Traveral 
 data Traversal  s  t  a  b      =    forall f. Traversal {  traverse ::  (a -> f b) -> s  -> f t  }
 
@@ -50,3 +51,6 @@ data Traversal  s  t  a  b      =    forall f. Traversal {  traverse ::  (a -> f
 
 --instance Profunctor   (Traversal  s  t ) where
 --      dimap    h    g   (Traversal  k)     =   ??
+
+
+---------------------------------------------------------------------------------
