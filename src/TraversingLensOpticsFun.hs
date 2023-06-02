@@ -2,11 +2,6 @@ module TraversingLensOpticsFun where
 
 
 
-import Control.Lens.Combinators    (Profunctor, dimap               )
-import Data.Profunctor.Traversing  (Traversing, traverse', wander   )
-import Data.Profunctor.Strong      (Strong    , first',    second'  )
-import Data.Profunctor.Choice      (Choice    , left' ,    right'   )
-
 {--
 
 To understand this better, read from top to bottom, in the style 
@@ -65,7 +60,7 @@ class Functor f where
 ---------------------------------------------------------------------------------
 
 -- We cannot create a TraversingLens, based on the Traversing Typeclass. 
--- Why not ? --->>>> We can certainly make a Lens Profunctor Strong.....
---           --->>>> Another requirement of making a Lens Profunctor, a Traversing Profunctor, is that it also needs to be CoCartesian (Choice), which is not possible (see LensCoCartesianOpticalFun)
+-- Why not ? --->>>> We can certainly make a Lens Profunctor Strong    (see LensCartesianOpticalFun  )
+--           --->>>> We cannot, however, make a Lens Profunctor Choice (see LensCoCartesianOpticalFun)
 
 -- So we abandon the exercise here.                   
