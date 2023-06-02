@@ -46,6 +46,13 @@ where p is a Profunctor :
 type  Optic  p  a  b  s  t    =  p  a  b    ->   p  s  t
 
 
+class functor f => Applicative f where
+    pure      :: x           -> f x
+    <*>       :: f (a -> b)  -> f a   ->  f b    
+
+
+class Functor f where
+    <$> :: (a -> b) -> f a -> f b
 --}
 
 
