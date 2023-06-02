@@ -64,14 +64,8 @@ class Functor f where
 
 ---------------------------------------------------------------------------------
 
--- First defining 
-data  TravLens  a  b  s  t          =    TLens    {    seek    ::  s       ->   a,
+-- We cannot create a TraversingLens, based on the Traversing Typeclass. 
+-- Why not ? --->>>> We can certainly make a Lens Profunctor Strong.....
+--           --->>>> Another requirement of making a Profunctor, a Traversing Profunctor, is that it also needs to be CoCartesian (Choice), which is not possible (see LensCoCartesianOpticalFun)
 
-                                                       mod     ::  (b, s)  ->   t
-                                                  }
-
-
-
--- Again, our Vanilla Profunctor....
-instance Profunctor (TravLens a b) where
-    dimap  h  g   (TLens q  r)        =    TLens   ( q . h ) (\y  ->  g $ r (fst y, (h $ snd y)))
+-- So must abandon the exercise here.                   
