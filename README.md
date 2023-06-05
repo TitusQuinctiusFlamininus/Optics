@@ -82,7 +82,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :orange_circle:  Cartesian (Strong) Downstar 
 - :orange_circle:  CoCartesian (Choice) Downstar 
 - :orange_circle:  Monoidal Downstar 
-- :white_circle:  InPhantom Downstar
+- :orange_circle:  InPhantom Downstar
 - :white_circle:  OutPhantom Downstar
 - :white_circle:  Cartographic Downstar
 - :white_circle:  Wandering Downstar
