@@ -1,7 +1,7 @@
 module TaggedCoCartesianFun where
 
 
-import Control.Lens.Combinators    (Profunctor, dimap)
+import Control.Lens.Combinators    (Profunctor, dimap           )
 import Data.Profunctor.Choice      (Choice    , left' , right'  )
 
 
