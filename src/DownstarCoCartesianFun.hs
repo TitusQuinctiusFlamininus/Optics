@@ -49,7 +49,7 @@ instance Functor f =>  Profunctor (CoStrong f) where
 --                             If it is ( Right c ) :  No problem, we have access to our required type
 --                             If it is ( Left  a ) :  We could do this now :  ( u . pure  )    :  Which gives us something of type b ......
 --                             We still need a function that goes like this :  ( b  ->  c  )    :  We don't have a means to produce such types (c) from types of our output (b)
-
+--                             An additional problem : How do we get rid of the functorial context from fmap ??
 --   instance (Functor f) =>  Choice (CoStrong f) where 
 --       left'    (DownCoStar u)                  =     Not Possible
 --       right'   (DownCoStar u)                  =     Not Possible
