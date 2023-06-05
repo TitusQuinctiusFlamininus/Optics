@@ -29,7 +29,7 @@ class Choice p => InPhantom p where
 --}
 
 -- Let's remind ourselves of the Downstar type
-data      DownPhantom f  a  b            =       DownInPhantom   { vanish   :: f a   ->   b  }
+data      DownPhantom f  a  b            =      DownInPhantom   { vanish   :: f a   ->   b  }
 
 
 -- Let's make it a Profunctor
