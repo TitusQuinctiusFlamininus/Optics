@@ -38,6 +38,7 @@ library
       LensInPhantomFun
       LensOpticsFun
       MultistarOpticsFun
+      PrismCoCartesianFun
       PrismInPhantom
       PrismOpticsFun
       TaggedCartesianOpticsFun
