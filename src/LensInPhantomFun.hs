@@ -1,7 +1,7 @@
 module LensInPhantomFun where
 
 
-import Control.Lens.Combinators    (Profunctor, dimap            )
+import Control.Lens.Combinators    ( Profunctor, dimap )
 
 {--
 
