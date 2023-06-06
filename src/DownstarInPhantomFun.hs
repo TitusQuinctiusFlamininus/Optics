@@ -1,8 +1,7 @@
 module DownstarInPhantomFun where 
 
 
-import Control.Lens.Combinators    (Profunctor, dimap            )
-import Data.Profunctor.Choice      (Choice    , left' , right'   )
+import Control.Lens.Combinators    ( Profunctor, dimap )
 
 {--
 
@@ -31,8 +30,11 @@ class Profunctor p  =>  Choice p where
 class Choice p => InPhantom p where
     icoerce   ::   p  a  c   ->    p  b  c
 
-    
 --}
+
+
+---------------------------------------------------------------------------------
+
 
 -- Let's remind ourselves of the Downstar type
 data      DownPhantom f  a  b            =      DownInPhantom   { vanish   ::   f a   ->   b  }
@@ -44,10 +46,9 @@ instance Functor f => Profunctor (DownPhantom f) where
     dimap  h  g   (DownInPhantom  w)     =      DownInPhantom   (     g  .  w  . fmap h     )
 
 
--- Ok, so attempting to make it an InPhantom
--- First we have to make our Downstar CoCartesian; This is not feasible, since Downstar cannot be a Choice instance (see DownstarCoCartesian)
-
---instance Functor f => Choice  (DownPhantom f)  where
---    left'    (DownInPhantom u)                  =   ??
+-- Attempting to make it an InPhantom : First we have to make our Downstar CoCartesian (Choice p => InPhantom p)
+-- This is not feasible, since Downstar cannot be a Choice instance (see DownstarCoCartesian)
+-- Therefore, inPhantom Downstars are unrealistic. 
  
 
+---------------------------------------------------------------------------------

@@ -30,8 +30,8 @@ class Choice p => InPhantom p where
 
 
 -- From the definition of InPhantom, it seems that we cannot create an InPhantomLens. 
--- The reason us that there is a typeclass contextual requrement where the Lens Profunctor has to be Choice (or CoCartesian)
--- We cannot create a CoCartesian Lens (see LensCoCartesianFun). 
+-- The reason us that there is a typeclass contextual requrement where the Lens Profunctor has to be Choice (Choice p => InPhantom p)
+-- Now, we cannot create a CoCartesian Lens (see LensCoCartesianFun). 
 -- Therefore, we cannot create a Lens that is also InPhantom.
 
 
