@@ -39,7 +39,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle: Cartesian (Strong) Prism
 - :white_circle: CoCartesian (Choice) Prism
 - :white_circle: Monoidal Prism
-- :white_circle:  InPhantom Prism
+- :orange_circle:  InPhantom Prism
 - :white_circle:  OutPhantom Prism
 - :white_circle: Traversing Prism
 - :white_circle:  Cartographic Prism
