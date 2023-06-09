@@ -42,7 +42,7 @@ class (Choice p, Strong p) => Traversing p where
 
 
 class (Functor t, Foldable t) => Traversable t where
-  traverse   :: Applicative f => (a -> f b) -> t a -> f (t b)
+  traverse   :: Applicative f => (a -> f b) -> t a     -> f (t b)
   sequenceA  :: Applicative f => t (f a)    -> f (t a)
 
 
@@ -53,6 +53,7 @@ class Functor f => Applicative f where
 
 class Functor f where
     <$>       ::      (a -> b)  -> f a   ->  f b
+
 --}
 
 
