@@ -34,6 +34,7 @@ library
       DownstarMonoidalFun
       ForgetFun
       LensCartesianOpticalFun
+      LensClosedOpticsFun
       LensCoCartesianOpticalFun
       LensInPhantomFun
       LensOpticsFun
@@ -47,6 +48,7 @@ library
       TraversalOpticsFun
       TraversingLensOpticsFun
       UpstarCartesianFun
+      UpstarClosedFun
       UpstarCoCartesianFun
       UpstarFun
       UpstarMonoidalFun

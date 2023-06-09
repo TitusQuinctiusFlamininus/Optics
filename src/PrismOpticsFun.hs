@@ -26,13 +26,13 @@ type Optic p a b s t = p a b -> p s t
 
 
 class Functor f where
-    <$>         :: (a -> b)   -> f a -> f b
+    <$>         :: (a -> b)     -> f a -> f b
 
 
 class Functor w => Comonad w where
-    extract     ::  w a       -> a      
-    duplicate   ::  w a       -> w (w a)
-    extend      :: (w a -> b) -> w a -> w b    
+    extract     ::  w a         ->   a      
+    duplicate   ::  w a         ->   w (w a)
+    extend      :: (w a  ->  b) ->   w a       -> w b    
 
 
 class Functor r => Applicative r where

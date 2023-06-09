@@ -32,7 +32,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :orange_circle:  InPhantom Lens
 - :white_circle:  OutPhantom Lens
 - :white_circle:  Cartographic Lens
-- :white_circle:  Wandering Lens
+- :white_circle:  Sieve Lens
 
 ### Prism Variants
 
@@ -43,7 +43,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle:  OutPhantom Prism
 - :white_circle: Traversing Prism
 - :white_circle:  Cartographic Prism
-- :white_circle:  Wandering Prism
+- :white_circle:  Sieve Prism
 
 ### Affine Variants
 
@@ -54,7 +54,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle:  OutPhantom Affine
 - :white_circle: Traversing Affine
 - :white_circle:  Cartographic Affine
-- :white_circle:  Wandering Affine
+- :white_circle:  Sieve Affine
 
 ### Iso Variants
 
@@ -65,17 +65,18 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle:  InPhantom Iso
 - :white_circle:  OutPhantom Iso
 - :white_circle:  Cartographic Iso
-- :white_circle:  Wandering Iso
+- :white_circle:  Sieve Iso
 
 ### Upstar Variants
 
 - :green_circle: Cartesian (Strong) Upstar
 - :green_circle: CoCartesian (Choice) Upstar
 - :green_circle: Monoidal Upstar
+- :orange_circle: Closed Upstar
 - :white_circle:  InPhantom Upstar
 - :white_circle:  OutPhantom Upstar
 - :white_circle:  Cartographic Upstar
-- :white_circle:  Wandering Upstar
+- :white_circle:  Sieve Upstar
 
 ### Downstar Variants
 
@@ -83,14 +84,17 @@ Attempting to create Optics and other Computational structures from scratch
 - :orange_circle:  CoCartesian (Choice) Downstar 
 - :orange_circle:  Monoidal Downstar 
 - :orange_circle:  InPhantom Downstar
+- :orange_circle: Closed Downstar 
 - :white_circle:  OutPhantom Downstar
 - :white_circle:  Cartographic Downstar
-- :white_circle:  Wandering Downstar
+- :white_circle:  Sieve Downstar
 
 ### Multistar Variants
 
 - :green_circle: Spike (Upstar-Downstar)
+- :green_circle: Sieve Spike (Downstar-Upstar)
 - :white_circle: Ditch (Downstar-Upstar)
+- :white_circle: Sieve Ditch (Downstar-Upstar)
 
 ### Tagged Variants
 
@@ -101,7 +105,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle: Tagged Traversing
 - :white_circle:  Tagged OutPhantom 
 - :white_circle:  Tagged Cartographic
-- :white_circle:  Tagged Wandering 
+- :white_circle:  Tagged Sieve 
 
 ### Other Variants
 
@@ -119,7 +123,6 @@ Attempting to create Optics and other Computational structures from scratch
 - :green_circle: Prism
 - :white_circle: Iso
 - :green_circle: Adapter
-- :white_circle: Sieve
 - :green_circle: Affine
 - :white_circle: Traversal
 - :white_circle: Procompose
@@ -140,7 +143,6 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle: CoCartesian (Choice) Upstar
 - :white_circle: Monoidal Upstar
 - :white_circle: Downstar
-- :white_circle: Sieve
 - :white_circle: Adapter
 - :white_circle: Forget
 - :white_circle: Tagged
