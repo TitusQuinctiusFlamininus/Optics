@@ -46,9 +46,10 @@ instance Functor f => Profunctor (DownPhantom f) where
     dimap  h  g   (DownInPhantom  w)     =      DownInPhantom   (     g  .  w  . fmap h     )
 
 
--- Attempting to make it an InPhantom : First we have to make our Downstar CoCartesian (Choice p => InPhantom p)
--- This is not feasible, since Downstar cannot be a Choice instance (see DownstarCoCartesian)
--- Therefore, inPhantom Downstars are unrealistic. 
  
+-- From the definition of InPhantom, it seems that we cannot create an InPhantom Downstar. 
+-- The reason us that there is a typeclass contextual requirement where the Downstar Profunctor has to be Choice : (Choice p => InPhantom p)
+-- But         : We cannot create a CoCartesian Downstar (see DownstarCoCartesianFun). 
+-- Therefore   : We cannot create a Downstar that is also InPhantom.
 
 ---------------------------------------------------------------------------------

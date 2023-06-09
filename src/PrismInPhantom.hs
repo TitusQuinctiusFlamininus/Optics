@@ -33,7 +33,10 @@ class Choice p => InPhantom p where
 
 --}   
 
--- Since we cannot make Prism Choice Profunctors(see PrismCoCartesian), it means we cannot form Prism InPhantom Profunctors
+
+-- From the definition of InPhantom, it seems that we cannot create an InPhantom Prism. 
+-- We cannot create a CoCartesian Prism (see PrismCoCartesian). 
+-- Therefore   : We cannot create a Prism that is also InPhantom.
 
 ---------------------------------------------------------------------------------
      

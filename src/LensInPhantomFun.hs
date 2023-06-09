@@ -1,8 +1,6 @@
 module LensInPhantomFun where
 
 
-import Control.Lens.Combinators    ( Profunctor, dimap )
-
 {--
 
 To understand this better, read from top to bottom, in the style 
@@ -30,9 +28,9 @@ class Choice p => InPhantom p where
 
 
 -- From the definition of InPhantom, it seems that we cannot create an InPhantomLens. 
--- The reason us that there is a typeclass contextual requrement where the Lens Profunctor has to be Choice (Choice p => InPhantom p)
--- Now, we cannot create a CoCartesian Lens (see LensCoCartesianFun). 
--- Therefore, we cannot create a Lens that is also InPhantom.
+-- The reason us that there is a typeclass contextual requirement where the Lens Profunctor has to be Choice : (Choice p => InPhantom p)
+-- But         : We cannot create a CoCartesian Lens (see LensCoCartesianFun). 
+-- Therefore   : We cannot create a Lens that is also InPhantom.
 
 
 ---------------------------------------------------------------------------------
