@@ -32,6 +32,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :orange_circle:  InPhantom Lens
 - :white_circle:  OutPhantom Lens
 - :white_circle:  Cartographic Lens
+- :orange_circle:  Closed Lens
 - :white_circle:  Sieve Lens
 
 ### Prism Variants
@@ -42,6 +43,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :orange_circle:  InPhantom Prism
 - :white_circle:  OutPhantom Prism
 - :white_circle: Traversing Prism
+- :white_circle:  Closed Prism
 - :white_circle:  Cartographic Prism
 - :white_circle:  Sieve Prism
 
@@ -50,11 +52,12 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle: Cartesian (Strong) Affine
 - :white_circle: CoCartesian (Choice) Affine
 - :white_circle: Monoidal Affine
-- :white_circle:  InPhantom Affine
-- :white_circle:  OutPhantom Affine
+- :white_circle: InPhantom Affine
+- :white_circle: OutPhantom Affine
 - :white_circle: Traversing Affine
-- :white_circle:  Cartographic Affine
-- :white_circle:  Sieve Affine
+- :white_circle: Closed Affine
+- :white_circle: Cartographic Affine
+- :white_circle: Sieve Affine
 
 ### Iso Variants
 
@@ -62,10 +65,11 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle: CoCartesian (Choice) Iso
 - :white_circle: Monoidal Iso
 - :white_circle: Traversing Iso
-- :white_circle:  InPhantom Iso
-- :white_circle:  OutPhantom Iso
-- :white_circle:  Cartographic Iso
-- :white_circle:  Sieve Iso
+- :white_circle: InPhantom Iso
+- :white_circle: OutPhantom Iso
+- :white_circle: Closed Iso
+- :white_circle: Cartographic Iso
+- :white_circle: Sieve Iso
 
 ### Upstar Variants
 
@@ -73,21 +77,21 @@ Attempting to create Optics and other Computational structures from scratch
 - :green_circle: CoCartesian (Choice) Upstar
 - :green_circle: Monoidal Upstar
 - :orange_circle: Closed Upstar
-- :white_circle:  InPhantom Upstar
-- :white_circle:  OutPhantom Upstar
-- :white_circle:  Cartographic Upstar
-- :white_circle:  Sieve Upstar
+- :white_circle: InPhantom Upstar
+- :white_circle: OutPhantom Upstar
+- :white_circle: Cartographic Upstar
+- :white_circle: Sieve Upstar
 
 ### Downstar Variants
 
-- :orange_circle:  Cartesian (Strong) Downstar 
-- :orange_circle:  CoCartesian (Choice) Downstar 
-- :orange_circle:  Monoidal Downstar 
-- :orange_circle:  InPhantom Downstar
+- :orange_circle: Cartesian (Strong) Downstar 
+- :orange_circle: CoCartesian (Choice) Downstar 
+- :orange_circle: Monoidal Downstar 
+- :orange_circle: InPhantom Downstar
 - :orange_circle: Closed Downstar 
-- :white_circle:  OutPhantom Downstar
-- :white_circle:  Cartographic Downstar
-- :white_circle:  Sieve Downstar
+- :white_circle: OutPhantom Downstar
+- :white_circle: Cartographic Downstar
+- :white_circle: Sieve Downstar
 
 ### Multistar Variants
 
@@ -98,19 +102,18 @@ Attempting to create Optics and other Computational structures from scratch
 
 ### Tagged Variants
 
-- :orange_circle:  Tagged Cartesian (Strong) 
-- :green_circle:  Tagged CoCartesian (Choice)
-- :white_circle:  Tagged Monoidal 
-- :white_circle:  Tagged InPhantom 
+- :orange_circle: Tagged Cartesian (Strong) 
+- :green_circle: Tagged CoCartesian (Choice)
+- :white_circle: Tagged Monoidal 
+- :white_circle: Tagged InPhantom 
+- :white_circle: Tagged Closed
 - :white_circle: Tagged Traversing
-- :white_circle:  Tagged OutPhantom 
-- :white_circle:  Tagged Cartographic
-- :white_circle:  Tagged Sieve 
+- :white_circle: Tagged OutPhantom 
+- :white_circle: Tagged Cartographic
+- :white_circle: Tagged Sieve 
 
-### Other Variants
+### Other Modifications
 
-- :white_circle: Closed
-- :white_circle: Sieve
 - :white_circle: Traversing
 - :white_circle: Right Kan Lift
 

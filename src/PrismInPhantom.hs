@@ -1,8 +1,6 @@
 module PrismInPhantom where
 
 
-import Control.Lens.Combinators    ( Profunctor, dimap )
-
 ---------------------------------------------------------------------------------
 
  {--
