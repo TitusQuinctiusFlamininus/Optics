@@ -16,7 +16,6 @@ class Profunctor p where
 
 
 where p is a Profunctor : 
-
 type  Optic  p  a  b  s  t    =  p  a  b    ->   p  s  t
 
 
