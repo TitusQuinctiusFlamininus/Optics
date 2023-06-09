@@ -35,9 +35,11 @@ class Profunctor p => Closed p where
 newtype ClosedStar f  a  b             =   ClosedUpstar { seal  ::   a   ->    f b }
 
 
+
 -- The profunctor is not hard to invent...
 instance Functor f => Profunctor (ClosedStar f)    where
     dimap  h   g   (ClosedUpstar k)    =   ClosedUpstar (fmap g . k . h)
+
 
 
 -- And now attempting to make it Closed: 
