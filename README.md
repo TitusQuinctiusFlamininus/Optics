@@ -77,7 +77,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :green_circle: CoCartesian (Choice) Upstar
 - :green_circle: Monoidal Upstar
 - :orange_circle: Closed Upstar
-- :white_circle: InPhantom Upstar
+- :orange_circle: InPhantom Upstar
 - :white_circle: OutPhantom Upstar
 - :white_circle: Cartographic Upstar
 - :white_circle: Sieve Upstar
