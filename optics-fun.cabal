@@ -51,6 +51,7 @@ library
       UpstarClosedFun
       UpstarCoCartesianFun
       UpstarFun
+      UpstarInPhantomFun
       UpstarMonoidalFun
   other-modules:
       Paths_optics_fun
