@@ -34,7 +34,7 @@ class Functor f where
 
 ---------------------------------------------------------------------------------
 
-
+-- This is what we mean by InPhantom
 class Choice p => InPhantom p where
     icoerce   ::   p  a  c   ->    p  b  c
 
@@ -45,9 +45,11 @@ newtype Upstar f  a  b               =    UpPhantom { upper ::   a  -> f b  }
 
 
 
+
 -- Making it a Profunctor is easy enough....
 instance Functor f =>  Profunctor (Upstar f) where
     dimap h g (UpPhantom u)          =    UpPhantom (fmap g . u . h) 
+
 
 
 
@@ -57,11 +59,13 @@ instance (Applicative f) =>  Choice (Upstar f)     where
   right' (UpPhantom  u)              =    UpPhantom . either ((Left <$>) . pure) $ ((Right <$>) . u   )               
 
 
--- Seems like an instance cannot be formed 
----  ----------->>>>>> Explanation :  The transformation is from   :   (a   ->  f c)   to  :  (b  ->  f c)
---                                 :  There's access to type b, but we need to form (f c)
+
+
+-- Seems like an instance of InPhantom cannot be formed, based purely on the definitions above
+---  ----------->>>>>> Explanation :  The transformation is from   :   (a   ->  f c)     to      (b  ->  f c)
+--                                 :  There's access to type b, but we need to form   :   (f c)
 --                                 :  To form (f c), we may use u  :   But we need access to type a  
---                                 :  So really, we need a function that can transform b's into a's    :   (b  ->  a)  ..... ??? This function is unknown
+--                                 :  So really, we need a function that can transform b's into a's    :   (b  ->  a)  ..... ??? 
 --                                 :  Side Note : If you REALLY force the issue, we could use unsafe package's:  coerce :: (b -> a) (for practical cases, but not in principle)
 --instance (Applicative f) =>  InPhantom (Upstar f) where
 --    icoerce  (UpPhantom  u)        =    UpPhantom $ u . ??
