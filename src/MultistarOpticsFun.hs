@@ -49,11 +49,11 @@ data Multistar   f a b s t        = Multistar    {  up   ::   a     ->    f b,
 
 
 -- Now we construct a Profunctor, like we always do
-instance Functor f => Profunctor (Multistar f s t) where
-    dimap h g (Multistar u d)     =    Multistar (u . id) (g . d . fmap h)
+instance Functor f => Profunctor (Multistar f a b) where
+    dimap h g (Multistar u d)     =    Multistar  u  (g . d . fmap h)
 
 -- Explanation: 
-    -- (For Multistar's left-hand-side  (L.H.S) function ): u takes something of type a ; let's assume h can produce that type; if so, h is really: (some_type_call_it_a' -> a): Why not just assume a' is identical to type a, then use identity? Easy enough
+    -- (For Multistar's left-hand-side  (L.H.S) function ): u takes something of type a ; let's assume h can produce that type; if so, h is really: (some_type_call_it_a' -> a): Why not just assume a' is identical to type a, then use identity? If so, we actually don't need anything but u
     -- (For Multistar's right-hand-side (R.H.S) function): 
                   --  Notice   first  : The left hand side (as explained above), goes from : (a -> f b) . The type a here is not necessarily identical to a' in h; it could be a', but it could also be something else
                   --           second : s and t are types that 'make up' the concept of the multistar profunctor ((p s t), according to the dimap syntax above), but they dont appear as types on the left, only on the right;  
