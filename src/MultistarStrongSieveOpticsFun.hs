@@ -198,7 +198,7 @@ multiSieve             =    extract . sieve (multiOptic multiFunctorP) $ From
 
 
 
--- Trying to create another sieve based on the original profunctor will simply not do!
+-- Trying to create t's using the same sieve (based on the original profunctor) will simply not do!
 -- You'll need to roll your own Profunctor
 --multiSieve'        ::    To
 --multiSieve'         =    extract . sieve (multiOptic multiFunctorP) $ From    <<<<------- will not compile
