@@ -1,13 +1,14 @@
-{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE FlexibleInstances      #-}
 
 
 module MultistarStrongSieveOpticsFun where
 
-import Control.Comonad
-import Control.Lens.Combinators    (Profunctor, dimap            )
-import Data.Profunctor.Strong      (Strong    , first', second'  )
+
+import Control.Comonad             (Comonad   , extract   , duplicate, extend   ) 
+import Control.Lens.Combinators    (Profunctor, dimap                           )
+import Data.Profunctor.Strong      (Strong    , first'    , second'             )
 
 ---------------------------------------------------------------------------------
 
