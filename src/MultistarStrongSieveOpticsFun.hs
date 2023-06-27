@@ -62,9 +62,10 @@ class Functor w => Comonad w where
 --}
 
 ---------------------------------------------------------------------------------
+
 -- Formally declaring it (rather than importing Mezzolenses)
 class (Profunctor p, Functor f)    =>   Sieve  p f  |  p -> f  where
-        sieve  ::  p  a  b    ->   a   ->   f  b
+        sieve  ::  p  s  t    ->   s   ->   f  t
 
 
 
