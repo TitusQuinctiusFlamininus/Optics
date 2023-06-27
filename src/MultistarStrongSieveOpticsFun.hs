@@ -156,25 +156,25 @@ instance Comonad OpFunc where
 
 -- Re-inventing the functions from the vanilla MultiStar
 -- Here is our Multistar variation of the contravariant function (from the vanilla)
-epoch      ::    k           ->    From
+epoch            ::    k           ->    From
 epoch                        =     undefined
 
 
 
 -- Here is the covariant function...
-evolve     ::   To           ->    s'
+evolve           ::   To           ->    s'
 evolve                       =     undefined
 
 
 
 -- Here is a way to go up
-outflow    ::  a             ->    OpFunc b 
+outflow          ::   a            ->    OpFunc b 
 outflow                      =     undefined
 
 
 
--- And this one way to go down...
-supernova         ::   OpFunc From    ->    To
+-- And this a way to go down...
+supernova         ::  OpFunc From   ->    To
 supernova                    =     undefined
 
 
