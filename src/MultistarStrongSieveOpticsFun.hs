@@ -31,9 +31,6 @@ where p is a Profunctor :
 type Optic p a b s t = p a b -> p s t
 
 
--- From the Mezzolens Haskell Package, we find this definition: 
-https://hackage.haskell.org/package/mezzolens-0.0.0/docs/Mezzolens-Profunctor.html#t:OutPhantom
-
 
 class Profunctor p where
   lmap  :: (c -> a) -> p a b -> p c b                 <<-----
@@ -43,9 +40,11 @@ class Profunctor p where
   dimap :: (c -> a) -> (b -> d) -> p a b -> p c d     <<-------------- Or just this one
 
 
+
 class (Profunctor p, Functor f) => Sieve p f | p -> f where
         sieve :: p a b -> a -> f b
   
+
 
 -- We will have to change this contextual signature to make the experimental type Strong successfully
 -- If not, we cannot continue, so a little bit of rule-bending is needed
@@ -54,11 +53,23 @@ class Profunctor p => Strong p where
         second'  ::  p  a  b   -> p  (c,  a)  (c,  b)
 
 
+
 -- As a convenience only so we can develop our example further than it normally is possible
 class Functor w => Comonad w where
         extract   :: w a -> a
         duplicate :: w a -> w (w a)
         extend    :: (w a -> b) -> w a -> w b
+
+
+
+class Functor f where
+    <$>     :: (a -> b) -> f a -> f b
+
+
+
+class Functor f => Applicative f where
+    pure      ::    x           -> f x
+    <*>       ::    f (a -> b)  -> f a   ->  f b    
 
 --}
 
