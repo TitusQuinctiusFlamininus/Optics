@@ -46,6 +46,8 @@ class (Profunctor p, Functor f) => Sieve p f | p -> f where
         sieve :: p a b -> a -> f b
   
 
+-- We will have to change this contextual signature to make the experimental type Strong successfully
+-- If not, we cannot continue, so a little bit of rule-bending is needed
 class Profunctor p => Strong p where
         first'   ::  p  a  b   -> p  (a,  c)  (b,  c)
         second'  ::  p  a  b   -> p  (c,  a)  (c,  b)
@@ -61,8 +63,9 @@ class Functor w => Comonad w where
 
 ---------------------------------------------------------------------------------
 -- Formally declaring it (rather than importing Mezzolenses)
-class (Profunctor p, Functor f) => Sieve p f | p -> f where
-        sieve :: p a b -> a -> f b
+class (Profunctor p, Functor f)    =>   Sieve  p f  |  p -> f  where
+        sieve  ::  p  a  b    ->   a   ->   f  b
+
 
 
 -- Re-examining our experimental type
@@ -72,7 +75,7 @@ data Multistar   f  a  b  s  t              =           Multistar    {  up   :: 
                                                                      }
 
 
--- Now we construct a Profunctor, like we always do
+-- Now we construct a Profunctor, like we did before
 instance Functor f => Profunctor (Multistar f a b) where
     dimap   h   g   (Multistar   u   d)     =           Multistar  u  (g . d . fmap h)
 
@@ -80,14 +83,79 @@ instance Functor f => Profunctor (Multistar f a b) where
 
 
 -- First, we make our Multistar Strong
--- We did a litte cheating, since we made our Functor a lot more powerful by making it an applicative
--- We also needed a way to dissociate the functorial context from the resultant strong tuple, in down
--- Without the additional comonadic context, it would not be possible to forme a strong Multistar
+-- We did a litte cheating, since we made our Functor a lot more powerful by making it an applicative and a comonad
+--   --------->>>>> It used to be :         class  Profunctor p                              =>    Strong p  
+--                  But now it is :         class (Profunctor p, Applicative f, Comonad f)   =>    Strong p
+--   
 instance   (Applicative f, Comonad f)   =>    Strong   (Multistar f a b) where
            first'   (Multistar   u   d)     =           Multistar  u  (extract  .  ((\y ->  ((d . pure . fst $ y ), snd y)) <$>)) 
            second'  (Multistar   u   d)     =           Multistar  u  (extract  .  ((\y ->  (fst y, (d . pure . snd $ y ))) <$>)) 
 
 
--- Now making a Sieve
+
+
+-- Now making a Sieve. The upstar portion of the multistar is irrelevant
 instance   Applicative f   =>     Sieve  (Multistar f a b) f where
             sieve  (Multistar   _   d)      =           pure . d . pure
+
+
+
+---------------------------------------------------------------------------------
+
+-- REINVENTING!
+
+-- this will help be our functor
+data   OpFunc a              =      OpFunc a 
+
+
+
+-- we will be going from this type...
+data   From                  =      From
+
+
+
+-- and eventually end up with this type.... 
+data   To                    =      To
+
+
+---------------------------------------------------------------------------------
+
+--First let's make our OpFunc a functor, since it will be represented in f'
+instance Functor OpFunc where
+    fmap f (OpFunc x)        =       OpFunc (f x)
+
+
+
+
+-- Re-inventing the functions from the vanilla MultiStar
+
+-- Here is our Multistar variation of the contravariant function (from the vanilla)
+epoch      ::    k           ->    From
+epoch                        =     undefined
+
+
+
+-- Here is the covariant function...
+evolve     ::   To           ->    s'
+evolve                       =     undefined
+
+
+
+-- Here is a way to go up
+outflow    ::  a             ->    OpFunc b 
+outflow                      =     undefined
+
+
+
+-- And this is a way to go down
+supernova  :: OpFunc From    ->    To
+supernova                    =     undefined
+
+
+
+---------------------------------------------------------------------------------
+
+-- Defining the Profunctor 
+multiFunctorP :: Multistar OpFunc  a'  b'  From  To  
+multiFunctorP                =    dimap epoch evolve (Multistar  outflow supernova)
+
