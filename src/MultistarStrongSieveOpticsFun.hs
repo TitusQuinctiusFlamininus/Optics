@@ -65,7 +65,7 @@ class Functor w => Comonad w where
 
 -- Formally declaring it (rather than importing Mezzolenses)
 class (Profunctor p, Functor f)    =>   Sieve  p f  |  p -> f  where
-        sieve  ::  p  s  t    ->   s   ->   f  t
+        sieve    ::     p  s  t    ->   s   ->   f  t
 
 
 
@@ -105,25 +105,34 @@ instance   Applicative f   =>     Sieve  (Multistar f a b) f where
 
 -- REINVENTING!
 
--- this will help be our functor
+-- This will help be our primary sieve functor
 data   OpFunc a              =      OpFunc a 
 
 
+-- Let's invent an alternative type, for the purposes of our Sieve
+data   DownFunc a'              =    DownFunc a' 
 
--- we will be going from this type...
+
+-- We'll will be going from this type...
 data   From                  =      From
 
 
 
--- and eventually end up with this type.... 
+-- And eventually end up with this type.... 
 data   To                    =      To
 
 
 ---------------------------------------------------------------------------------
 
---First let's make our OpFunc a functor, since it will be represented in f'
+--First let's make our OpFunc a functor, since it will be represented in f
 instance Functor OpFunc where
     fmap f (OpFunc x)        =     OpFunc (f x)
+
+
+
+-- Let's make our alternative Sieve functor 
+instance Functor DownFunc where
+    fmap f (DownFunc x)        =     DownFunc (f x)
 
 
 
@@ -141,7 +150,6 @@ instance Comonad OpFunc where
 
 
 -- Re-inventing the functions from the vanilla MultiStar
-
 -- Here is our Multistar variation of the contravariant function (from the vanilla)
 epoch      ::    k           ->    From
 epoch                        =     undefined
@@ -161,14 +169,40 @@ outflow                      =     undefined
 
 
 -- And this is a way to go down
-supernova  :: OpFunc From    ->    To
-supernova                    =     undefined
+supernova         ::   OpFunc From    ->    To
+supernova              =     undefined
 
 
 
 ---------------------------------------------------------------------------------
 
--- Defining the Profunctor 
-multiFunctorP :: Multistar OpFunc  a  b  From  To  
-multiFunctorP                =    dimap epoch evolve (Multistar  outflow supernova)
 
+-- Defining the Profunctor 
+multiFunctorP     ::   Multistar OpFunc  a  b  From  To  
+multiFunctorP          =    dimap epoch evolve (Multistar outflow supernova)
+
+
+
+
+-- And now for our Optic
+multiOptic        ::   Multistar OpFunc a' b' a  b       ->       Multistar OpFunc a' b' From To
+multiOptic        m    =   Multistar (up m) supernova
+
+
+
+
+-- Let's use the sieve and optic to create the resultant types we are really interested in
+multiSieve        ::   To
+multiSieve             =    extract . sieve (multiOptic multiFunctorP) $ From
+
+
+
+
+-- Trying to create another sieve based on the original profunctor will simply not do!
+-- You'll need to roll your own Profunctor
+--multiSieve'        ::    To
+--multiSieve'         =    extract . sieve (multiOptic multiFunctorP) $ From    <<<<------- will not compile
+
+
+
+---------------------------------------------------------------------------------
