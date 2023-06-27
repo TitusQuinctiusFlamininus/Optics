@@ -140,12 +140,6 @@ instance Functor OpFunc where
 
 
 
--- Let's make our alternative Sieve functor 
-instance Functor DownFunc where
-    fmap f (DownFunc x)        =     DownFunc (f x)
-
-
-
 -- Now, doing the due diligence based on the functor constraints way up top...
 instance Applicative OpFunc where
   pure x                     =     OpFunc x
@@ -178,7 +172,7 @@ outflow                      =     undefined
 
 
 
--- And this is a way to go down
+-- And this one way to go down...
 supernova         ::   OpFunc From    ->    To
 supernova              =     undefined
 
@@ -195,23 +189,20 @@ multiFunctorP          =    dimap epoch evolve (Multistar outflow supernova)
 
 
 -- And now for our Optic
-multiOptic        ::   Multistar OpFunc a' b' a  b       ->       Multistar OpFunc a' b' From To
-multiOptic        m    =   Multistar (up m) supernova
+multiOptic             ::  Multistar f a' b' a  b     ->    (f From  ->  To)   -> Multistar f a' b' From To
+multiOptic        m    =   Multistar (up m)
 
 
 
 
 -- Let's use the sieve and optic to create the resultant types we are really interested in
-multiSieve        ::   To
-multiSieve             =    extract . sieve (multiOptic multiFunctorP) $ From
+multiSieve             ::   To
+multiSieve             =    extract . sieve (multiOptic multiFunctorP supernova) $ From
 
 
-
-
--- Trying to create t's using the same sieve (based on the original profunctor) will simply not do!
+-- Trying to create t's using the same sieve (based on the original profunctor, which itself has a specific functorial context will simply not do.
 -- You'll need to roll your own Profunctor
---multiSieve'        ::    To
---multiSieve'         =    extract . sieve (multiOptic multiFunctorP) $ From    <<<<------- will not compile
+  
 
 
 
