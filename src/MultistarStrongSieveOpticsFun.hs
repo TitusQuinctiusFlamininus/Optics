@@ -123,9 +123,21 @@ data   To                    =      To
 
 --First let's make our OpFunc a functor, since it will be represented in f'
 instance Functor OpFunc where
-    fmap f (OpFunc x)        =       OpFunc (f x)
+    fmap f (OpFunc x)        =     OpFunc (f x)
 
 
+
+-- Now, doing the due diligence based on the functor constraints way up top...
+instance Applicative OpFunc where
+  pure x                     =     OpFunc x
+  OpFunc y   <*>  OpFunc z   =     OpFunc (y z)
+
+
+
+instance Comonad OpFunc where
+    extract (OpFunc x)       =     x
+    duplicate  x             =     OpFunc x
+    extend     f             =     fmap f . duplicate
 
 
 -- Re-inventing the functions from the vanilla MultiStar
@@ -157,6 +169,6 @@ supernova                    =     undefined
 ---------------------------------------------------------------------------------
 
 -- Defining the Profunctor 
-multiFunctorP :: Multistar OpFunc  a'  b'  From  To  
+multiFunctorP :: Multistar OpFunc  a  b  From  To  
 multiFunctorP                =    dimap epoch evolve (Multistar  outflow supernova)
 
