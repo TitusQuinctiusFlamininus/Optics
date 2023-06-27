@@ -116,20 +116,20 @@ instance   Applicative f   =>     Sieve  (Multistar f a b) f where
 -- REINVENTING!
 
 -- This will help be our primary sieve functor
-data   OpFunc a              =      OpFunc a 
+data   OpFunc a              =    OpFunc a 
 
 
 -- Let's invent an alternative type, for the purposes of our Sieve
-data   DownFunc a'              =    DownFunc a' 
+data   DownFunc a'           =    DownFunc a' 
 
 
 -- We'll will be going from this type...
-data   From                  =      From
+data   From                  =    From
 
 
 
 -- And eventually end up with this type.... 
-data   To                    =      To
+data   To                    =   To
 
 
 ---------------------------------------------------------------------------------
@@ -153,6 +153,7 @@ instance Comonad OpFunc where
     extend     f             =     fmap f . duplicate
 
 
+
 -- Re-inventing the functions from the vanilla MultiStar
 -- Here is our Multistar variation of the contravariant function (from the vanilla)
 epoch      ::    k           ->    From
@@ -174,7 +175,7 @@ outflow                      =     undefined
 
 -- And this one way to go down...
 supernova         ::   OpFunc From    ->    To
-supernova              =     undefined
+supernova                    =     undefined
 
 
 
@@ -182,28 +183,22 @@ supernova              =     undefined
 
 
 -- Defining the Profunctor 
-multiFunctorP     ::   Multistar OpFunc  a  b  From  To  
+multiFunctorP     ::        Multistar OpFunc  a  b  From  To  
 multiFunctorP          =    dimap epoch evolve (Multistar outflow supernova)
 
 
 
-
 -- And now for our Optic
-multiOptic             ::  Multistar f a' b' a  b     ->    (f From  ->  To)   -> Multistar f a' b' From To
-multiOptic        m    =   Multistar (up m)
+multiOptic             ::   Multistar OpFunc a' b' a  b     ->    Multistar OpFunc a' b' From To
+multiOptic        m    =    Multistar (up m) supernova
 
 
 
 
 -- Let's use the sieve and optic to create the resultant types we are really interested in
 multiSieve             ::   To
-multiSieve             =    extract . sieve (multiOptic multiFunctorP supernova) $ From
-
-
--- Trying to create t's using the same sieve (based on the original profunctor, which itself has a specific functorial context will simply not do.
--- You'll need to roll your own Profunctor
+multiSieve             =    extract . sieve (multiOptic multiFunctorP) $ From
   
-
 
 
 ---------------------------------------------------------------------------------
