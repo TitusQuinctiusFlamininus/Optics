@@ -28,7 +28,7 @@ class Profunctor p where
 
 
 where p is a Profunctor : 
-type Optic p a b s t = p a b -> p s t
+type Optic  p a b s t    =    p a b     ->    p s t
 
 
 
@@ -42,7 +42,7 @@ class Profunctor p where
 
 
 class (Profunctor p, Functor f) => Sieve p f | p -> f where
-        sieve :: p a b -> a -> f b
+        sieve    ::    p a b    ->    a   ->    f b
   
 
 
@@ -61,12 +61,10 @@ class Functor w => Comonad w where
         extend    :: (w a -> b) -> w a -> w b
 
 
-
 class Functor f where
     <$>     :: (a -> b) -> f a -> f b
 
-
-
+s
 class Functor f => Applicative f where
     pure      ::    x           -> f x
     <*>       ::    f (a -> b)  -> f a   ->  f b    
