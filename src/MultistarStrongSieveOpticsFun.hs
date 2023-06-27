@@ -197,7 +197,7 @@ multiOptic        m    =    Multistar (up m) supernova
 
 -- Let's use the sieve and optic to create the resultant types we are really interested in
 multiSieve             ::   To
-multiSieve             =    extract . sieve (multiOptic multiFunctorP) $ From
+multiSieve             =    fst $ extract $ sieve (first' $ multiOptic multiFunctorP) (From, id)
   
 
 
