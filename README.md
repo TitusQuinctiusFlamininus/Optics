@@ -111,8 +111,6 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle: Tagged Cartographic
 - :white_circle: Tagged Sieve 
 
-### Downstar Variants
-- :orange_circle:Traversal
 
 ### Other Modifications
 
