@@ -95,10 +95,9 @@ Attempting to create Optics and other Computational structures from scratch
 
 ### Multistar Variants
 
-- :green_circle: Spike (Upstar-Downstar)
-- :green_circle: Sieve Spike (Downstar-Upstar)
-- :white_circle: Ditch (Downstar-Upstar)
-- :white_circle: Sieve Ditch (Downstar-Upstar)
+- :green_circle: Vanilla
+- :green_circle: Strong Sieve 
+
 
 ### Tagged Variants
 
@@ -111,6 +110,9 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle: Tagged OutPhantom 
 - :white_circle: Tagged Cartographic
 - :white_circle: Tagged Sieve 
+
+### Downstar Variants
+- :orange_circle:Traversal
 
 ### Other Modifications
 
