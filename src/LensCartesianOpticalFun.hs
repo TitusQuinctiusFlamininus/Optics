@@ -158,7 +158,7 @@ rightOptical'  k       =     SLens (\x -> see   (first' k) ((peep . snd $ x), fs
 
 
 
--- Adding this for more fun. First' could also have been used....
+-- Adding this for more fun. Second' could also have been used....
 flippyOptical   ::  StrongLens Atom Molecule (Atom, d) (Molecule, d)   ->   StrongLens Atom Molecule (d, Composite Atom) (d, NewComposite Molecule) 
 flippyOptical    k     =     SLens  (\x  -> see  (second' k) (fst x, ((peep . snd $ x), fst x)))  (\y ->   ((fst . snd $ y), comp ((fst y), snd . snd $ y)))
 
