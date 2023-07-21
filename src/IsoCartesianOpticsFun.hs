@@ -35,9 +35,17 @@ type  Optic  p  a  b  s  t    =  p  a  b    ->   p  s  t
 
 ---------------------------------------------------------------------------------
 
--- Defining an Iso structure as a prerequisite
-data  Iso  a  b  s  t               =     Iso    {   hin    ::  a       ->   b,
 
-                                                     her    ::  s       ->   t
+-- Defining the Isomorphism structure as a prerequisite
+data  Iso  a  b  s  t                =     Iso    {   hin    ::  a       ->   b,
+
+                                                      her    ::  s       ->   t
                                                     
-                                                }
+                                                  }
+
+
+-- Making the Iso a Profunctor
+-- Explanation :   ------>>>>>   hin function :: No modifications needed, because no type variables appear for the instance requirement
+--                               her function :: Straight-forward function composition from the input of the contravariant function to the covariant one, through her
+instance Profunctor (Iso  a  b) where
+    dimap    h    g  (Iso f  k)       =    Iso   f   (g . k . h)
