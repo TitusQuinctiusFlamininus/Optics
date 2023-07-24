@@ -46,6 +46,11 @@ data  Iso  a  b  s  t                =     Iso    {   hin    ::  a       ->   b,
 
 -- Making the Iso a Profunctor
 -- Explanation :   ------>>>>>   hin function :: No modifications needed, because no type variables appear for the instance requirement
---                               her function :: Straight-forward function composition from the input of the contravariant function to the covariant one, through her
-instance Profunctor (Iso  a  b) where
-    dimap    h    g  (Iso f  k)       =    Iso   f   (g . k . h)
+--                               her function ::Straight Composition from the input of the contravariant function to the covariant one, through 'her'
+instance  Profunctor (Iso a  b  )   where
+    dimap    h    g  (Iso f  k  )       =    Iso  f    (g . k . h)
+
+
+instance  Strong     (Iso a  b  )   where
+    first'           (Iso f  k  )       =    Iso   f   (\x ->   ((k . fst $ x), snd   x  ))
+    second'          (Iso f  k  )       =    Iso   f   (\x ->   (fst x,    (k . snd $ x )))
