@@ -52,7 +52,7 @@ instance  Profunctor (Iso a  b  )   where
 
 
 -- Now strengthening the Iso Profunctor
--- Explanation :   ------>>>>>   hin function :: As in the profunctor case, n modifications needed
+-- Explanation :   ------>>>>>   hin function :: As in the profunctor case, no modifications needed
 --                               her function :: 
 --                                   First'   ::  The transformation is from (s  -> t)  into : (s,  c)  ->  (t,  c)
 --                                         --->>  We need to produce : (t, c) , so to obtain the second tuple element : (snd x) 
