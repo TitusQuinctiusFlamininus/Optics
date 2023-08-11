@@ -60,7 +60,7 @@ instance  Profunctor (Iso a  b  )   where
 --                                                                            :  So first obtain the type s           : (fst x)
 --                                                                            :  Now give the above result to our k function
 --                                   Second'  ::  The transformation is from (s  -> t)  into :    (c,  s)  ->  (c,  t)
---                                            ::  The process is similar to first', only the positions of our t and s types are interchanged
+--                                            ::  The process is similar to first', only the positions of our t and s (w.r.t to type c) types are interchanged
 instance  Strong     (Iso a  b  )   where
     first'           (Iso f  k  )       =    Iso   f   (\x ->   ((k . fst $ x), snd   x  ))
     second'          (Iso f  k  )       =    Iso   f   (\x ->   (fst x,    (k . snd $ x )))
