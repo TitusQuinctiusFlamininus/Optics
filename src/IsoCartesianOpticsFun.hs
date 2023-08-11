@@ -46,11 +46,21 @@ data  Iso  a  b  s  t                =     Iso    {   hin    ::  a       ->   b,
 
 -- Making the Iso a Profunctor
 -- Explanation :   ------>>>>>   hin function :: No modifications needed, because no type variables appear for the instance requirement
---                               her function ::Straight Composition from the input of the contravariant function to the covariant one, through 'her'
+--                               her function :: Straight Composition from the input of the contravariant function to the covariant one, through 'her'
 instance  Profunctor (Iso a  b  )   where
     dimap    h    g  (Iso f  k  )       =    Iso   f   (g . k . h)
 
 
+-- Now strengthening the Iso Profunctor
+-- Explanation :   ------>>>>>   hin function :: As in the profunctor case, n modifications needed
+--                               her function :: 
+--                                   First'   ::  The transformation is from (s  -> t)  into : (s,  c)  ->  (t,  c)
+--                                         --->>  We need to produce : (t, c) , so to obtain the second tuple element : (snd x) 
+--                                         --->>  For the first tuple element :  We need to create the type t
+--                                                                            :  So first obtain the type s           : (fst x)
+--                                                                            :  Now give the above result to our k function
+--                                   Second'  ::  The transformation is from (s  -> t)  into :    (c,  s)  ->  (c,  t)
+--                                            ::  The process is similar to first', only the positions of our t and s types are interchanged
 instance  Strong     (Iso a  b  )   where
     first'           (Iso f  k  )       =    Iso   f   (\x ->   ((k . fst $ x), snd   x  ))
     second'          (Iso f  k  )       =    Iso   f   (\x ->   (fst x,    (k . snd $ x )))
@@ -85,22 +95,37 @@ data New             = New
 
 -- We perform this function when we are preparing a profunctor isomorphic transformation
 preAdapt     :: s'          ->         Old
-preAdapt                   = undefined
+preAdapt            = undefined
 
 
 -- We perform this function when we are winding down the transformation
 postAdapt    :: New         ->         t'
-postAdapt                  = undefined
+postAdapt           = undefined
 
 
 -- This is a function that deals with transforming base types into other base types
 adapt        :: Raw         ->         Ripe
-adapt                      = undefined
+adapt               = undefined
 
 
 -- And finally this function has the ability to transform ancient types into more modern ones
 unAdapt      :: Old         ->         New
-unAdapt                    = undefined
+unAdapt             =    undefined
+
+
+---------------------------------------------------------------------------------
+
+-- Now creating the Iso Profunctor
+isoP         ::  Iso Raw Ripe Old New
+isoP                =     dimap preAdapt postAdapt (Iso adapt unAdapt)
+
+
+
+-- Finally, constructing the Iso Optic
+-- The adapter function from the input can be used untouched
+isoOptic     ::  Iso Raw Ripe Raw Ripe  ->  Iso Raw Ripe Old New
+isoOptic     k       =     Iso (hin k) unAdapt
+
 
 
 ---------------------------------------------------------------------------------
