@@ -28,7 +28,7 @@ class Profunctor p  =>  Choice p where
 
 
 class Choice p => InPhantom p where
-    icoerce   ::   p  a  c   ->    p  b  
+    icoerce   ::   p  a  c   ->    p  b  c
 
 
 --}   
