@@ -125,6 +125,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :green_circle: Strong Lens
 - :green_circle: Prism
 - :green_circle: Iso
+- :green_circle: Choice Iso
 - :green_circle: Adapter
 - :green_circle: Affine
 - :white_circle: Traversal
