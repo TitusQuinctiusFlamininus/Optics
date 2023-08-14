@@ -121,9 +121,17 @@ Attempting to create Optics and other Computational structures from scratch
 ## Profunctor-Optics
 ![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/optic.png "Optic")
 
-- :green_circle: Lens
 - :green_circle: Strong Lens
+- :orange_circle: Choice Lens
+- :white_circle: Monoidal Lens
+- :orange_circle: Traversing Lens
+- :orange_circle: InPhantom Lens
+- :white_circle: OutPhantom Lens
+- :white_circle: Cartographic Lens
+- :orange_circle: Closed Lens
 - :green_circle: Prism
+- :orange_circle: Choice Prism
+- :orange_circle: inPhantom Prism
 - :green_circle: Iso
 - :green_circle: Choice Iso
 - :green_circle: Adapter
