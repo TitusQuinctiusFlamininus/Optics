@@ -34,6 +34,7 @@ library
       DownstarMonoidalFun
       ForgetFun
       IsoCartesianOpticsFun
+      IsoCoCartesianOpticsFun
       LensCartesianOpticalFun
       LensClosedOpticsFun
       LensCoCartesianOpticalFun
