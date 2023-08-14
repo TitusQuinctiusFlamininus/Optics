@@ -61,8 +61,8 @@ Attempting to create Optics and other Computational structures from scratch
 
 ### Iso Variants
 
-- :green_circle: Cartesian (Strong) Iso
-- :white_circle: CoCartesian (Choice) Iso
+- :green_circle: Cartesian   Strong)  Iso
+- :green_circle: CoCartesian (Choice) Iso
 - :white_circle: Monoidal Iso
 - :white_circle: Traversing Iso
 - :white_circle: InPhantom Iso
