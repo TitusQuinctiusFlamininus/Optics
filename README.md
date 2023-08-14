@@ -121,6 +121,7 @@ Attempting to create Optics and other Computational structures from scratch
 ## Profunctor-Optics
 ![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/optic.png "Optic")
 
+- :green_circle: Lens
 - :green_circle: Strong Lens
 - :orange_circle: Choice Lens
 - :white_circle: Monoidal Lens
