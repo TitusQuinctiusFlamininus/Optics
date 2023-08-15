@@ -123,7 +123,7 @@ isoP                =     dimap preAdapt postAdapt (Iso adapt unAdapt)
 
 -- Finally, constructing the Iso Optic
 -- The unadapt function must now act as our new transformation function, since we cannot use the input anymore
-isoOptic     ::  Iso Raw Ripe Raw Ripe  ->  Iso Raw Ripe Old New
+isoOptic     ::  Iso a' b' Raw Ripe  ->  Iso a' b' Old New
 isoOptic     k       =     Iso (hin k) unAdapt
 
 

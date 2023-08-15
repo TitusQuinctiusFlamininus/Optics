@@ -66,3 +66,46 @@ instance  Profunctor (Iso a  b  )   where
 instance Choice (Iso a b) where
   left'     (Iso   f   k)            =   Iso   f   (either (Left . k) Right      )
   right'    (Iso   f   k)            =   Iso   f   (either  Left     (Right . k) )
+
+
+ ---------------------------------------------------------------------------------
+
+-- The definitions used in the Strong Iso will be used here again, in order to see patterns more clearly
+
+data Raw             = Raw
+
+
+data Ripe            = Ripe
+
+
+data Old             = Old 
+
+
+data New             = New
+
+
+-- And now for the related functions....
+
+
+preAdapt     :: s'          ->         Old
+preAdapt            = undefined
+
+
+postAdapt    :: New         ->         t'
+postAdapt           = undefined
+
+
+adapt        :: Raw         ->         Ripe
+adapt               = undefined
+
+
+unAdapt      :: Old         ->         New
+unAdapt             =    undefined
+
+
+---------------------------------------------------------------------------------
+
+-- Here is our bare Profunctor
+isoP         ::  Iso Raw Ripe Old New
+isoP                =     dimap preAdapt postAdapt (Iso adapt unAdapt)
+
