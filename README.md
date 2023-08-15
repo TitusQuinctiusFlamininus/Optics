@@ -132,7 +132,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :orange_circle: Closed Lens
 - :green_circle: Prism
 - :orange_circle: Choice Prism
-- :orange_circle: inPhantom Prism
+- :orange_circle: InPhantom Prism
 - :green_circle: Iso
 - :green_circle: Choice Iso
 - :green_circle: Adapter
