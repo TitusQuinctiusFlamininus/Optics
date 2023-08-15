@@ -110,15 +110,15 @@ telescopicP            = SLens (peep . preTreat) (\z  -> postTreat . comp $ (fst
 
 
 
--- Using just the convenience functions directly, we can form the Left Profunctor......                                                             
-leftTelescopic   ::   StrongLens Atom Molecule (Composite Atom, d) (NewComposite Molecule, d) 
-leftTelescopic         = SLens (peep . fst) (\y -> (comp (fst y, fst . snd $ y), snd . snd $ y))
+-- Using just the convenience functions directly, we can form the First Profunctor......                                                             
+firstTelescopic   ::   StrongLens Atom Molecule (Composite Atom, d) (NewComposite Molecule, d) 
+firstTelescopic         = SLens (peep . fst) (\y -> (comp (fst y, fst . snd $ y), snd . snd $ y))
 
 
 
--- And for the Right.....
-rightTelescopic   ::   StrongLens Atom Molecule (d, Composite Atom) (d, NewComposite Molecule) 
-rightTelescopic        = SLens (peep . snd) (\y -> (fst . snd $ y, comp (fst y, snd . snd $ y)))
+-- And for the Second Profunctor .....
+secondTelescopic   ::   StrongLens Atom Molecule (d, Composite Atom) (d, NewComposite Molecule) 
+secondTelescopic        = SLens (peep . snd) (\y -> (fst . snd $ y, comp (fst y, snd . snd $ y)))
 
 
 -- Or we could take the scenic route, using an Optical definition below .....
@@ -137,23 +137,23 @@ rightTelescopic        = SLens (peep . snd) (\y -> (fst . snd $ y, comp (fst y, 
 --                                                 :       If we use (update k)            :  The transformation is    :    ((Molecule, Atom)       ->   Molecule     )        <<<---- not useful.....
 --                                                 :       If we use (update . first' k)   :  The transformation is    :    ((Molecule, (Atom, d))  ->   (Molecule, d))        <<<---- still dealing with Atoms....
 --                                                 : But comp, by definition, seems eager to take parts of the input and provide the required types (NewComposite Molecule), we just need to include the pass-through type as well (d) ...                                          
-leftOptical'   ::   StrongLens Atom Molecule Atom Molecule            ->     StrongLens Atom Molecule (Composite Atom, d) (NewComposite Molecule, d) 
-leftOptical'   k       =     SLens (\x -> see  (first' k)  ((peep . fst $ x), snd x))  (\y -> (comp (fst y, fst . snd $ y), snd . snd $ y))
+firstOptical'   ::   StrongLens Atom Molecule Atom Molecule            ->     StrongLens Atom Molecule (Composite Atom, d) (NewComposite Molecule, d) 
+firstOptical'   k       =     SLens (\x -> see  (first' k)  ((peep . fst $ x), snd x))  (\y -> (comp (fst y, fst . snd $ y), snd . snd $ y))
 
 
 
 
 
 -- Same logic applies except now the pass-through type is in the first position....., the update function is just reverse order
-rightOptical   ::   StrongLens Atom Molecule Atom Molecule            ->    StrongLens Atom Molecule (d, Composite Atom) (d, NewComposite Molecule) 
-rightOptical   k       =     SLens (\x -> see   (second' k) (fst x, peep . snd $ x)  )  (\y -> (fst . snd $ y, comp (fst y, snd . snd $ y)))
+secondOptical   ::   StrongLens Atom Molecule Atom Molecule            ->    StrongLens Atom Molecule (d, Composite Atom) (d, NewComposite Molecule) 
+secondOptical   k       =     SLens (\x -> see   (second' k) (fst x, peep . snd $ x)  )  (\y -> (fst . snd $ y, comp (fst y, snd . snd $ y)))
 
 
 
 
--- One can also use a Left-Strengthener to build an Optic that Right-Strengthens....
-rightOptical'  ::   StrongLens Atom Molecule Atom Molecule            ->    StrongLens Atom Molecule (d, Composite Atom) (d, NewComposite Molecule) 
-rightOptical'  k       =     SLens (\x -> see   (first' k) ((peep . snd $ x), fst x) )  (\y -> (fst . snd $ y, comp (fst y, snd . snd $ y)))
+-- One can also use a First-Strengthener to build an Optic that Second-Strengthens....
+secondOptical'  ::   StrongLens Atom Molecule Atom Molecule            ->    StrongLens Atom Molecule (d, Composite Atom) (d, NewComposite Molecule) 
+secondOptical'  k       =     SLens (\x -> see   (first' k) ((peep . snd $ x), fst x) )  (\y -> (fst . snd $ y, comp (fst y, snd . snd $ y)))
 
 
 

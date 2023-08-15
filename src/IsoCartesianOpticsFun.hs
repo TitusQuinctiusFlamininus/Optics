@@ -117,15 +117,23 @@ unAdapt             =    undefined
 
 -- Now creating the Iso Profunctor
 isoP         ::  Iso Raw Ripe Old New
-isoP                =     dimap preAdapt postAdapt (Iso adapt unAdapt)
+isoP                     =     dimap preAdapt postAdapt (Iso adapt unAdapt)
 
 
 
 -- Finally, constructing the Iso Optic
 -- The unadapt function must now act as our new transformation function, since we cannot use the input anymore
 isoOptic     ::  Iso a' b' Raw Ripe  ->  Iso a' b' Old New
-isoOptic     k       =     Iso (hin k) unAdapt
+isoOptic         k       =     Iso (hin k) unAdapt
 
 
+-- Let's use the convenience functions directly to influence the creation of a First Iso Optic
+firstIsoOptic :: Iso a' b' Raw Ripe  ->  Iso a' b' (Old, v) (New, v)
+firstIsoOptic    k       =    Iso (hin k) (\x ->  ((unAdapt . fst $ x), snd x))
+
+
+-- And now the creation of a Second Iso Optic
+secondIsoOptic :: Iso a' b' Raw Ripe  ->  Iso a' b' (v, Old) (v, New)
+secondIsoOptic   k       =    Iso (hin k) (\x ->  (fst x, (unAdapt . snd $ x)))
 
 ---------------------------------------------------------------------------------

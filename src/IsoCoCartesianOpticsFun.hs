@@ -103,9 +103,30 @@ unAdapt      :: Old         ->         New
 unAdapt             =    undefined
 
 
+
 ---------------------------------------------------------------------------------
 
--- Here is our bare Profunctor
+-- Now creating the Iso Profunctor
 isoP         ::  Iso Raw Ripe Old New
-isoP                =     dimap preAdapt postAdapt (Iso adapt unAdapt)
+isoP                     =     dimap preAdapt postAdapt (Iso adapt unAdapt)
 
+
+
+-- Finally, constructing the Iso Optic
+-- The unadapt function must now act as our new transformation function, since we cannot use the input anymore
+isoOptic     ::  Iso a' b' Raw Ripe  ->  Iso a' b' Old New
+isoOptic         k       =     Iso (hin k) unAdapt
+
+
+
+-- Here we now create the Left Iso Optic
+leftIsoOptic :: Iso a' b' Raw Ripe  ->  Iso a' b' (Either Old v) (Either New v)
+leftIsoOptic    k       =    undefined
+
+
+
+-- As well as a Right Iso Optic
+rightIsoOptic :: Iso a' b' Raw Ripe  ->  Iso a' b' (Either v s) (Either v New)
+rightIsoOptic   k       =    undefined
+
+---------------------------------------------------------------------------------
