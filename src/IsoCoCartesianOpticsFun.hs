@@ -42,9 +42,7 @@ data  Iso  a  b  s  t                   =     Iso    {   hin    ::  a       ->  
 instance  Profunctor (Iso a  b  )   where
     dimap    h    g  (Iso f  k  )       =    Iso   f   (g . k . h)
 
-
-
--- Alright, now we (attempt) to make it Choice, or CoCartesian 
+ 
 -- We are able to make the co-cartesian case successfully in the following manner: 
 -- --->>>> EXPLANTION
 -- ---->>>       :  For Left'  :: The hin function remains untouched, because no type variables appear for us to manipulate (s and t types)
