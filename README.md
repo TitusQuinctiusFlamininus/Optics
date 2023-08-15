@@ -61,7 +61,7 @@ Attempting to create Optics and other Computational structures from scratch
 
 ### Iso Variants
 
-- :green_circle: Cartesian   Strong)  Iso
+- :green_circle: Cartesian (Strong)  Iso
 - :green_circle: CoCartesian (Choice) Iso
 - :white_circle: Monoidal Iso
 - :white_circle: Traversing Iso
@@ -122,8 +122,8 @@ Attempting to create Optics and other Computational structures from scratch
 ![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/optic.png "Optic")
 
 - :green_circle: Lens
-- :green_circle: Strong Lens
-- :orange_circle: Choice Lens
+- :green_circle: Cartesian (Strong) Lens
+- :orange_circle: CoCartesian (Choice) Lens
 - :white_circle: Monoidal Lens
 - :orange_circle: Traversing Lens
 - :orange_circle: InPhantom Lens
@@ -131,10 +131,11 @@ Attempting to create Optics and other Computational structures from scratch
 - :white_circle: Cartographic Lens
 - :orange_circle: Closed Lens
 - :green_circle: Prism
-- :orange_circle: Choice Prism
+- :orange_circle: CoCartesian (Choice) Prism
 - :orange_circle: InPhantom Prism
 - :green_circle: Iso
-- :green_circle: Choice Iso
+- :green_circle: Cartesian (Strong) Iso
+- :green_circle: CoCartesian (Choice) Iso
 - :green_circle: Adapter
 - :green_circle: Affine
 - :white_circle: Traversal
