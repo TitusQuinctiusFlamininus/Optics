@@ -23,6 +23,10 @@ class Profunctor p  =>  Cocartesian p where
   right'   ::  p  a  b   ->  p  (Either  c  a)  (Either  c  b)
 
 
+where p is a Profunctor : 
+type  Optic  p  a  b  s  t    =  p  a  b    ->   p  s  t
+
+
 --} 
 
 
