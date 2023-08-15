@@ -1,7 +1,7 @@
 module IsoCartesianOpticsFun where 
 
 
-
+import Data.Tuple                  (swap                         )
 import Control.Lens.Combinators    (Profunctor, dimap            )
 import Data.Profunctor.Strong      (Strong    , first', second'  )
 
@@ -127,13 +127,22 @@ isoOptic     ::  Iso a' b' Raw Ripe  ->  Iso a' b' Old New
 isoOptic         k       =     Iso (hin k) unAdapt
 
 
+
 -- Let's use the convenience functions directly to influence the creation of a First Iso Optic
 firstIsoOptic :: Iso a' b' Raw Ripe  ->  Iso a' b' (Old, v) (New, v)
-firstIsoOptic    k       =    Iso (hin k) (\x ->  ((unAdapt . fst $ x), snd x))
+firstIsoOptic    k       =     Iso (hin k)  (\x ->  ((unAdapt . fst $ x), snd x))
+
 
 
 -- And now the creation of a Second Iso Optic
 secondIsoOptic :: Iso a' b' Raw Ripe  ->  Iso a' b' (v, Old) (v, New)
-secondIsoOptic   k       =    Iso (hin k) (\x ->  (fst x, (unAdapt . snd $ x)))
+secondIsoOptic   k       =     Iso (hin k)  (\x ->  (fst x, (unAdapt . snd $ x)))
+
+
+
+-- For fun, creating a variant of the Second Optic by flipping the internals
+secondIsoOptic' :: Iso a' b' Raw Ripe  ->  Iso a' b' (v, Old) (New, v)
+secondIsoOptic'   k       =    Iso (hin k)  (\x ->  swap (fst x, (unAdapt . snd $ x)))
+
 
 ---------------------------------------------------------------------------------
