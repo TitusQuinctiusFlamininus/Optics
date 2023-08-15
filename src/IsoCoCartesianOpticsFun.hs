@@ -120,12 +120,18 @@ isoOptic         k       =     Iso (hin k) unAdapt
 
 -- Here we now create the Left Iso Optic
 leftIsoOptic :: Iso a' b' Raw Ripe  ->  Iso a' b' (Either Old v) (Either New v)
-leftIsoOptic    k       =    undefined
+leftIsoOptic    k       =      Iso (hin k) (either (Left . unAdapt) Right)
 
 
 
 -- As well as a Right Iso Optic
-rightIsoOptic :: Iso a' b' Raw Ripe  ->  Iso a' b' (Either v s) (Either v New)
-rightIsoOptic   k       =    undefined
+rightIsoOptic :: Iso a' b' Raw Ripe  ->  Iso a' b' (Either v Old) (Either v New)
+rightIsoOptic   k       =      Iso (hin k) (either Left (Right . unAdapt))
+
+
+-- Here is a variant of the Right Optic: We have the same input types but required to create a fipped structure
+-- We simplified the Optic's output to avoid the problem of defining how to create unknown 'v' types
+rightIsoOptic' :: Iso a' b' Raw Ripe  ->  Iso a' b' (Either v Old) (Either New Old)
+rightIsoOptic'   k       =      Iso (hin k) (either (\_ -> Left New) Right )
 
 ---------------------------------------------------------------------------------
