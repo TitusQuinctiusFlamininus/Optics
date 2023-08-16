@@ -145,9 +145,34 @@ Attempting to create Optics and other Computational structures from scratch
 
 # Experimental Types
 
-## TFunctor
+## TFunctor (Post Processing Profunctor)
 (This is my own invention, let's see what works here)
 ![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/tfunctor.png "TFunctor")
+
+- :white_circle: Lens
+- :white_circle: Prism
+- :white_circle: Upstar
+- :white_circle: Iso
+- :white_circle: Cartesian (Strong) Upstar
+- :white_circle: CoCartesian (Choice) Upstar
+- :white_circle: Monoidal Upstar
+- :white_circle: Downstar
+- :white_circle: Adapter
+- :white_circle: Forget
+- :white_circle: Tagged
+- :white_circle: Arrow
+- :white_circle: Affine
+- :white_circle: Bazaar
+- :white_circle: Traversal
+- :white_circle: Monoidal
+- :white_circle: Traversing
+- :white_circle: Closed
+- :white_circle: Right Kan Lift
+
+
+## RFunctor (Pre Processing Profunctor)
+(This is also my own invention, let's see what works here)
+![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/rfunctor.png "RFunctor")
 
 - :white_circle: Lens
 - :white_circle: Prism
