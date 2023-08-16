@@ -132,7 +132,7 @@ rightIsoOptic   k       =      Iso (hin k) (either Left (Right . unAdapt))
 
 
 
--- Here is a variant of the Right Optic: We have the same input types but required to create a fipped structure
+-- Here is a variant of the Right Optic: We have the same input types but required to create a flipped structure
 -- We simplified the Optic's output to avoid the problem of defining how to create unknown 'v' types
 rightIsoOptic' :: Iso a' b' Raw Ripe  ->  Iso a' b' (Either v Old) (Either New Old)
 rightIsoOptic'   k       =      Iso (hin k) (either (\_ -> Left New) Right )
