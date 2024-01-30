@@ -1,5 +1,6 @@
-module BazaarOpticsFun where
+{-# LANGUAGE RankNTypes #-}
 
+module BazaarOpticsFun where
 
 import Control.Lens.Combinators (Profunctor, dimap)
 
@@ -21,11 +22,14 @@ where p is a Profunctor :
 type    Optic  p  a  b  s  t =  p  a  b  ->  p  s  t
 
 
-newtype Bazaar p  a  b  t    =  Bazaar { runBazaar :: forall f. Applicative f => p a (f b) -> f t }
-
-
-
 --}
 
 ---------------------------------------------------------------------------------
 
+-- Let's formally define our wierd Bizzare type 
+newtype Bazaar p  a  b  t    =  Bazaar { runBazaar :: forall f. Applicative f => p a (f b) -> f t }
+
+
+--Attempting to make the Bazaar a Profunctor
+instance Profunctor (Bazaar p a) where
+    dimap  h  g  (Bazaar z)  = Bazaar undefined

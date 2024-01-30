@@ -40,6 +40,7 @@ library
       LensClosedOpticsFun
       LensCoCartesianOpticalFun
       LensInPhantomFun
+      LensMonoidalOpticsFun
       LensOpticsFun
       MultistarOpticsFun
       MultistarStrongSieveOpticsFun
