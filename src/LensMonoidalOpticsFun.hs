@@ -33,16 +33,26 @@ type  Optic  p  a  b  s  t    =  p  a  b    ->   p  s  t
 
 ---------------------------------------------------------------------------------
 
--- Popping up the definition from before
+-- Base definition for the type
+class Profunctor  p => Monoidal p where
+  par        ::   p a b     ->    p c d     -> p (a, c) (b, d)
+  empty      ::   p () ()
+
+
+-- Raising the lens definition
 data  MonoLens  a  b  s  t     =     MLens    {   blik   ::  s       ->   a,
 
                                                    upp   ::  (b, s)  ->   t
                                               }
 
 
-
--- Making it a Profunctor first like we did before...
+-- First establishing the Profunctor...
 instance Profunctor (MonoLens a b) where
     dimap  h   g    (MLens r  z    )    =    MLens   ( r . h ) (\x  ->  g $ z (fst x, (h $ snd x)))
 
 
+-- Now, attempting to make the Lens Monoidal...
+-- (m (fst y, fst . snd $ y))
+instance Monoidal (MonoLens a b) where
+    par (MLens k  m) (MLens _  r)       =    MLens (k . fst) (\y -> ((m (fst y, fst . snd $ y)) , r (fst y, snd . snd $ y)))  
+    --empty                             =    ??
