@@ -48,11 +48,10 @@ data  MonoLens  a  b  s  t     =     MLens    {   blik   ::  s       ->   a,
 
 -- First establishing the Profunctor...
 instance Profunctor (MonoLens a b) where
-    dimap  h   g    (MLens r  z    )    =    MLens   ( r . h ) (\x  ->  g $ z (fst x, (h $ snd x)))
+    dimap  h   g    (MLens r  z  )        =    MLens   ( r . h ) (\x  ->  g $ z (fst x, (h $ snd x)))
 
 
 -- Now, attempting to make the Lens Monoidal...
--- (m (fst y, fst . snd $ y))
 instance Monoidal (MonoLens a b) where
-    par (MLens k  m) (MLens _  r)       =    MLens (k . fst) (\y -> ((m (fst y, fst . snd $ y)) , r (fst y, snd . snd $ y)))  
-    --empty                             =    ??
+    par (MLens k  m)  (MLens _  r)        =    MLens (k . fst) (\y -> ((m (fst y, fst . snd $ y)) , r (fst y, snd . snd $ y)))  
+    --empty                               =    ??
