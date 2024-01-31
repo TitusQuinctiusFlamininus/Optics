@@ -54,4 +54,4 @@ instance Profunctor (MonoLens a b) where
 -- Now, attempting to make the Lens Monoidal...
 instance Monoidal (MonoLens a b) where
     par (MLens k  m) (MLens _  r)        =    MLens (k . fst) (\y -> ((m (fst y, fst . snd $ y)) , r (fst y, snd . snd $ y)))  
-    --empty                              =    ??
+    empty                                =    MLens (\() -> undefined) snd
