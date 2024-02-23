@@ -27,7 +27,7 @@ Attempting to create Optics and other Computational structures from scratch
 
 - :green_circle: Cartesian (Strong) Lens
 - :orange_circle: CoCartesian (Choice) Lens
-- :white_circle: Monoidal Lens
+- :green_circle: Monoidal Lens
 - :orange_circle: Traversing Lens
 - :orange_circle:  InPhantom Lens
 - :white_circle:  OutPhantom Lens
@@ -124,7 +124,7 @@ Attempting to create Optics and other Computational structures from scratch
 - :green_circle: Lens
 - :green_circle: Cartesian (Strong) Lens
 - :orange_circle: CoCartesian (Choice) Lens
-- :white_circle: Monoidal Lens
+- :green_circle: Monoidal Lens
 - :orange_circle: Traversing Lens
 - :orange_circle: InPhantom Lens
 - :white_circle: OutPhantom Lens
