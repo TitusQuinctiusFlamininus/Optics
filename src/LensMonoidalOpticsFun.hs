@@ -29,8 +29,6 @@ type  Optic  p  a  b  s  t    =  p  a  b    ->   p  s  t
 
 --}
 
-
-
 ---------------------------------------------------------------------------------
 
 -- Base definition for the type
@@ -39,23 +37,36 @@ class Profunctor  p => Monoidal p where
   empty      ::   p () ()
 
 
--- Raising the lens definition
+-- Raising an earlier lens definition
 data  MonoLens  a  b  s  t     =     MLens    {   blik   ::  s       ->   a,
 
                                                    upp   ::  (b, s)  ->   t
                                               }
 
 
--- First establishing the Profunctor...
+-- The profunctor Lens as it was in Vanilla form.... 
 instance Profunctor (MonoLens a b) where
         dimap  h  g  (MLens r  z)        =    MLens   ( r . h ) (\x  ->  g $ z (fst x, (h $ snd x)))
 
 
--- Now, attempting to make the Lens Monoidal...
-instance Monoidal (MonoLens a b) where
-    par (MLens k  m) (MLens _  r)        =    MLens (k . fst) (\y -> ((m (fst y, fst . snd $ y)) , r (fst y, snd . snd $ y)))  
-    empty                                =    MLens (\() -> undefined) snd
 
+-- Now, attempting to make the Lens Monoidal...
+--     Explanation :: ----->>>> Par Function:  - Left-Side: - Suppose, for par, we have these two hypothetical types: (MonoLens a b a1 b1) and (MonoLens a b c d)
+--                                                          - We need a function that maps: (a1, c) -> a . This is the equivalent of: (s, c) -> a
+--                                                          - To solve the left-side, we just need to produce an 'a' type: 
+--                                                          --So by providing the "blik", or k-function, with the first element of the tuple, we're done.
+--                    - Right-Side:    - Continuing with the two hypothetical types: (MonoLens a b a1 b1) and (MonoLens a b c d)  
+--                                     - We need a function that maps: (b, (a1, c)) -> (b1, d) 
+--                                     - First, we can notice that : a1 <=> s               (since: (MonoLens a b a1 b1) <=> (MonoLens  a b s t)
+--                                     -        we can notice that :  c <=> s  and d <=> t  (since: (MonoLens a b c d)   <=> (MonoLens  a b s t)
+--                                     - So let's simplify : (b, (a1, c)) -> (b1, d)  to  : (b, (s, c)) -> (t, t)   [we leave c as it is for better visuals]
+--                                     - We just need to produce two 't' types, hopefully using the rest of the type functions, m and r
+--                                     - (m (fst y, fst . snd $ y))  helps produce the first tuple 't' using out m function
+--                                     - (r (fst y, snd . snd $ y))  helps produce the second tuple 't' using out r function
+--                                     - Notice, finally, that we have no need for our view function from the second profunctor lens
+instance Monoidal (MonoLens a b) where
+    par (MLens k  m) (MLens _  r)        =    MLens (k . fst) (\y -> ((m (fst y, fst . snd $ y)) , r (fst y, snd . snd $ y))) 
+    empty                                =    MLens (\() -> undefined) snd
 
 
 ---------------------------------------------------------------------------------
@@ -63,29 +74,25 @@ instance Monoidal (MonoLens a b) where
 -- Reusing types from the Vanilla Lens construction, to illustrate an example
 
 
-data Atom                     =   Atom
+data    Atom                  =   Atom
 
-data Atom'                     =   Atom'
+newtype Composite     a       =   Composite    a
 
-newtype Composite a           = Composite a
+data    Molecule              =   Molecule
 
-data Molecule                 = Molecule
+newtype NewComposite  b       =   NewComposite b
 
-newtype NewComposite b        = NewComposite b
 
--- Let's define a function that acts as a magnifying glass, but we can use our comonad function
-peep         ::   Composite Atom                ->   Atom
+--And the follow-up functions to accompany these types...
+peep         ::   Composite Atom                 ->   Atom
 peep                    = undefined
 
--- Let's define a function that can assemble new types and create new ones from parts
-comp         ::   (Molecule, Composite Atom)    ->   NewComposite Molecule
+comp         ::   (Molecule, Composite Atom)     ->   NewComposite Molecule
 comp                    = undefined
 
--- This contravariant function will supply our original structure
 preTreat     ::   m                              ->  Composite Atom
 preTreat                = undefined
 
--- This covariant function will absorb our resultant type structures and possibly modify them further
 postTreat    ::   NewComposite Molecule          ->   n
 postTreat               = undefined
 
@@ -96,13 +103,17 @@ postTreat               = undefined
 ourLensP :: MonoLens Atom Molecule s t
 ourLensP =   MLens  (peep . preTreat) (\z  -> postTreat . comp $ (fst z, preTreat $ snd z))
 
+
+
 -- Now for the monoidal profunctor (seems to mimic the Cartesian Lens's embellished profunctor)
 monoLensP :: MonoLens Atom Molecule (Composite Atom,t) (NewComposite Molecule, t)
 monoLensP  =  MLens (peep . fst) (\y -> (comp (fst y, (fst . snd $ y)), (snd . snd $ y)))
+
                                  
 
 -- We arrive an eerily similar Optic, when one compares it to the Cartestian Lens Optic 
 monoLensOptical   ::   MonoLens Atom Molecule Atom Molecule   ->  MonoLens Atom Molecule (Composite Atom, Atom) (NewComposite Molecule, Atom) 
 monoLensOptical   w   =   MLens (\x -> blik  (par w w)  ((peep . fst $ x), snd x))  (\y -> (comp (fst y, fst . snd $ y), snd . snd $ y))
+
 
 ---------------------------------------------------------------------------------
