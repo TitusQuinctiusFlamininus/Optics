@@ -64,6 +64,13 @@ instance Profunctor (MonoLens a b) where
 --                                     - (m (fst y, fst . snd $ y))  helps produce the first tuple 't' using out m function
 --                                     - (r (fst y, snd . snd $ y))  helps produce the second tuple 't' using out r function
 --                                     - Notice, finally, that we have no need for our view function from the second profunctor lens
+
+--                   ----->>>> Empty Function:  - We require a Profunctor of the form: p () ()   :  which translates to : MonoLens  a  b  () () 
+--                                              - Our "blik" function now becomes:  blik ::     ()   ->   a 
+--                                              - Our "upp"  function now becomes:  upp  :: (b, ())  ->   ()
+--                                              - Tackling the "upp" function first: All we need to do it access the second value in our input tuple: Done
+--                                              - The "blik" function is trickier: We need to produce some type a from unit.......but we don't know how to do that.
+--                                              - To satisfy the typechecker, we leave the function undefined
 instance Monoidal (MonoLens a b) where
     par (MLens k  m) (MLens _  r)        =    MLens (k . fst) (\y -> ((m (fst y, fst . snd $ y)) , r (fst y, snd . snd $ y))) 
     empty                                =    MLens (\() -> undefined) snd
