@@ -54,7 +54,7 @@ instance Profunctor (MonoLens a b) where
 --     Explanation :: ----->>>> Par Function:  - Left-Side: - Suppose, for par, we have these two hypothetical types: (MonoLens a b a1 b1) and (MonoLens a b c d)
 --                                                          - We need a function that maps: (a1, c) -> a . This is the equivalent of: (s, c) -> a
 --                                                          - To solve the left-side, we just need to produce an 'a' type: 
---                                                          --So by providing the "blik", or k-function, with the first element of the tuple, we're done.
+--                                                          - So by providing the "blik", or k-function, with the first element of the tuple, we're done.
 --                    - Right-Side:    - Continuing with the two hypothetical types: (MonoLens a b a1 b1) and (MonoLens a b c d)  
 --                                     - We need a function that maps: (b, (a1, c)) -> (b1, d) 
 --                                     - First, we can notice that : a1 <=> s               (since: (MonoLens a b a1 b1) <=> (MonoLens  a b s t)
