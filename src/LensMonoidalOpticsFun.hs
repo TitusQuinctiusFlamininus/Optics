@@ -119,7 +119,7 @@ monoLensP  =  MLens (peep . fst) (\y -> (comp (fst y, (fst . snd $ y)), (snd . s
                                  
 
 -- We arrive an eerily similar Optic, when one compares it to the Cartestian Lens Optic 
-monoLensOptical   ::   MonoLens Atom Molecule Atom Molecule   ->  MonoLens Atom Molecule (Composite Atom, Atom) (NewComposite Molecule, Atom) 
+monoLensOptical   ::   MonoLens Atom Molecule Atom b   ->  MonoLens Atom Molecule (Composite Atom, Atom) (NewComposite Molecule, Atom) 
 monoLensOptical   w   =   MLens (\x -> blik  (par w w)  ((peep . fst $ x), snd x))  (\y -> (comp (fst y, fst . snd $ y), snd . snd $ y))
 
 
