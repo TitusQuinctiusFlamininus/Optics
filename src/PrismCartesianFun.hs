@@ -21,7 +21,7 @@ class Profunctor p where
 
 
 where p is a Profunctor : 
-type Optic p a b s t = p a b -> p s t
+type   Optic  p  a  b  s  t   =   p  a  b   ->  p  s  t
 
 
 class Profunctor p => Strong p where
@@ -36,8 +36,15 @@ class Profunctor p => Strong p where
 ---------------------------------------------------------------------------------
    
 -- Our Prism Definition
-data Prism a b s t     = Prism {    exist    :: s     ->     Either b a, 
+data Prism a b s t     = Prism {    seek    :: s     ->     Either b a, 
 
-                                    recon    :: b     ->     t
+                                    fill    :: b     ->     t
                                }
 
+-- Make the Prism a Profuntor
+-- Creating the Prism Profunctor as before....
+
+-- If how this Profunctor was formed is not clear, please see the PrismOpticsFun module for a full explanation
+-- I have used different type symbols here but it is essentially the same (just needs some eye squinting)
+instance Profunctor (Prism s t) where 
+    dimap  d  g  (Prism k  m)   = Prism  (k . d)  (g . m)

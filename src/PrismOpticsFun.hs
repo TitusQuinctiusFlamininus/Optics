@@ -52,9 +52,14 @@ data Polyhedron a b s t     = Poly {  peer    :: s     ->     Either b a,
 
 
 
--- Making a profunctor out of the polyhedron, its pretty straight forward
+-- Making a profunctor out of the polyhedron, its pretty straight forward, but just to be clear let us explain it
+
+-- Explanation :   ---------->>> For peer function: 
+--                              -- -->    
+
+
 instance Profunctor (Polyhedron s t) where 
-     dimap h g (Poly l v)   = Poly (l . h)  (g . v)       
+     dimap  h   g   (Poly l v)   =   Poly (l . h)  (g . v)       
 
 
 

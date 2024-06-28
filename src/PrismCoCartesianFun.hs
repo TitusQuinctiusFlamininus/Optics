@@ -19,7 +19,6 @@ class Profunctor p where
   dimap :: (c -> a) -> (b -> d) -> p a b -> p c d     <<-------------- Or just this one
 
 
-
 where p is a Profunctor : 
 type Optic p a b s t = p a b -> p s t
 
@@ -28,9 +27,7 @@ class Profunctor p  =>  Choice p where
   left'    ::  p  a  b   ->  p  (Either  a  c)  (Either  b  c)
   right'   ::  p  a  b   ->  p  (Either  c  a)  (Either  c  b)
 
-
 --}   
-
 
 ---------------------------------------------------------------------------------
    
@@ -46,8 +43,6 @@ data Prism a b s t     = Prism {    exist    :: s     ->     Either b a,
 instance Profunctor (Prism s t) where 
      dimap  h  g  (Prism  u  v)   = Prism (u . h)  (g . v)       
 
-
--- First, since InPhantoms are Choices, we need to make the Prism a Choice
 -- It seems as though we cannot make Prisms into Choices
 -- Explanation :   ---------->>>     For exist                 :  The transition is from : (s   ->   Either b a)  into : ((Either s c)   ->   (Either b a))
 --                                       If   (s -> (Left  s)) :  Then k represents exactly what we need, since we have access to s
