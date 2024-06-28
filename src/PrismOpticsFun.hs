@@ -53,14 +53,25 @@ data Polyhedron a b s t     = Poly {  peer    :: s     ->     Either b a,
 
 
 -- Making a profunctor out of the polyhedron, its pretty straight forward, but just to be clear let us explain it
-
--- Explanation :   ---------->>> For peer function: 
---                              -- -->    
-
+-- Squint your eyes!
+-- Explanation :   ---------->>> For the Both LEFT AND RIGHT Hand Sides of the Polyhedron: 
+--                              --------->  Since the polyhedron is : Polyhedron a b s t, our DIMAP take a shape like this below, typewise:
+--                              --------->  dimap :: (a' -> s) -> (t -> d) -> p a b s t -> p a b a' d
+--                 --> For the LEFT-HAND-SIDE Portion of the final polyhedron: 
+--                              --- We require a function like this:  (a  ->  Either t  s)
+--                              -- There's a and a' : Can we, for all intents and purposes, assume a <=> a' ? Why not? 
+--                              -- If so, dimap becomes:   dimap :: (a' -> s)  -> (t -> d) ->   p a' b s t   ->   p a' b a' d
+--                              -- Mapping it exactly to:  dimap        h      ->     g    ->    (Poly l v)  ->    (Poly ? ?)
+--                              -- Now, we require a function like this:  (a'  ->  Either t  s)
+--                              -- Interestingly,  (a' -> s) can deal with a' as input and the peer function can take that output to create an Either
+--                              -- So, the function composition satisfies the type checker:   (peer . (a' -> s)), which is : (l . h)
+--                 --> For the RIGHT-HAND-SIDE Portion of the final polyhedron: 
+--                              --- We require a function like this:  (b  ->  d)
+--                              --  But: v take type b, and our g function will produce type d eventually, so why not concatenate them functionally?
+--                              -- The Solution then seems to be:   (g . v)
 
 instance Profunctor (Polyhedron s t) where 
      dimap  h   g   (Poly l v)   =   Poly (l . h)  (g . v)       
-
 
 
 ---------------------------------------------------------------------------------
