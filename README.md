@@ -37,7 +37,7 @@ Attempting to create Optics and other Computational structures from scratch
 
 ### Prism Variants
 
-![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/workinprogress.png "Work-In-Progress") Cartesian (Strong) Prism
+<img src="https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/workinprogress.png" width="40"> Cartesian (Strong) Prism
 - :orange_circle: CoCartesian (Choice) Prism
 - :white_circle: Monoidal Prism
 - :orange_circle:  InPhantom Prism
