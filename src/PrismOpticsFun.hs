@@ -67,7 +67,7 @@ data Polyhedron a b s t     = Poly {  peer    :: s     ->     Either b a,
 --                              -- So, the function composition satisfies the type checker:   (peer . (a' -> s)), which is : (l . h)
 --                 --> For the RIGHT-HAND-SIDE Portion of the final polyhedron: 
 --                              --- We require a function like this:  (b  ->  d)
---                              --  But: v take type b, and our g function will produce type d eventually, so why not concatenate them functionally?
+--                              --  But: v take type b as input, and our g function will produce type d eventually, so why not concatenate them functionally?
 --                              -- The Solution then seems to be:   (g . v)
 
 instance Profunctor (Polyhedron s t) where 
