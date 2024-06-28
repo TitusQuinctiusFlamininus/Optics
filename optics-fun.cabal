@@ -44,6 +44,7 @@ library
       LensOpticsFun
       MultistarOpticsFun
       MultistarStrongSieveOpticsFun
+      PrismCartesianFun
       PrismCoCartesianFun
       PrismInPhantom
       PrismOpticsFun
