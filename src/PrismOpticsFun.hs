@@ -57,12 +57,13 @@ data Polyhedron a b s t     = Poly {  peer    :: s     ->     Either b a,
 --                              --------->  Since the polyhedron is : Polyhedron a b s t, our DIMAP take a shape like this below, typewise:
 --                              --------->  dimap :: (a' -> s) -> (t -> d) -> p a b s t -> p a b a' d
 --                 --> For the LEFT-HAND-SIDE Portion of the final polyhedron: 
---                              --- We require a function like this:  (a  ->  Either t  s)
---                              -- If so, dimap becomes:   dimap :: (a' -> s)  ->  (t -> d) ->   p a b s t   ->   p a b a' d
---                              -- Mapping it exactly to:  dimap        h      ->     g    ->    (Poly l v)  ->    (Poly ? ?)
---                              -- Now, we require a function like this:  (a'  ->  Either t  s)
---                              -- Interestingly,  (a' -> s) can deal with a' as input and the peer function can take that output to create an Either
---                              -- So, the function composition satisfies the type checker:   (peer . (a' -> s)), which is : (l . h)
+--                              -- It may be safe to assume that type a and type a' can be interchanged whenever convenience suits us
+--                              -- Mapping it exactly to:      dimap       h   ->     g      ->   (Poly l v)  ->   (Poly ? ?)
+--                              -- We require a function like this:  (a  ->  Either b  a); But, the Contravariant Function deals with a' . Hmmm. What to do..
+--                              -- Is it ok to (temporarily) assume we need a function like this: (a' -> Either t s), because we have an eye on h? Let's try.
+--                              -- We have a function like: (\a' -> ??) . But h is : (a' -> s).... so, use it : (\a' -> ?? . (a' -> s) $ a')
+--                              -- Now l is : (s -> Either b a) . So let's use it :  (\a' -> (s -> Either b a) . (a' -> s) $ a')
+--                              -- So, simplifying : (\a' -> (l) . (h) $ a')  which is: (l  .  h) 
 --                 --> For the RIGHT-HAND-SIDE Portion of the final polyhedron: 
 --                              --- We require a function like this:  (b  ->  d)
 --                              --  But: v take types b as input, and our g function will produce types d eventually, so why not concatenate them functionally?

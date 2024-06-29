@@ -35,6 +35,14 @@ class Profunctor p => Strong p where
 
 ---------------------------------------------------------------------------------
    
+-- Defining a Strong Profunctor
+class Profunctor p => Strong p where
+  first'  ::  p  a  b   -> p  (a,  c)  (b,  c)
+   
+  second' ::  p  a  b   -> p  (c,  a)  (c,  b)
+
+
+
 -- Our Prism Definition
 data Prism a b s t     = Prism {    seek    :: s     ->     Either b a, 
 
@@ -46,6 +54,9 @@ data Prism a b s t     = Prism {    seek    :: s     ->     Either b a,
 -- If how this Profunctor was formed is not clear, please see the PrismOpticsFun module for a full explanation
 -- I have used different type symbols here but it is essentially the same (just needs some eye squinting)
 instance Profunctor (Prism s t) where 
-    dimap  d  g  (Prism k  m)   = Prism  (k . d)  (g . m)
+    dimap  d  g  (Prism k  m)   =    Prism  (k . d)  (g . m)
 
--- And now 
+-- And now attempting to Strengthen the Polyhedron...
+
+instance Strong (Prism s t) where 
+    first'   (Prism k  m)       =    Prism undefined undefined
