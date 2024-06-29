@@ -60,7 +60,7 @@ data Polyhedron a b s t     = Poly {  peer    :: s     ->     Either b a,
 --                              -- We require a function like  this:  (a  ->  Either b  a)
 --                              -- Generally, we want to solve this:  dimap   (a' -> s) -> (t -> d) -> (Poly peer pack) -> (Poly ? ?)
 --                              -- The Contravariant Function deals with a', not a . Is that a problem?
---                              -- Is it ok to (temporarily) assume we need a function like this: (a' -> Either t s), because we have an eye on h? Let's try.
+--                              -- Is it ok to (temporarily) assume we need a function like this: (a' -> Either b a), because we have an eye on h? Let's try.
 --                              -- We have a function like: (\a' -> ??) . But h is : (a' -> s).... so, use it : (\a' -> ?? . (a' -> s) $ a')
 --                              -- Now l is : (s -> Either b a) . So let's use it :  (\a' -> (s -> Either b a) . (a' -> s) $ a')
 --                              -- So, simplifying : (\a' -> (l) . (h) $ a')  which is: (l  .  h) 
