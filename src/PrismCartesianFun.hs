@@ -66,8 +66,8 @@ instance Profunctor (Prism s t) where
 --                 --  Provide the result to k:  (\x -> k . fst $ x) which simplifies to:  (k . fst)
 -- -----------------> For the RIGHT-HAND-SIDE :
 --                 --  We require a function like this:  (\b   ->  (t, c)) where c is some type
---                 --  Let's provide that function's input to m:  (\b  -> m $ b), which is:  resolved to t
---                 --  But: We need (t, c) and not just t: So let's wrap everything in a tuple with the unknown c type 
+--                 --  Let's provide that function's input to m:  (\b  -> m $ b), which resolved into: t
+--                 --  But: We need (t, c) and not just t..... So let's wrap everything in a tuple with the some type c..
 --                 --  But what is c? How can we produce that tuple type? It could be any type! So let's leave it undefined
 --                 --  (\b  -> ((m $ b), ??))   becomes:   (\b  -> ((m $ b), undefined))
 instance Strong (Prism s t) where 
