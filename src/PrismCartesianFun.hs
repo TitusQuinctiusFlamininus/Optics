@@ -44,7 +44,7 @@ class Profunctor p => Strong p where
 
 
 -- Our Prism Definition
-data Prism a b s t     = Prism {    seek    :: s     ->     Either b a, 
+data Prism a b s t     = SPrism {    seek    :: s     ->     Either b a, 
 
                                     fill    :: b     ->     t
                                }
@@ -55,7 +55,7 @@ data Prism a b s t     = Prism {    seek    :: s     ->     Either b a,
 -- It is located here : https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/src/PrismOpticsFun.hs
 -- I have used different type symbols here but it is essentially the same (just needs some eye squinting)
 instance Profunctor (Prism s t) where 
-    dimap  d  g  (Prism k  m)   =    Prism  (k . d)  (g . m)
+    dimap  d  g  (SPrism k  m)   =    SPrism  (k . d)  (g . m)
 
 -- And now attempting to Strengthen the Prism...
 
@@ -71,4 +71,4 @@ instance Profunctor (Prism s t) where
 --                 -- We have no information about what c is exactly, or how to produce it. It could be any type! If only we had: (b -> c) or (t -> c)
 --                 --  So let's leave it undefined:  (\b  -> ((m $ b), ??))  becomes:   (\b  -> ((m $ b), undefined))
 instance Strong (Prism s t) where 
-    first'   (Prism k  m)       =    Prism (k . fst) (\x  -> ((m x), undefined))
+    first'   (SPrism k  m)       =    SPrism (k . fst) (\x  -> ((m x), undefined))
