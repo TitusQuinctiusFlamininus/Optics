@@ -52,11 +52,12 @@ data Prism a b s t     = Prism {    seek    :: s     ->     Either b a,
 -- Make the Prism a Profuntor
 -- Creating the Prism Profunctor as before....
 -- If how this Profunctor was formed is not clear, please see the PrismOpticsFun module for a full explanation
+-- It is located here : https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/src/PrismOpticsFun.hs
 -- I have used different type symbols here but it is essentially the same (just needs some eye squinting)
 instance Profunctor (Prism s t) where 
     dimap  d  g  (Prism k  m)   =    Prism  (k . d)  (g . m)
 
--- And now attempting to Strengthen the Polyhedron...
+-- And now attempting to Strengthen the Prism...
 
 -- Explanation FOR FIRST': 
 -- -----------------> For the LEFT-HAND-SIDE :
@@ -67,7 +68,7 @@ instance Profunctor (Prism s t) where
 --                 --  We require a function like this:  (\b   ->  (t, c)) where c is some type
 --                 --  Let's provide that function's input to m:  (\b  -> m $ b), which is:  resolved to t
 --                 --  But: We need (t, c) and not just t: So let's wrap everything in a tuple with the unknown c type 
---                 --  But what type is c? How can we produce that tuple value? It could be any type. So let's leave it undefined
+--                 --  But what is c? How can we produce that tuple type? It could be any type! So let's leave it undefined
 --                 --  (\b  -> ((m $ b), ??))   becomes:   (\b  -> ((m $ b), undefined))
 instance Strong (Prism s t) where 
     first'   (Prism k  m)       =    Prism (k . fst) (\x  -> ((m x), undefined))
