@@ -57,9 +57,9 @@ data Polyhedron a b s t     = Poly {  peer    :: s     ->     Either b a,
 --                              --------->  Since the polyhedron is : Polyhedron a b s t, our DIMAP take a shape like this below, typewise:
 --                              --------->  dimap :: (a' -> s) -> (t -> d) -> p a b s t -> p a b a' d
 --                 --> For the LEFT-HAND-SIDE Portion of the final polyhedron: 
---                              -- It may be safe to assume that type a and type a' can be interchanged whenever convenience suits us
---                              -- Mapping it exactly to:      dimap       h   ->     g      ->   (Poly l v)  ->   (Poly ? ?)
---                              -- We require a function like this:  (a  ->  Either b  a); But, the Contravariant Function deals with a' . Hmmm. What to do..
+--                              -- We require a function like  this:  (a  ->  Either b  a)
+--                              -- Generally, we want to solve this:  dimap   (a' -> s) -> (t -> d) -> (Poly peer pack) -> (Poly ? ?)
+--                              -- The Contravariant Function deals with a', not a . Is that a problem?
 --                              -- Is it ok to (temporarily) assume we need a function like this: (a' -> Either t s), because we have an eye on h? Let's try.
 --                              -- We have a function like: (\a' -> ??) . But h is : (a' -> s).... so, use it : (\a' -> ?? . (a' -> s) $ a')
 --                              -- Now l is : (s -> Either b a) . So let's use it :  (\a' -> (s -> Either b a) . (a' -> s) $ a')
