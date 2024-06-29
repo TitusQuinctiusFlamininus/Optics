@@ -43,8 +43,9 @@ data Prism a b s t     = Prism {    seek    :: s     ->     Either b a,
 
 -- Make the Prism a Profuntor
 -- Creating the Prism Profunctor as before....
-
 -- If how this Profunctor was formed is not clear, please see the PrismOpticsFun module for a full explanation
 -- I have used different type symbols here but it is essentially the same (just needs some eye squinting)
 instance Profunctor (Prism s t) where 
     dimap  d  g  (Prism k  m)   = Prism  (k . d)  (g . m)
+
+-- And now 

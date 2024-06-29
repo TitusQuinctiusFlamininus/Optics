@@ -51,7 +51,6 @@ data Polyhedron a b s t     = Poly {  peer    :: s     ->     Either b a,
                                    }
 
 
-
 -- Making a profunctor out of the polyhedron, its pretty straight forward, but just to be clear let us explain it
 -- Squint your eyes!
 -- Explanation :   ---------->>> For the Both LEFT AND RIGHT Hand Sides of the Polyhedron: 
@@ -59,8 +58,7 @@ data Polyhedron a b s t     = Poly {  peer    :: s     ->     Either b a,
 --                              --------->  dimap :: (a' -> s) -> (t -> d) -> p a b s t -> p a b a' d
 --                 --> For the LEFT-HAND-SIDE Portion of the final polyhedron: 
 --                              --- We require a function like this:  (a  ->  Either t  s)
---                              -- There's a and a' : Can we, for all intents and purposes, assume a <=> a' ? Why not? 
---                              -- If so, dimap becomes:   dimap :: (a' -> s)  -> (t -> d) ->   p a' b s t   ->   p a' b a' d
+--                              -- If so, dimap becomes:   dimap :: (a' -> s)  ->  (t -> d) ->   p a b s t   ->   p a b a' d
 --                              -- Mapping it exactly to:  dimap        h      ->     g    ->    (Poly l v)  ->    (Poly ? ?)
 --                              -- Now, we require a function like this:  (a'  ->  Either t  s)
 --                              -- Interestingly,  (a' -> s) can deal with a' as input and the peer function can take that output to create an Either
