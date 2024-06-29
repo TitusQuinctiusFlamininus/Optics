@@ -58,5 +58,16 @@ instance Profunctor (Prism s t) where
 
 -- And now attempting to Strengthen the Polyhedron...
 
+-- Explanation FOR FIRST': 
+-- -----------------> For the LEFT-HAND-SIDE :
+--                 --  We require a function like this:  (\(s, c)  ->  Either b  a) where c is some type
+--                 --  It seems that we can just take advantaga of the first tuple element for the solution: (\x -> ?? .  fst $ x)
+--                 --  Provide the result to k:  (\x -> k . fst $ x) which simplifies to:  (k . fst)
+-- -----------------> For the RIGHT-HAND-SIDE :
+--                 --  We require a function like this:  (\b   ->  (t, c)) where c is some type
+--                 --  Let's provide that function's input to m:  (\b  -> m $ b), which is:  resolved to t
+--                 --  But: We need (t, c) and not just t: So let's wrap everything in a tuple with the unknown c type 
+--                 --  But what type is c? How can we produce that tuple value? It could be any type. So let's leave it undefined
+--                 --  (\b  -> ((m $ b), ??))   becomes:   (\b  -> ((m $ b), undefined))
 instance Strong (Prism s t) where 
-    first'   (Prism k  m)       =    Prism undefined undefined
+    first'   (Prism k  m)       =    Prism (k . fst) (\x  -> ((m x), undefined))
