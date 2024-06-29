@@ -63,7 +63,7 @@ instance Profunctor (Prism s t) where
 -- -----------------> For the LEFT-HAND-SIDE :
 --                 --  We require a function like this:  (\(s, c)  ->  Either b  a) where c is some type
 --                 --  Let's take advantage of the first tuple element for the solution: (\x -> ?? .  fst $ x)
---                 --  Provide the result to k:  (\x -> k . fst $ x) which simplifies to:  (k . fst)
+--                 --  Provide the result to k:  (\x -> k . fst $ x), resulting in point-free notation to:  (k . fst)
 -- -----------------> For the RIGHT-HAND-SIDE :
 --                 --  We require a function like this:  (\b   ->  (t, c)) where c is some type
 --                 --  Let's provide that function's input to m:  (\b  -> m $ b), which resolved into: t
