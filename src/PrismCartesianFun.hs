@@ -62,7 +62,7 @@ instance Profunctor (Prism s t) where
 -- Explanation FOR FIRST': 
 -- -----------------> For the LEFT-HAND-SIDE :
 --                 --  We require a function like this:  (\(s, c)  ->  Either b  a) where c is some type
---                 --  It seems that we can just take advantaga of the first tuple element for the solution: (\x -> ?? .  fst $ x)
+--                 --  Let's take advantage of the first tuple element for the solution: (\x -> ?? .  fst $ x)
 --                 --  Provide the result to k:  (\x -> k . fst $ x) which simplifies to:  (k . fst)
 -- -----------------> For the RIGHT-HAND-SIDE :
 --                 --  We require a function like this:  (\b   ->  (t, c)) where c is some type
