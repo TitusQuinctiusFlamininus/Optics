@@ -78,3 +78,39 @@ instance Profunctor (Prism s t) where
 instance Strong (Prism s t) where 
     first'   (SPrism k  m)       =    SPrism (k . fst) (\x  -> ((m x), undefined))
     second'  (SPrism k  m)       =    SPrism (k . snd) (\x  -> (undefined, (m x)))
+
+
+---------------------------------------------------------------------------------
+
+-- Let's reuse some types we defined way back in the vanilla prism 
+
+data       Crystal           = Crystal
+
+data       Shard             = Shard
+
+-- I'm imagining these to be analogous to composite types
+
+newtype    Glass   a         = Glass   a
+
+newtype    Diamond b         = Diamond b
+
+---------------------------------------------------------------------------------
+-- These are also some types we had before, but redefining here for convenience 
+-- We left one definition out (the compression function) to keep it simpler
+
+-- we need a function that will provide the materials to make a wonderful prism
+preheat      :: a'           ->  Glass  a
+preheat                       = undefined
+
+-- Now we need something that will polish up our prism before we display it
+cool         :: Diamond b'   ->         d
+cool                          = undefined
+
+magnify      :: Glass  a     ->  Either e  a
+magnify                       = undefined
+
+-- This function can build a new structure from fragments of new material, using the prism
+pressurize   :: b'           ->  Diamond b'
+pressurize                    = undefined
+
+---------------------------------------------------------------------------------
