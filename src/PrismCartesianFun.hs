@@ -123,19 +123,20 @@ pressurize                    =  undefined
 ---------------------------------------------------------------------------------
 
 -- If we provide this function a function our covariant function can use, it gives us back a prism
-basePrism ::  (b  ->  t)  -> Prism  a  b  s  t
-basePrism     =   dimap preheat cool . SPrism magnify
+basePrism      ::  (b  ->  t)  -> Prism  a  b  s  t
+basePrism      =   dimap preheat cool . SPrism magnify
 
 
 -- Let's make some Profunctor with the above definitions strong, in the first way
-xPrismF     :: Prism  a  b  (s, c)  (t, c)
+xPrismF        :: Prism  a  b  (s, c)  (t, c)
 xPrismF        =  first' . basePrism $ pressurize
 
 
 -- Now the other way
-xPrismS     :: Prism  a  b  (c, s)  (c, t)
-xPrismS        =  second' . basePrism $ pressurize
+yPrismS        :: Prism  a  b  (c, s)  (c, t)
+yPrismS        =  second' . basePrism $ pressurize
+
 
 -- Ok, now we can form a Strong Optic in the first way
-xPrismOpticF     :: Prism  a  b  (a, c)  (b, c)  ->  Prism  a  b  (s, c)   (t, c)
+xPrismOpticF   :: Prism  a  b  (a, c)  (b, c)  ->  Prism  a  b  (s, c)  (t, c)
 xPrismOpticF  (SPrism x y)   =    SPrism (\z ->  x ((fromRight . magnify . fst $ z), snd z)) undefined
