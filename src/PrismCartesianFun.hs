@@ -108,32 +108,32 @@ preheat      :: a'           ->  Glass  a
 preheat                       =  undefined
 
 -- Now we need something that will polish up our prism before we display it
-cool         :: Diamond b    ->  d
+cool         :: t    ->  d
 cool                          =  undefined
 
 magnify      :: Glass  a     ->  Either b  a
 magnify                       =  undefined
 
 -- This function can build a new structure from fragments of new material, using the prism
-pressurize   :: b            ->  Diamond b
+pressurize   :: b            ->  t
 pressurize                    =  undefined
 
 ---------------------------------------------------------------------------------
 
 -- If we provide this function a function our covariant function can use, it gives us back a prism
-basePrism ::  (b  ->  Diamond b)  -> Prism  a  b  s  t
-basePrism          =   dimap preheat cool . SPrism magnify
+basePrism ::  (b  ->  t)  -> Prism  a  b  s  t
+basePrism     =   dimap preheat cool . SPrism magnify
 
 
 -- Let's make some Profunctor with the above definitions strong, in the first way
-xPrismF     :: Prism  a  b  ((Glass a), c)   ((Diamond b), c)
+xPrismF     :: Prism  a  b  ((Glass a), c)  (t, c)
 xPrismF        =  first' . basePrism $ pressurize
 
 
 -- Now the other way
-xPrismS     :: Prism  a  b  (c, (Glass a))   (c, (Diamond b))
+xPrismS     :: Prism  a  b  (c, (Glass a))  (c, t)
 xPrismS        =  second' . basePrism $ pressurize
 
 -- Ok, now we can form a Strong Optic in the first way
-xPrismOpticF     :: Prism  a  b  (a, c)  (b, c)  ->  Prism  a  b  ((Glass a), c)   ((Diamond b), c)
+xPrismOpticF     :: Prism  a  b  (a, c)  (b, c)  ->  Prism  a  b  ((Glass a), c)   (t, c)
 xPrismOpticF  = undefined
