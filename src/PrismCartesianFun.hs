@@ -114,21 +114,20 @@ magnify                       =  undefined
 pressurize   :: b            ->  Diamond b
 pressurize                    =  undefined
 
+-- The other way of forming really shiny things
+compress     :: m            ->  Diamond m
+compress                      =  undefined
 
--- Now keeping in mind: (P m n q r) : This is just another set of functions.
--- Let's keep the type functions Glass and Diamond so we don't get too confused with associations
+---------------------------------------------------------------------------------
 
-preheat'      :: a''           ->  Glass  m
-preheat'                       =   undefined
+-- So, let's define a Profunctor based on the above types
+xPrism  :: Prism a b Crystal Shard
+xPrism          =  dimap preheat cool $ SPrism magnify pressurize
 
-cool'         :: Diamond m    ->  d'
-cool'                          =  undefined
+-- So, let's define a Profunctor based on the above types
+zPrism  :: Prism Crystal Shard (Glass Crystal)  (Diamond Shard)
+zPrism          =  dimap preheat cool $ SPrism magnify compress
 
-magnify'      :: Glass  m     ->  Either n  m
-magnify'                       =  undefined
-
-pressurize'   :: n            ->  Diamond n
-pressurize'                    =  undefined
-
-
+--Let's reuse the old Optic
+type Mirror a b  = Prism a b Crystal Shard  ->  Prism a b (Glass Crystal)  (Diamond Shard)
 
