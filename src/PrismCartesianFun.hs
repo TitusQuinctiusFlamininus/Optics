@@ -97,25 +97,38 @@ newtype    Diamond b         = Diamond b
 
 ---------------------------------------------------------------------------------
 -- These are also some types we had before, but redefining here for convenience 
--- We left one definition out (the compression function) to keep it simpler
+-- Keeping in mind: (P a b s t) 
 
 -- we need a function that will provide the materials to make a wonderful prism
 preheat      :: a'           ->  Glass  a
 preheat                       =  undefined
 
 -- Now we need something that will polish up our prism before we display it
-cool         :: Diamond b'   ->         d
+cool         :: Diamond b    ->  d
 cool                          =  undefined
 
-magnify      :: Glass  a     ->  Either e  a
+magnify      :: Glass  a     ->  Either b  a
 magnify                       =  undefined
 
 -- This function can build a new structure from fragments of new material, using the prism
-pressurize   :: b'           ->  Diamond b'
+pressurize   :: b            ->  Diamond b
 pressurize                    =  undefined
 
----------------------------------------------------------------------------------
 
--- So, let's define a Profunctor based on the above types
-basePrism :: Prism a  b  (Glass a)  (Diamond b)
-basePrism   = dimap preheat cool (SPrism magnify pressurize)
+-- Now keeping in mind: (P m n q r) : This is just another set of functions.
+-- Let's keep the type functions Glass and Diamond so we don't get too confused with associations
+
+preheat'      :: a''           ->  Glass  m
+preheat'                       =   undefined
+
+cool'         :: Diamond m    ->  d'
+cool'                          =  undefined
+
+magnify'      :: Glass  m     ->  Either n  m
+magnify'                       =  undefined
+
+pressurize'   :: n            ->  Diamond n
+pressurize'                    =  undefined
+
+
+
