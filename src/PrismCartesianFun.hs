@@ -122,12 +122,12 @@ compress                      =  undefined
 
 -- So, let's define a Profunctor based on the above types
 xPrism  :: Prism a b Crystal Shard
-xPrism          =  dimap preheat cool $ SPrism magnify pressurize
+xPrism              =  dimap preheat cool $ SPrism magnify pressurize
 
 -- So, let's define a Profunctor based on the above types
 zPrism  :: Prism Crystal Shard (Glass Crystal)  (Diamond Shard)
-zPrism          =  dimap preheat cool $ SPrism magnify compress
+zPrism              =  dimap preheat cool $ SPrism magnify compress
 
 --Let's reuse the old Optic
-type Mirror a b  = Prism a b Crystal Shard  ->  Prism a b (Glass Crystal)  (Diamond Shard)
+type Mirror a b s t = Prism a b a b  ->  Prism a b s t
 
