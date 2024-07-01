@@ -75,9 +75,10 @@ instance Profunctor (Prism s t) where
 --                 --  Only difference with first', is the position of the unknown type. Since it is the second tuple elements, we use snd
 -- -----------------> For the RIGHT-HAND-SIDE :
 --                 -- Again, just positioning: the function application occurs in the second tuple position
+
 instance Strong (Prism s t) where 
-    first'   (SPrism k  m)       =    SPrism (k . fst) (\x  -> ((m x), undefined))
-    second'  (SPrism k  m)       =    SPrism (k . snd) (\x  -> (undefined, (m x)))
+    first'   (SPrism k  m)       =    SPrism (k . fst) (\x  -> (    (m x),   undefined))
+    second'  (SPrism k  m)       =    SPrism (k . snd) (\x  -> (undefined,       (m x)))
 
 
 ---------------------------------------------------------------------------------
