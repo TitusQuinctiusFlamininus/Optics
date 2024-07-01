@@ -125,32 +125,32 @@ instance Applicative Diamond where
 
 -- we need a function that will provide the materials to make a wonderful prism
 preheat      :: a'           ->  Glass  a
-preheat                       = undefined
+preheat      = undefined
 
 
 
 -- Now we need something that will polish up our prism before we display it
 cool         :: Diamond b'   ->         d
-cool                          = undefined
+cool         = undefined
 
 
 
 -- This function will try and look inside some structure using the prism; prisms help us capture the idea of not finding what we are looking for
 magnify      :: Glass  a     ->  Either e  a
-magnify                       = undefined
+magnify      = undefined
 
 
 
 -- This function can build a new structure from fragments of new material, using the prism
 pressurize   :: b'           ->  Diamond b'
-pressurize                    = undefined
+pressurize    = undefined
 
 
 
 -- This function can build a new structures in a slightly different way
 -- We compress by simply lifting the type into our Functor
 compress     :: c            ->  Diamond c
-compress                      = pure
+compress     = pure
 
 
 ---------------------------------------------------------------------------------
@@ -158,13 +158,13 @@ compress                      = pure
 
 -- Making our Polyhedron into a Profunctor
 hubble       :: Polyhedron Crystal Shard s t 
-hubble                        = dimap preheat cool (Poly magnify pressurize)
+hubble       = dimap preheat cool (Poly magnify pressurize)
 
 
 
 -- Here's another kind of profunctor that forms the final type in the different way
 webb         :: Polyhedron Crystal Shard s t 
-webb                          = dimap preheat cool (Poly magnify compress  )
+webb         = dimap preheat cool (Poly magnify compress  )
 
 
 
@@ -177,7 +177,7 @@ webb                          = dimap preheat cool (Poly magnify compress  )
 -- We can decide to pass in the final type formation function separately, or simply ignore how the profunctor provided forms the final type 
 
 -- Simplifying
-type Mirror a                         = Polyhedron Crystal Shard a Shard   ->  Polyhedron Crystal Shard (Glass a) (Diamond Shard) 
+type Mirror a    = Polyhedron Crystal Shard a Shard   ->  Polyhedron Crystal Shard (Glass a) (Diamond Shard) 
 
 
 

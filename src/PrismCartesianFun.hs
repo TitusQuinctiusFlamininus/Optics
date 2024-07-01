@@ -35,6 +35,10 @@ class Profunctor p => Strong p where
 
 ---------------------------------------------------------------------------------
    
+--F ormally defining an Optic 
+type Optical a   b   s   t   =   (Prism  a  b  a  b   ->  Prism  a  b  s  t)
+
+
 -- Defining a Strong Profunctor
 class Profunctor p => Strong p where
   first'  ::  p  a  b   -> p  (a,  c)  (b,  c)
@@ -115,19 +119,16 @@ pressurize   :: b            ->  Diamond b
 pressurize                    =  undefined
 
 -- The other way of forming really shiny things
-compress     :: m            ->  Diamond m
-compress                      =  undefined
+--compress     :: m            ->  Diamond m
+--compress                      =  undefined
 
 ---------------------------------------------------------------------------------
 
--- So, let's define a Profunctor based on the above types
-xPrism  :: Prism a b Crystal Shard
-xPrism              =  dimap preheat cool $ SPrism magnify pressurize
+-- Let's make some Profunctor with the above definitions strong, in the first way
+xPrismF     :: Prism  a  b  ((Glass a), c)   ((Diamond b), c)
+xPrismF        =  first' . dimap preheat cool . SPrism magnify $ pressurize
 
--- So, let's define a Profunctor based on the above types
-zPrism  :: Prism Crystal Shard (Glass Crystal)  (Diamond Shard)
-zPrism              =  dimap preheat cool $ SPrism magnify compress
 
---Let's reuse the old Optic
-type Mirror a b s t = Prism a b a b  ->  Prism a b s t
-
+-- Now the other way
+xPrismS     :: Prism  a  b  (c, (Glass a))   (c, (Diamond b))
+xPrismS        =  second' . dimap preheat cool . SPrism magnify $ pressurize
