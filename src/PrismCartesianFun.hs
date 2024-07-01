@@ -70,5 +70,11 @@ instance Profunctor (Prism s t) where
 --                 --  But: We need (t, c) and not just t..... So let's wrap everything in a tuple with the some type c..
 --                 -- We have no information about what c is exactly, or how to produce it. It could be any type! If only we had: (b -> c) or (t -> c)
 --                 --  So let's leave it undefined:  (\b  -> ((m $ b), ??))  becomes:   (\b  -> ((m $ b), undefined))
+-- Explanation FOR SECOND': 
+-- -----------------> For the LEFT-HAND-SIDE :
+--                 --  Only difference with first', is the position of the unknown type. Since it is the second tuple elements, we use snd
+-- -----------------> For the RIGHT-HAND-SIDE :
+--                 -- Again, just positioning: the function application occurs in the second tuple position
 instance Strong (Prism s t) where 
     first'   (SPrism k  m)       =    SPrism (k . fst) (\x  -> ((m x), undefined))
+    second'  (SPrism k  m)       =    SPrism (k . snd) (\x  -> (undefined, (m x)))
