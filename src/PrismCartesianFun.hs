@@ -46,7 +46,7 @@ class Profunctor p => Strong p where
 -- Our Prism Definition
 data Prism a b s t     = SPrism {    seek    :: s     ->     Either b a, 
 
-                                    fill    :: b     ->     t
+                                    fill     :: b     ->     t
                                }
 
 -- Make the Prism a Profuntor
