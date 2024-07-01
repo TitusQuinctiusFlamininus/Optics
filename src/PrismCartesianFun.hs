@@ -44,18 +44,18 @@ class Profunctor p => Strong p where
 
 
 -- Our Prism Definition
-data Prism a b s t     = SPrism {    seek    :: s     ->     Either b a, 
+data Prism a  b  s  t  = SPrism {   seek  ::  s   ->   Either b  a, 
 
-                                    fill     :: b     ->     t
-                               }
+                                    fill  ::  b   ->   t
+                                }
 
 -- Make the Prism a Profuntor
 -- Creating the Prism Profunctor as before....
 -- If how this Profunctor was formed is not clear, please see the PrismOpticsFun module for a full explanation
 -- It is located here : https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/src/PrismOpticsFun.hs
 -- I have used different type symbols here but it is essentially the same (just needs some eye squinting)
-instance Profunctor (Prism s t) where 
-    dimap  d  g  (SPrism k  m)   =    SPrism  (k . d)  (g . m)
+instance Profunctor (Prism  s  t) where 
+    dimap   d   g   (SPrism k  m)   =   SPrism  (k . d)   (g . m)
 
 -- And now attempting to Strengthen the Prism...
 
@@ -76,9 +76,9 @@ instance Profunctor (Prism s t) where
 -- -----------------> For the RIGHT-HAND-SIDE :
 --                 -- Again, just positioning: function application occurs in the second tuple position
 
-instance Strong (Prism s t) where 
-    first'   (SPrism k  m)       =    SPrism (k . fst) (\x  -> (    (m x),   undefined))
-    second'  (SPrism k  m)       =    SPrism (k . snd) (\x  -> (undefined,       (m x)))
+instance Strong (Prism  s  t) where 
+      first'    (SPrism k  m)       =    SPrism (k . fst) (\x  -> (    (m x),   undefined))
+      second'   (SPrism k  m)       =    SPrism (k . snd) (\x  -> (undefined,       (m x)))
 
 
 ---------------------------------------------------------------------------------
@@ -115,3 +115,4 @@ pressurize   :: b'           ->  Diamond b'
 pressurize                    = undefined
 
 ---------------------------------------------------------------------------------
+
