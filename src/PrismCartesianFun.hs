@@ -101,18 +101,21 @@ newtype    Diamond b         = Diamond b
 
 -- we need a function that will provide the materials to make a wonderful prism
 preheat      :: a'           ->  Glass  a
-preheat                       = undefined
+preheat                       =  undefined
 
 -- Now we need something that will polish up our prism before we display it
 cool         :: Diamond b'   ->         d
-cool                          = undefined
+cool                          =  undefined
 
 magnify      :: Glass  a     ->  Either e  a
-magnify                       = undefined
+magnify                       =  undefined
 
 -- This function can build a new structure from fragments of new material, using the prism
 pressurize   :: b'           ->  Diamond b'
-pressurize                    = undefined
+pressurize                    =  undefined
 
 ---------------------------------------------------------------------------------
 
+-- So, let's define a Profunctor based on the above types
+basePrism :: Prism a  b  (Glass a)  (Diamond b)
+basePrism   = dimap preheat cool (SPrism magnify pressurize)
