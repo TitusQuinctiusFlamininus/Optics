@@ -118,17 +118,22 @@ magnify                       =  undefined
 pressurize   :: b            ->  Diamond b
 pressurize                    =  undefined
 
--- The other way of forming really shiny things
---compress     :: m            ->  Diamond m
---compress                      =  undefined
-
 ---------------------------------------------------------------------------------
+
+-- If we provide this function a function our covariant function can use, it gives us back a prism
+basePrism ::  (b  ->  Diamond b)  -> Prism  a  b  s  t
+basePrism          =   dimap preheat cool . SPrism magnify
+
 
 -- Let's make some Profunctor with the above definitions strong, in the first way
 xPrismF     :: Prism  a  b  ((Glass a), c)   ((Diamond b), c)
-xPrismF        =  first' . dimap preheat cool . SPrism magnify $ pressurize
+xPrismF        =  first' . basePrism $ pressurize
 
 
 -- Now the other way
 xPrismS     :: Prism  a  b  (c, (Glass a))   (c, (Diamond b))
-xPrismS        =  second' . dimap preheat cool . SPrism magnify $ pressurize
+xPrismS        =  second' . basePrism $ pressurize
+
+-- Ok, now we can form a Strong Optic in the first way
+xPrismOpticF     :: Prism  a  b  (a, c)  (b, c)  ->  Prism  a  b  ((Glass a), c)   ((Diamond b), c)
+xPrismOpticF  = undefined
