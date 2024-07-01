@@ -1,6 +1,8 @@
 module PrismCartesianFun where
 
 
+
+import Data.Either.Utils
 import Control.Lens.Combinators    ( Profunctor, dimap )
 
 ---------------------------------------------------------------------------------
@@ -104,14 +106,14 @@ newtype    Diamond b         = Diamond b
 -- Keeping in mind: (P a b s t) 
 
 -- we need a function that will provide the materials to make a wonderful prism
-preheat      :: a'           ->  Glass  a
+preheat      :: a'           ->  s
 preheat                       =  undefined
 
 -- Now we need something that will polish up our prism before we display it
-cool         :: t    ->  d
+cool         :: t            ->  d
 cool                          =  undefined
 
-magnify      :: Glass  a     ->  Either b  a
+magnify      :: s            ->  Either b  a
 magnify                       =  undefined
 
 -- This function can build a new structure from fragments of new material, using the prism
@@ -126,14 +128,14 @@ basePrism     =   dimap preheat cool . SPrism magnify
 
 
 -- Let's make some Profunctor with the above definitions strong, in the first way
-xPrismF     :: Prism  a  b  ((Glass a), c)  (t, c)
+xPrismF     :: Prism  a  b  (s, c)  (t, c)
 xPrismF        =  first' . basePrism $ pressurize
 
 
 -- Now the other way
-xPrismS     :: Prism  a  b  (c, (Glass a))  (c, t)
+xPrismS     :: Prism  a  b  (c, s)  (c, t)
 xPrismS        =  second' . basePrism $ pressurize
 
 -- Ok, now we can form a Strong Optic in the first way
-xPrismOpticF     :: Prism  a  b  (a, c)  (b, c)  ->  Prism  a  b  ((Glass a), c)   (t, c)
-xPrismOpticF  = undefined
+xPrismOpticF     :: Prism  a  b  (a, c)  (b, c)  ->  Prism  a  b  (s, c)   (t, c)
+xPrismOpticF  (SPrism x y)   =    SPrism (\z ->  x ((fromRight . magnify . fst $ z), snd z)) undefined

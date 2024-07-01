@@ -24,6 +24,7 @@ dependencies:
 - lens
 - comonad
 - profunctors
+- MissingH
 
 ghc-options:
 - -Wall
