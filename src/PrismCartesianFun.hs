@@ -121,18 +121,19 @@ pressurize   :: b            ->  t
 pressurize                    =  undefined
 
 ---------------------------------------------------------------------------------
+-- Just to demonstrate how to strengthen a profunctor one may
 
--- If we provide this function a function our covariant function can use, it gives us back a prism
+-- Provide a function whose output is useful to the covariant function, and it will provide a full prism
 basePrism      ::  (b  ->  t)  -> Prism  a  b  s  t
 basePrism      =   dimap preheat cool . SPrism magnify
 
 
--- Let's make some Strengthened Profunctor with the above definitions strong, in the first way
+-- Let's strengthen the base prism in the first way
 xPrismF        :: Prism  a  b  (s, c)  (t, c)
 xPrismF        =  first' . basePrism $ pressurize
 
 
--- Now we strengthen the other way
+-- And in the other way..
 yPrismS        :: Prism  a  b  (c, s)  (c, t)
 yPrismS        =  second' . basePrism $ pressurize
 
