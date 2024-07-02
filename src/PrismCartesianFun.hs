@@ -2,7 +2,7 @@ module PrismCartesianFun where
 
 
 
-import Data.Either.Utils
+import Data.Either.Utils           (fromRight          )
 import Control.Lens.Combinators    ( Profunctor, dimap )
 
 ---------------------------------------------------------------------------------
