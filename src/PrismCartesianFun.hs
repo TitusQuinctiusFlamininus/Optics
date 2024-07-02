@@ -127,16 +127,22 @@ basePrism      ::  (b  ->  t)  -> Prism  a  b  s  t
 basePrism      =   dimap preheat cool . SPrism magnify
 
 
--- Let's make some Profunctor with the above definitions strong, in the first way
+-- Let's make some Strengthened Profunctor with the above definitions strong, in the first way
 xPrismF        :: Prism  a  b  (s, c)  (t, c)
 xPrismF        =  first' . basePrism $ pressurize
 
 
--- Now the other way
+-- Now we strengthen the other way
 yPrismS        :: Prism  a  b  (c, s)  (c, t)
 yPrismS        =  second' . basePrism $ pressurize
+
+---------------------------------------------------------------------------------
+-- Settings up some Optics 
+
+-- EXPLORE : xPrismOpticF   :: Prism  a  b  a  b  ->  Prism  a  b  (s, c)  (t, c)
 
 
 -- Ok, now we can form a Strong Optic in the first way
 xPrismOpticF   :: Prism  a  b  (a, c)  (b, c)  ->  Prism  a  b  (s, c)  (t, c)
-xPrismOpticF  (SPrism x y)   =    SPrism (\z ->  x ((fromRight . magnify . fst $ z), snd z)) undefined
+xPrismOpticF  (SPrism x y)   =    SPrism (\z   ->  x ((fromRight . magnify . fst $ z), snd z  )) 
+                                         (\z'  ->    (pressurize . fst . y $ z', snd . y $ z' ))
