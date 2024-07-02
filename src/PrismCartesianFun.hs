@@ -129,47 +129,47 @@ yPrismS        =  second' . basePrism $ pressurize
 
 -- This Optic can produce a Strengthened Profunctor of one Kind from a simpler one that computes "internal" types...
 xPrismOpticF   :: Prism  a  b  a  b  ->  Prism  a  b  (s, c)  (t, c)
-xPrismOpticF        (SPrism x _)   =    SPrism (x . rip snd                                 ) 
-                                               (\z -> ((pressurize . id $ z), undefined))
+xPrismOpticF        (SPrism x _)   =    SPrism (x . rip snd                           ) 
+                                               (\z -> (pressurize . id $ z, undefined))
 
 
 -- If you already have a strengthened profunctor, this Optic will create a strong computational one to transpose between composites
 xStrongPrismOpticF   :: Prism  a  b  (a, c)  (b, c)  ->  Prism  a  b  (s, c)  (t, c)
-xStrongPrismOpticF  (SPrism x y)   =    SPrism (\z   ->  x (rip snd z, snd z                            )) 
-                                               (\z   ->    (pressurize . fst . y $ z, snd . y $ z   ))
+xStrongPrismOpticF  (SPrism x y)   =    SPrism (\z   ->  x (rip snd z, snd z                      )) 
+                                               (\z   ->    (pressurize . fst . y $ z, snd . y $ z ))
 
 
 -- First, the Optic for the second form of strength, still dealing with "internal" types...
 yPrismOpticF   :: Prism  a  b  a  b  ->  Prism  a  b  (c, s)  (c, t)
-yPrismOpticF        (SPrism x _)   =    SPrism (x . rip snd                                )  
-                                               (\z -> ((pressurize . id $ z), undefined))
+yPrismOpticF        (SPrism x _)   =    SPrism (x . rip snd                           )  
+                                               (\z -> (pressurize . id $ z, undefined))
 
 
 -- Now dealing with the already strengthened alternative form...
 yStrongPrismOpticF   :: Prism  a  b  (c, a)  (c, b)  ->  Prism  a  b  (c, s)  (c, t)
-yStrongPrismOpticF  (SPrism x y)   =    SPrism (\z -> x (fst z, rip snd z                            )) 
-                                               (\z   -> (fst . y $ z, (pressurize . snd . y $ z )))
+yStrongPrismOpticF  (SPrism x y)   =    SPrism (\z -> x (fst z, rip snd z                      )) 
+                                               (\z   -> (fst . y $ z, pressurize . snd . y $ z ))
 
 
 -- A Curious yet Fun Optical Structure: It transforms a Strong Prism from one "direction" to Strong Prism in another 
 -- One can also go the other way around, both from simpler elemental types to composites, or purely elementals....
 zStrongPrismOpticF   :: Prism  a  b  (a, c)  (b, c)  ->  Prism  a  b  (c, s)  (c, t)
-zStrongPrismOpticF  (SPrism x y)   =    SPrism (\z   ->  x (rip snd z, fst z                            )) 
-                                               (\z   ->    (snd . y $ z, (pressurize . snd . y $ z )))
+zStrongPrismOpticF  (SPrism x y)   =    SPrism (\z   ->  x (rip snd z, fst z                      )) 
+                                               (\z   ->    (snd . y $ z, pressurize . snd . y $ z ))
 
 
 ---------------------------------------------------------------------------------
 
 -- We can form a xPrismF profunctor from a lower profunctorial form like this...
 xDirect ::  Prism  a  b  (a, c)  (b, c)  ->  Prism  a  b  (s, c)  (t, c)
-xDirect k    =     SPrism (\v -> seek k (rip snd v, rip snd v                             ))   
+xDirect k    =     SPrism (\v -> seek k (rip snd v, rip snd v                     ))   
                           (\v -> (pressurize . fst . fill k $ v, snd . fill k $ v ))
 
 
 -- Similarly, same for a yPrismF profunctor from another compositional type...
 yDirect ::  Prism  a  b  (c, a)  (c, b)  ->  Prism  a  b  (c, s)  (c, t)
-yDirect k    =     SPrism (\v -> seek k (rip fst v, rip fst v                     ))
-                          (\v ->  (fst . fill k $ v, pressurize . snd . fill k $ v  ))
+yDirect k    =     SPrism (\v -> seek k (rip fst v, rip fst v                      ))
+                          (\v ->  (fst . fill k $ v, pressurize . snd . fill k $ v ))
 
 
 -- Convenience Function 
