@@ -48,12 +48,12 @@ class Profunctor p => Strong p where
   second' ::  p  a  b   -> p  (c,  a)  (c,  b)
 
 
-
 -- Our Prism Definition
 data Prism a  b  s  t  = SPrism {   seek  ::  s   ->   Either b  a, 
 
                                     fill  ::  b   ->   t
                                 }
+
 
 -- Make the Prism a Profuntor
 -- Creating the Prism Profunctor as before....
@@ -82,24 +82,11 @@ instance Profunctor (Prism  s  t) where
 -- -----------------> For the RIGHT-HAND-SIDE :
 --                 -- Again, just positioning: function application occurs in the second tuple position
 
+
 instance Strong (Prism  s  t) where 
       first'    (SPrism k  m)       =    SPrism (k . fst) (\x  -> (    (m x),   undefined))
       second'   (SPrism k  m)       =    SPrism (k . snd) (\x  -> (undefined,       (m x)))
 
-
----------------------------------------------------------------------------------
-
--- Let's reuse some types we defined way back in the vanilla prism 
-
-data       Crystal           = Crystal
-
-data       Shard             = Shard
-
--- I'm imagining these to be analogous to composite types
-
-newtype    Glass   a         = Glass   a
-
-newtype    Diamond b         = Diamond b
 
 ---------------------------------------------------------------------------------
 -- These are also some types we had before, but redefining here for convenience 
@@ -121,6 +108,7 @@ pressurize   :: b            ->  t
 pressurize                    =  undefined
 
 ---------------------------------------------------------------------------------
+-- Forming Profunctors:
 -- Just to demonstrate how to strengthen a profunctor one may
 
 -- Provide a function whose output is useful to the covariant function, and it will provide a full prism
@@ -138,15 +126,50 @@ yPrismS        :: Prism  a  b  (c, s)  (c, t)
 yPrismS        =  second' . basePrism $ pressurize
 
 ---------------------------------------------------------------------------------
--- Finally the Cartesian Prism Optics
+-- Finally the Cartesian Prism Optics:
 
 -- This Optic can produce a Strengthened Profunctor of one Kind from a simpler one that computes "internal" types...
 xPrismOpticF   :: Prism  a  b  a  b  ->  Prism  a  b  (s, c)  (t, c)
-xPrismOpticF        (SPrism x _)   =    SPrism (x . fromRight . magnify . fst           ) 
+xPrismOpticF        (SPrism x _)   =    SPrism (x . rip                                 ) 
                                                (\z -> ((pressurize . id $ z), undefined))
 
 
 -- If you already have a strengthened profunctor, this Optic will create a strong computational one to transpose between composites
 xStrongPrismOpticF   :: Prism  a  b  (a, c)  (b, c)  ->  Prism  a  b  (s, c)  (t, c)
-xStrongPrismOpticF  (SPrism x y)   =    SPrism (\z   ->  x ((fromRight . magnify . fst $ z), snd z  )) 
+xStrongPrismOpticF  (SPrism x y)   =    SPrism (\z   ->  x (rip z, snd z                            )) 
                                                (\z   ->    (pressurize . fst . y $ z, snd . y $ z   ))
+
+
+-- First, the Optic for the second form of strength, still dealing with "internal" types...
+yPrismOpticF   :: Prism  a  b  a  b  ->  Prism  a  b  (c, s)  (c, t)
+yPrismOpticF        (SPrism x _)   =    SPrism (x . rip                                 )  
+                                               (\z -> ((pressurize . id $ z), undefined))
+
+
+-- Now dealing with the already strengthened alternative form...
+yStrongPrismOpticF   :: Prism  a  b  (c, a)  (c, b)  ->  Prism  a  b  (c, s)  (c, t)
+yStrongPrismOpticF  (SPrism x y)   =    SPrism (\z -> x (fst z, rip z                            )) 
+                                               (\z   -> (fst . y $ z, (pressurize . snd . y $ z )))
+
+
+-- A Curious yet Fun Optical Structure: It ransforms a Strong Prism from one "direction" to Strong Prism in another 
+-- One can also go the other way around, both from simpler elemental types to composites, or purely elementals....
+zStrongPrismOpticF   :: Prism  a  b  (a, c)  (b, c)  ->  Prism  a  b  (c, s)  (c, t)
+zStrongPrismOpticF  (SPrism x y)   =    SPrism (\z   ->  x (rip z, fst z                            )) 
+                                               (\z   ->    (snd . y $ z, (pressurize . snd . y $ z )))
+
+
+---------------------------------------------------------------------------------
+-- We can form a xPrismF from a lower lifeform like this
+xDirect ::  Prism  a  b  (a, c)  (b, c)  ->  Prism  a  b  (s, c)  (t, c)
+xDirect k    =     SPrism (\v -> seek k (rip v, rip v                             ))   
+                          (\v -> (pressurize . fst . fill k $ v, snd . fill k $ v ))
+
+
+
+-- Smaller convenience function 
+rip :: (k, m)  -> n
+rip  = fromRight . magnify . snd
+
+
+---------------------------------------------------------------------------------
