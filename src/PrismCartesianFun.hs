@@ -37,7 +37,7 @@ class Profunctor p => Strong p where
 
 ---------------------------------------------------------------------------------
    
---F ormally defining an Optic 
+--Formally defining an Optic 
 type Optical a   b   s   t   =   (Prism  a  b  a  b   ->  Prism  a  b  s  t)
 
 
@@ -90,7 +90,6 @@ instance Strong (Prism  s  t) where
 
 ---------------------------------------------------------------------------------
 -- These are also some types we had before, but redefining here for convenience 
--- Keeping in mind: (P a b s t) 
 
 -- we need a function that will provide the materials to make a wonderful prism
 preheat      :: a'           ->  s
@@ -107,23 +106,24 @@ magnify                       =  undefined
 pressurize   :: b            ->  t
 pressurize                    =  undefined
 
+
 ---------------------------------------------------------------------------------
 -- Forming Profunctors:
--- Just to demonstrate how to strengthen a profunctor one may
 
 -- Provide a function whose output is useful to the covariant function, and it will provide a full prism
 basePrism      ::  (b  ->  t)  -> Prism  a  b  s  t
 basePrism      =   dimap preheat cool . SPrism magnify
 
 
--- Let's strengthen the base prism in the first way
+-- Let's strengthen the base prism one way to form a profunctor...
 xPrismF        :: Prism  a  b  (s, c)  (t, c)
 xPrismF        =  first' . basePrism $ pressurize
 
 
--- And in the other way..
+-- And in the other way to form another profunctor..
 yPrismS        :: Prism  a  b  (c, s)  (c, t)
 yPrismS        =  second' . basePrism $ pressurize
+
 
 ---------------------------------------------------------------------------------
 -- Finally the Cartesian Prism Optics:
@@ -160,16 +160,27 @@ zStrongPrismOpticF  (SPrism x y)   =    SPrism (\z   ->  x (rip z, fst z        
 
 
 ---------------------------------------------------------------------------------
--- We can form a xPrismF from a lower lifeform like this
+
+-- We can form a xPrismF profunctor from a lower lifeform like this...
 xDirect ::  Prism  a  b  (a, c)  (b, c)  ->  Prism  a  b  (s, c)  (t, c)
 xDirect k    =     SPrism (\v -> seek k (rip v, rip v                             ))   
                           (\v -> (pressurize . fst . fill k $ v, snd . fill k $ v ))
 
 
+-- Similarly, same for a yPrismF profunctor from another compositional type...
+yDirect ::  Prism  a  b  (c, a)  (c, b)  ->  Prism  a  b  (c, s)  (c, t)
+yDirect k    =     SPrism (\v -> seek k (ripL v, ripL v                             ))
+                          (\v -> (fst . fill k $ v, (pressurize . snd . fill k $ v )))
 
--- Smaller convenience function 
+
+-- Smaller convenience function , extract from the right..
 rip :: (k, m)  -> n
-rip  = fromRight . magnify . snd
+rip          = fromRight . magnify . snd
+
+
+-- Similar function, but extract from the left.. 
+ripL :: (k, m)  -> n
+ripL         = fromRight . magnify . fst
 
 
 ---------------------------------------------------------------------------------
