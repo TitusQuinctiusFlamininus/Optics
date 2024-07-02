@@ -151,7 +151,7 @@ yStrongPrismOpticF  (SPrism x y)   =    SPrism (\z -> x (fst z, rip snd z       
                                                (\z   -> (fst . y $ z, (pressurize . snd . y $ z )))
 
 
--- A Curious yet Fun Optical Structure: It ransforms a Strong Prism from one "direction" to Strong Prism in another 
+-- A Curious yet Fun Optical Structure: It transforms a Strong Prism from one "direction" to Strong Prism in another 
 -- One can also go the other way around, both from simpler elemental types to composites, or purely elementals....
 zStrongPrismOpticF   :: Prism  a  b  (a, c)  (b, c)  ->  Prism  a  b  (c, s)  (c, t)
 zStrongPrismOpticF  (SPrism x y)   =    SPrism (\z   ->  x (rip snd z, fst z                            )) 
@@ -160,7 +160,7 @@ zStrongPrismOpticF  (SPrism x y)   =    SPrism (\z   ->  x (rip snd z, fst z    
 
 ---------------------------------------------------------------------------------
 
--- We can form a xPrismF profunctor from a lower lifeform like this...
+-- We can form a xPrismF profunctor from a lower profunctorial form like this...
 xDirect ::  Prism  a  b  (a, c)  (b, c)  ->  Prism  a  b  (s, c)  (t, c)
 xDirect k    =     SPrism (\v -> seek k (rip snd v, rip snd v                             ))   
                           (\v -> (pressurize . fst . fill k $ v, snd . fill k $ v ))
