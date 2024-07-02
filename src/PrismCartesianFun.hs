@@ -138,12 +138,14 @@ yPrismS        :: Prism  a  b  (c, s)  (c, t)
 yPrismS        =  second' . basePrism $ pressurize
 
 ---------------------------------------------------------------------------------
--- Settings up some Optics 
+-- Finally the Cartesian Prism Optics
 
--- EXPLORE : xPrismOpticF   :: Prism  a  b  a  b  ->  Prism  a  b  (s, c)  (t, c)
+-- This Optic can produce a Strengthened Profunctor of one Kind from a simpler one that computes "internal" types...
+xPrismOpticF   :: Prism  a  b  a  b  ->  Prism  a  b  (s, c)  (t, c)
+xPrismOpticF        (SPrism x _)   =    SPrism (x . fromRight . magnify . fst) (\z -> ((pressurize . id $ z), undefined))
 
 
--- Ok, now we can form a Strong Optic in the first way
-xPrismOpticF   :: Prism  a  b  (a, c)  (b, c)  ->  Prism  a  b  (s, c)  (t, c)
-xPrismOpticF  (SPrism x y)   =    SPrism (\z   ->  x ((fromRight . magnify . fst $ z), snd z  )) 
-                                         (\z'  ->    (pressurize . fst . y $ z', snd . y $ z' ))
+-- If you already have a strengthened profunctor, this Optic will create a strong computational one to transpose between composites
+xStrongPrismOpticF   :: Prism  a  b  (a, c)  (b, c)  ->  Prism  a  b  (s, c)  (t, c)
+xStrongPrismOpticF  (SPrism x y)   =    SPrism (\z   ->  x ((fromRight . magnify . fst $ z), snd z  )) 
+                                               (\z   ->    (pressurize . fst . y $ z, snd . y $ z   ))
