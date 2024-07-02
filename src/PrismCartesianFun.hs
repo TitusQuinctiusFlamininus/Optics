@@ -160,13 +160,13 @@ zStrongPrismOpticF  (SPrism x y)   =    SPrism (\z   ->  x (rip snd z, fst z    
 
 ---------------------------------------------------------------------------------
 
--- We can form a xPrismF profunctor from a lower profunctorial form like this...
+-- We can form a profunctor of the same type as xPrismF, from a lower profunctorial form like this...
 xDirect ::  Prism  a  b  (a, c)  (b, c)  ->  Prism  a  b  (s, c)  (t, c)
 xDirect k    =     SPrism (\v -> seek k (rip snd v, rip snd v                     ))   
                           (\v -> (pressurize . fst . fill k $ v, snd . fill k $ v ))
 
 
--- Similarly, same for a yPrismF profunctor from another compositional type...
+-- Similarly, same for a type that is similar to yPrismF, from another compositional type...
 yDirect ::  Prism  a  b  (c, a)  (c, b)  ->  Prism  a  b  (c, s)  (c, t)
 yDirect k    =     SPrism (\v -> seek k (rip fst v, rip fst v                      ))
                           (\v ->  (fst . fill k $ v, pressurize . snd . fill k $ v ))
