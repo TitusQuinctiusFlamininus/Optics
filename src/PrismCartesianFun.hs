@@ -74,8 +74,7 @@ instance Profunctor (Prism  s  t) where
 --                 --  We require a function like this:  (\b   ->  (t, c)) where c is some type
 --                 --  Let's provide that function's input to m:  (\b  -> m $ b), which resolved into: t
 --                 --  But: We need (t, c) and not just t..... So let's wrap everything in a tuple with the some type c..
---                 -- We have no information about what c is exactly, or how to produce it. It could be any type! If only we had: (b -> c) or (t -> c)
---                 --  So let's leave it undefined:  (\b  -> ((m $ b), ??))  becomes:   (\b  -> ((m $ b), undefined))
+--                 --  Type c is unknown, so let's leave it undefined:  (\b  -> ((m $ b), ??))  becomes:   (\b  -> ((m $ b), undefined))
 -- Explanation FOR SECOND': 
 -- -----------------> For the LEFT-HAND-SIDE :
 --                 --  Only difference with first' is the position of the unknown type c. Therefore, the snd tuple function is needed
