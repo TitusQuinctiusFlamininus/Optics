@@ -29,10 +29,11 @@ Attempting to create Optics and other Computational structures from scratch
 - :orange_circle: CoCartesian (Choice) Lens
 - :green_circle: Monoidal Lens
 - :orange_circle: Traversing Lens
-- :orange_circle:  InPhantom Lens
+- :orange_circle: InPhantom Lens
 - :white_circle:  OutPhantom Lens
-- :white_circle:  Cartographic Lens
-- :orange_circle:  Closed Lens
+- :green_circle:  Cartesian (Strong) Cartographic Lens
+- :orange_circle: CoCartesian (Choice) Cartographic Lens
+- :orange_circle: Closed Lens
 - :white_circle:  Sieve Lens
 
 ### Prism Variants
