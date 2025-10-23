@@ -28,7 +28,6 @@ library
       AdapterOpticsFun
       AffineOpticsFun
       BazaarOpticsFun
-      CartographicLensOpticsFun
       DownstarCartesianFun
       DownstarCoCartesianFun
       DownstarFun
@@ -38,6 +37,7 @@ library
       IsoCartesianOpticsFun
       IsoCoCartesianOpticsFun
       LensCartesianOpticalFun
+      LensCartographicOpticsFun
       LensClosedOpticsFun
       LensCoCartesianOpticalFun
       LensInPhantomFun

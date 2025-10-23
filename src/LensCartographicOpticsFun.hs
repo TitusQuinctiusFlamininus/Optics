@@ -1,6 +1,6 @@
 {-# LANGUAGE RankNTypes #-}
 
-module CartographicLensOpticsFun where 
+module LensCartographicOpticsFun where 
 
 import Control.Comonad             (Comonad, extract)
 import Control.Lens.Combinators    (Profunctor, dimap)
