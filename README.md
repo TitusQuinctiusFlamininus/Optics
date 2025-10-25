@@ -133,6 +133,9 @@ Attempting to create Optics and other Computational structures from scratch
 - :orange_circle: Closed Lens
 - :green_circle: Prism
 - :green_circle: Cartesian (Strong) Prism
+Lens
+- :green_circle:  Cartesian (Strong) Cartographic Lens
+- :orange_circle: CoCartesian (Choice) Cartographic Lens
 - :orange_circle: CoCartesian (Choice) Prism
 - :orange_circle: InPhantom Prism
 - :green_circle: Iso
