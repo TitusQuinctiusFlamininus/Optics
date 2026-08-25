@@ -3,7 +3,7 @@ module TFunctor.LensOpticsFun where
 
 import Control.Lens.Combinators (Profunctor, dimap)
 
-{--
+{-
 
 To understand this better, read from top to bottom, in the style 
 that the code was slowly built up
@@ -19,7 +19,75 @@ class Profunctor p where
 -- Next we express an Optic: 
 type Optic p a b s t = p a b -> p s t
 
---}
+And a TFunctor can be visualized as: 
+
+
+                         tmap
+                          │
+                          │
+              ┌───────────┴───────────┐
+              │                       │
+           a' -> b               c -> k
+              │                       │
+              ▼                       ▼
+           ┌─────┐                 ┌─────┐
+           │  b  │                 │  k  │
+           └──┬──┘                 └──┬──┘
+              │                       │
+              │                       │
+              │       p               │
+              └──────► b ───────► c ◄─┘
+                         │
+                         │
+                         │  k -> c -> e
+                         ▼
+                         e
+
+
+             p b c
+               │
+               │
+               │  tmap
+               ▼
+             p a' e
+
+
+  ┌─────────────────────────────────────────────────────────┐
+  │                                                         │
+  │  tmap :: (a' -> b)                                      │
+  │       -> (k -> c -> e)                                  │
+  │       -> (c -> k)                                       │
+  │       -> p b c                                           │
+  │       -> p a' e                                          │
+  │                                                         │
+  └─────────────────────────────────────────────────────────┘
+
+  The transformation can be viewed as:
+
+        a' ──────► b
+                    │
+                    │
+                  p b c
+                    │
+                    ▼
+                    c
+                    │
+                    ▼
+                    k
+                    │
+                    ▼
+                    e
+
+        giving
+
+                  p b c
+                    │
+                   tmap
+                    ▼
+                  p a' e
+
+-}
+
 
 ---------------------------------------------------------------------------------
 -- Defining a Tfunctor 
