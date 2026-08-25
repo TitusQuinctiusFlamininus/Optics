@@ -2,9 +2,9 @@ name:                optics-fun
 version:             0.1.0.0
 github:              "githubuser/optics-fun"
 license:             BSD3
-author:              "Author name here"
-maintainer:          "example@example.com"
-copyright:           "2023 Author name here"
+author:              "Ngumbah Michael Nyika"
+maintainer:          "ngumbahnyika@gmail.com"
+copyright:           "2026 Ngumbah Michael Nyika"
 
 extra-source-files:
 - README.md
