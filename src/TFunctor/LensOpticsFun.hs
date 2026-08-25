@@ -16,9 +16,6 @@ class Profunctor p where
 
   dimap :: (c -> a) -> (b -> d) -> p a b -> p c d     <<-------------- Or just this one
 
--- Next we express an Optic: 
-type Optic p a b s t = p a b -> p s t
-
 And a TFunctor can be visualized as: 
 
 
