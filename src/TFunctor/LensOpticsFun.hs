@@ -19,20 +19,29 @@ class Profunctor p where
 -- Next we express an Optic: 
 type Optic p a b s t = p a b -> p s t
 
-
---Next we define a Tfunctor 
-class TFunctor t' where
-  tmap :: (c -> a) -> (b -> d) -> p a b -> p c d
-
 --}
 
-
-
 ---------------------------------------------------------------------------------
+-- Defining a Tfunctor 
+class TFunctor p where
+  tmap :: (a' -> b) -> (k -> c -> e) -> (c -> k) -> p b c -> p a' e
 
--- Let's roll our own Lens
+-- But first, let's roll our own Lens
 data TFunctorLens a b s t         = TLens {  look :: s         ->     a, 
 
                                              edit :: (b, s)    ->     t 
                                            }
 
+-- Turning our custom type into a Profunctor
+instance Profunctor (TFunctorLens s t) where
+    dimap h g (TLens l e)   =   TLens (l . h) (\x  -> g . e $ (fst x, h . snd $ x))
+
+
+--For Convenience: remember how we defined a Tfunctor 
+-- class TFunctor p where
+--   tmap :: (a' -> b) -> (k -> c -> e) -> (c -> k) -> p b c -> p a' e
+
+
+-- Now lets make it into a TFunctor 
+instance TFunctor (TFunctorLens s t) where
+    tmap k m n (TLens l e)    =   TLens undefined undefined
