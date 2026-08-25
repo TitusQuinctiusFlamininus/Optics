@@ -2,7 +2,11 @@
 
 > An experimental Haskell project exploring optics, profunctors, and related computational structures by implementing them from first principles.
 
+![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/profunctor.png "Profunctor")
+
 This repository is a from-scratch exploration of **optics in functional programming**, with a particular focus on the profunctor formulation of lenses, prisms, isomorphisms, adapters, affines, and related structures.
+
+![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/optic.png "Optic")
 
 Rather than treating optics as a finished abstraction to be imported and used, the project asks a more fundamental question:
 
@@ -30,6 +34,10 @@ The repository currently contains implementations and experiments around several
 - **Closed, Traversing, Phantom, Cartographic and Sieve-related variants**
 - **Profunctor optics**
 - Experimental `TFunctor` and `RFunctor` structures
+
+![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/tfunctor.png "TFunctor")
+
+![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/rfunctor.png "RFunctor")
 
 The status table below is intentionally kept as the project's working map of what has been implemented, what is known not to work, and what remains unexplored.
 
@@ -238,6 +246,8 @@ This project is released under the **BSD 3-Clause License**. See [`LICENSE`](LIC
 
 ## Profunctor
 
+![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/profunctor.png "Profunctor")
+
 🟢 means profunctors can be formed  
 🟠 means profunctors can't be formed  
 ⚪ means I haven't gotten to it yet
@@ -350,6 +360,8 @@ This project is released under the **BSD 3-Clause License**. See [`LICENSE`](LIC
 
 ## Profunctor-Optics
 
+![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/optic.png "Optic")
+
 🟢 Lens  
 🟢 Cartesian (Strong) Lens  
 🟠 CoCartesian (Choice) Lens  
@@ -377,6 +389,7 @@ This project is released under the **BSD 3-Clause License**. See [`LICENSE`](LIC
 
 ## TFunctor (Post Processing Profunctor)
 
+![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/tfunctor.png "TFunctor")
 (This is my own invention, let's see what works here)
 
 ⚪ Lens  
@@ -401,6 +414,7 @@ This project is released under the **BSD 3-Clause License**. See [`LICENSE`](LIC
 
 ## RFunctor (Pre Processing Profunctor)
 
+![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/rfunctor.png "RFunctor")
 (This is also my own invention, let's see what works here)
 
 ⚪ Lens  
