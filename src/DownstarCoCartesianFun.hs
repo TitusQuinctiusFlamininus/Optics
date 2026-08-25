@@ -45,12 +45,22 @@ instance Functor f =>  Profunctor (CoStrong f) where
 --   It seems like this is not possible
 
 -- Explanation ::  ----->>>>>  The intent is to attempt going from :  (f a    ->   b)     to    :  (f (Either a c)    ->   (Either b c))
---                             Ok. So we need to fmap the input with a function that goes from  :  (  (Either a c)    ->   c           )
---                             If  ( Right c )      :  No problem, we have access to our required type
---                             If  ( Left  a )      :  We could do this now :  ( u . pure  )    :  Which gives us something of type b ......
---                             If  ( Left b  )      :  No problem, we have access to our required type of (Either b c), in this case (Left b)
---                             If  ( Right b )      :  We don't have a means to produce such types (c) from b : in other words, (b -> c) is unknown
---                             An additional problem : How do we get rid of the functorial context from fmap ??
+--                             Essentially: (\(f (Either a c)) ->  (Left b) or (Right c))   
+--                             (1) If (Right c) both sides  : then:  (\(f (Right c)) ->  (Right c)) 
+--                                               then: fmap ? (f (Right c)) yields (f (Right c))
+--                                               then: fmap (Right c -> Right c) (f (Right c)) yields (f (Right c))
+--                                               then: (extract . fmap id) yields (Right c) only if f is also a Comonad
+--                             (2) If (Left a) and (Right c) : then:  (\(f (Left a)) ->  (Right c))     
+--                                               then: fmap ? (f (Left a)) yields (f (Right c)) 
+--                                               then: fmap (Left a -> Right c) (f (Left a)) is problematic, since how to perform (a -> c) is currently unknown        
+--                             (3) If (Right c) and (Left b)  : then:  (\(f (Right c)) ->  (Left b))   
+--                                               then: fmap ? (f (Right c)) yields (f (Left b))   
+--                                               then: fmap (Right c -> Left b) (f (Right c)) is problematic, since how to perform (c -> b) is currently unknown           
+--                             (4) If (Left a) and (Left b) : then:  (\(f (Left a)) ->  (Left b))     
+--                                               then: fmap ? (f (Left a)) yields (f (Left b)) 
+--                                               then: fmap (Left a -> Left b) (f (Left b)) 
+--                                               then: fmap (extract . u . pure) fmap (Left a -> Left b) only if f is also a Comonad  
+--                             We have at least 2 possibilities where we cannot, either produce some type c or use c to produce a known type                     
 --   instance (Functor f) =>  Choice (CoStrong f) where 
 --       left'    (DownCoStar u)                  =     Not Possible
 --       right'   (DownCoStar u)                  =     Not Possible
