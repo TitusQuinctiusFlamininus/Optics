@@ -90,7 +90,7 @@ And a TFunctor can be visualized as:
 
 
 ---------------------------------------------------------------------------------
--- Defining a Tfunctor 
+-- Defining a Tfunctor (where p is a Profunctor)
 class TFunctor p where
   tmap :: (a' -> b) -> (k -> c -> e) -> (c -> k) -> p b c -> p a' e
 
