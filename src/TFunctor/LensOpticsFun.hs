@@ -109,4 +109,4 @@ instance Profunctor (TFunctorLens s t) where
 
 -- Now lets make it into a TFunctor 
 instance TFunctor (TFunctorLens s t) where
-    tmap k m n (TLens l e)    =   TLens undefined undefined
+    tmap k m n (TLens l e) = TLens (l . k) $ \x -> let y = e (fst x, k (snd x)) in m (n y) y
