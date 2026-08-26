@@ -85,8 +85,8 @@ And a TFunctor can be visualized as:
 
 -}
 
-
 ---------------------------------------------------------------------------------
+
 -- Defining a Tfunctor (where p is a Profunctor)
 class TFunctor p where
   tmap :: (a' -> b) -> (k -> c -> e) -> (c -> k) -> p b c -> p a' e
@@ -111,3 +111,10 @@ instance Profunctor (TFunctorLens s t) where
 -- We end up with something close to a profunctor instance
 instance TFunctor (TFunctorLens s t) where
     tmap k m n (TLens l e) = TLens (l . k) $ \x -> let y = e (fst x, k (snd x)) in m (n y) y
+
+---------------------------------------------------------------------------------
+-- Since Optics definition:
+type Optic p a b s t = p a b -> p s t
+
+-- Then TFunctor Optics defintion (where p' is a TFunctor)
+type TOptic p' a b s t = p' a b -> p' s t 
