@@ -92,9 +92,9 @@ class TFunctor p where
   tmap :: (a' -> b) -> (k -> c -> e) -> (c -> k) -> p b c -> p a' e
 
 -- But first, let's roll our own Lens
-data TFunctorLens a b s t         = TLens {  look :: s         ->     a, 
+data TFunctorLens a b s t         = TLens {  r  :: s         ->     a, 
 
-                                             edit :: (b, s)    ->     t 
+                                             r' :: (b, s)    ->     t 
                                            }
 
 -- Turning our custom type into a Profunctor
