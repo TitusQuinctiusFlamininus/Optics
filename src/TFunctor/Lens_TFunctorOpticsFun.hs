@@ -104,6 +104,6 @@ instance TFunctor (TFunctorLens s t) where
 -- TFunctor Optics definition (where p is a TFunctor)
 type TFunctorOptic p a b s t = p  a  b   ->  p  s  t
 
--- Creating a Generalized TFunctor Optic
-lensTFuncOptic :: TFunctorLens  a b a b  ->  TFunctorLens a b s t
-lensTFuncOptic z@(TLens g h)  = TLens undefined undefined
+-- Creating a Generalized TFunctor Optic, but we need to supply the lens functions
+lensTFuncOptic :: (s -> a) -> ((b, s) -> t) -> TFunctorLens  a b a b  ->  TFunctorLens a b s t
+lensTFuncOptic x y (TLens g h)  = TLens x y
