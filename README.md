@@ -392,7 +392,7 @@ This project is released under the **BSD 3-Clause License**. See [`LICENSE`](LIC
 ![alt text](https://github.com/TitusQuinctiusFlamininus/Optics/blob/main/images/tfunctor.png "TFunctor")
 (This is my own invention, let's see what works here)
 
-⚪ Lens  
+🟢 Lens  
 ⚪ Prism  
 ⚪ Upstar  
 ⚪ Iso  
