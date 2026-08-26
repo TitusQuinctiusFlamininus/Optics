@@ -107,3 +107,5 @@ type TFunctorOptic p a b s t = p  a  b   ->  p  s  t
 -- Creating a Generalized TFunctor Optic, but we need to supply the lens
 lensTFuncOptic :: (s -> a) -> ((b, s) -> t) -> TFunctorLens  a b a b  ->  TFunctorLens a b s t
 lensTFuncOptic x y (TLens _ _)  = TLens x y
+
+---------------------------------------------------------------------------------
