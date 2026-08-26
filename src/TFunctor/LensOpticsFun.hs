@@ -99,7 +99,7 @@ data TFunctorLens a b s t         = TLens {  r  :: s         ->     a,
 
 -- Turning our custom type into a Profunctor
 instance Profunctor (TFunctorLens s t) where
-    dimap h g (TLens l e)   =   TLens (l . h) (\x  -> g . e $ (fst x, h . snd $ x))
+    dimap h g (TLens l e)   =   TLens (l . h) $ \x  -> g $ e(fst x, h . snd $ x)
 
 
 --For Convenience: remember how we defined a Tfunctor 
@@ -108,5 +108,6 @@ instance Profunctor (TFunctorLens s t) where
 
 
 -- Now lets make it into a TFunctor 
+-- We end up with something close to a profunctor instance
 instance TFunctor (TFunctorLens s t) where
     tmap k m n (TLens l e) = TLens (l . k) $ \x -> let y = e (fst x, k (snd x)) in m (n y) y
