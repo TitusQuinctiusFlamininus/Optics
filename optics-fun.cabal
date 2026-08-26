@@ -52,7 +52,7 @@ library
       TaggedCartesianOpticsFun
       TaggedCoCartesianFun
       TaggedOpticsFun
-      TFunctor.LensOpticsFun
+      TFunctor.Lens_TFunctorOpticsFun
       TraversalOpticsFun
       TraversingLensOpticsFun
       UpstarCartesianFun
