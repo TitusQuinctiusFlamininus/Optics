@@ -20,24 +20,14 @@ class Profunctor p where
   dimap :: (c -> a) -> (b -> d) -> p a b -> p c d     <<-------------- Or just this one
 
 
-
 where p is a Profunctor : 
 type Optic p a b s t = p a b -> p s t
-
-
-class Functor f where
-    <$>         :: (a -> b)     -> f a -> f b
 
 
 class Functor w => Comonad w where
     extract     ::  w a         ->   a      
     duplicate   ::  w a         ->   w (w a)
     extend      :: (w a  ->  b) ->   w a       -> w b    
-
-
-class Functor r => Applicative r where
-    pure        :: x           -> r x
-    <*>         :: f (a -> b)  -> f a   ->  f b
 
 --}   
 
@@ -50,25 +40,7 @@ data Polyhedron a b s t     = Poly {  peer    :: s     ->     Either b a,
                                       pack    :: b     ->     t
                                    }
 
-
--- Making a profunctor out of the polyhedron, its pretty straight forward, but just to be clear let us explain it
--- Squint your eyes!
--- Explanation :   ---------->>> For the Both LEFT AND RIGHT Hand Sides of the Polyhedron: 
---                              --------->  Since the polyhedron is : Polyhedron a b s t, our DIMAP take a shape like this below, typewise:
---                              --------->  dimap :: (a' -> s) -> (t -> d) -> p a b s t -> p a b a' d
---                 --> For the LEFT-HAND-SIDE Portion of the final polyhedron: 
---                              -- We require a function like  this:  (a  ->  Either b  a)
---                              -- Generally, we want to solve this:  dimap   (a' -> s) -> (t -> d) -> (Poly peer pack) -> (Poly ? ?)
---                              -- The Contravariant Function deals with a', not a . Is that a problem?
---                              -- Is it ok to (temporarily) assume we need a function like this: (a' -> Either b a), because we have an eye on h? Let's try.
---                              -- We have a function like: (\a' -> ??) . But h is : (a' -> s).... so, use it : (\a' -> ?? . (a' -> s) $ a')
---                              -- Now l is : (s -> Either b a) . So let's use it :  (\a' -> (s -> Either b a) . (a' -> s) $ a')
---                              -- So, simplifying : (\a' -> (l) . (h) $ a')  which is: (l  .  h) 
---                 --> For the RIGHT-HAND-SIDE Portion of the final polyhedron: 
---                              --- We require a function like this:  (b  ->  d)
---                              --  But: v take types b as input, and our g function will produce types d eventually, so why not concatenate them functionally?
---                              -- The Solution then seems to be:   (g . v)
-
+-- Making the Prism a Profunctor
 instance Profunctor (Polyhedron s t) where 
      dimap  h   g   (Poly l v)   =   Poly (l . h)  (g . v)       
 
