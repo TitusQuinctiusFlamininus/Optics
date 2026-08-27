@@ -90,6 +90,7 @@ data TFunctorLens a b s t         = TLens {  r  :: s         ->     a,
 -- The idea is to feed our m function 2 parameters, one of which is a sub-component in the other, so we extract it as y
 -- The left hand side is identical to that of the regular profunctor, since most morphing occurs after the internal transformer does its thing
 
+--Then we make what we rolled into a TFunctor
 instance TFunctor (TFunctorLens s t) where
     tmap k m n (TLens l e) = TLens (l . k) $ \x -> let y = e (fst x, k . snd $ x) in m (n y) y
 
