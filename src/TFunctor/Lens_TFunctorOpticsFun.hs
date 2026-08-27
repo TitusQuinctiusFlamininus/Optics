@@ -91,7 +91,7 @@ data TFunctorLens a b s t         = TLens {  r  :: s         ->     a,
 -- The left hand side is identical to that of the regular profunctor, since most morphing occurs after the internal transformer does its thing
 
 instance TFunctor (TFunctorLens s t) where
-    tmap k m n (TLens l e) = TLens (l . k) $ \x -> let y = e (fst x, k (snd x)) in m (n y) y
+    tmap k m n (TLens l e) = TLens (l . k) $ \x -> let y = e (fst x, k . snd $ x) in m (n y) y
 
 
 ---------------------------------------------------------------------------------
