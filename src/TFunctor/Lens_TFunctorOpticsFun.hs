@@ -72,11 +72,6 @@ A TFunctor can be visualized as:
                     ▼
                   p a' e
 
-So defining:
-class TFunctor p where
-   tmap :: (a' -> b) -> (k -> c -> e) -> (c -> k) -> p b c -> p a' e
-
-
 -}
 
 ---------------------------------------------------------------------------------
