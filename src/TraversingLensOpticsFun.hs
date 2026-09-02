@@ -36,14 +36,14 @@ class Profunctor p  =>  Cocartesian p where
   right'     ::  p  a  b   ->  p  (Either  c  a)  (Either  c  b)
 
 
-class (Choice p, Strong p) => Traversing p where
-  traverse'  :: Traversable f => p a b -> p (f a) (f b)                                         <<-- Implement Either this ....
-  wander     :: (forall f. Applicative f => (a -> f b) -> s -> f t) -> p a b -> p s t           <<-- Or Implement this
+class (Choice p, Strong p, Applicative f, Traversable f) => Traversing p where
+  traverse'  :: p a b      -> p (f a) (f b)                         <<-- Implement Either this ....
+  wander     :: (a -> f b) -> s -> f t)     -> p a b -> p s t       <<-- Or Implement this
 
 
-class (Functor t, Foldable t) => Traversable t where
-  traverse   :: Applicative f => (a -> f b) -> t a     -> f (t b)
-  sequenceA  :: Applicative f => t (f a)    -> f (t a)
+class (Functor t, Foldable t, Applicative f) => Traversable t where
+  traverse   :: (a -> f b) -> t a     -> f (t b)
+  sequenceA  :: t (f a)    -> f (t a)
 
 
 class Functor f => Applicative f where
